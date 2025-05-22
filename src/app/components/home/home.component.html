@@ -1,0 +1,96 @@
+<section class="bg-body-tertiary">
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8 text-center">
+        <h1 class="fs-1 fs-md-2 fs-lg-3">
+          The Future of Menufecturing with Latest Technology
+        </h1>
+        <h6 class="mt-3">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Culpa,
+          facilis.
+        </h6>
+      </div>
+      <div class="d-flex justify-content-center gap-3 mt-4">
+        <button class="btn btn-primary" (click)="add(4, 10)">
+          {{ total }}
+          ADD
+        </button>
+        <button class="btn btn-primary" (click)="subtract(5, 5)">
+          {{ total }}
+          Sub
+        </button>
+      </div>
+      <div></div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="container mt-5">
+    <div class=" py-5 ">
+      <div class="row row-col-md-2 justify-content-center d-flex gap-3  ">
+        @for(item of arr; track item){
+        <div class="card rounded-4 text-center m-0 p-0 " style=" width: 13rem; height: 300px">
+          <img src="{{item.img}}" alt="" class="card-img-top w-100" style="height: 120px;">
+          <div class="card-body">
+            <h5 class="card-title ">Card {{item.name}}</h5>
+            <p class="card-text text-truncate">{{item.val}} </p>
+            <a href="# " class="btn btn-primary mt-4">Go somewhere</a>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-body-tertiary mt-5">
+  <div class="container-fluid text-white p-4 min-vh-100 mt-5" style="background-color: #142f32">
+    <div class="row justify-content-center">
+      <div class="col-md-8 text-center">
+        <h1 class="fs-1 fs-md-2 fs-lg-3">
+          Efficient and integrated <br />Menufecturing Service
+        </h1>
+        <h6 class="mt-3">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Culpa,
+          facilis.
+        </h6>
+      </div>
+      <div class="container text-center py-5">
+        <div class="row justify-content-center gap-5">
+          @for(item2 of cars; track item2){
+          <div class="card col-md-4" style="width: 21rem; height: 350px">
+            <img src="{{item2.img}}" class="card-img-top" alt="..." style="height: 150px;" />
+            <div class="card-text mt-2 text-start"><strong>Name:</strong> {{item2.Name}}
+            </div>
+            <div class="card-text mt-1 text-start">
+              <strong>Type:</strong> {{item2.Type}}
+            </div>
+            <div class="card-text mt-1 text-start"><strong>About:</strong> {{item2.about}}
+            </div>
+          </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="bg-body-tertiary container text-center mt-5">
+  <div class="container">
+    <div class="row align-items-center">
+      <!-- Image Column -->
+      <div class="col-12 col-md-6 mb-4 mb-md-0">
+        <img src="https://cdn.pixabay.com/photo/2020/09/24/09/32/graph-5598156_960_720.jpg" alt="Graph Image"
+          class="img rounded h-25" />
+      </div>
+
+      <!-- Text Column -->
+      <div class="col-12 col-md-6 d-flex flex-column align-items-center justify-content-center">
+        <div class="text-md-start text-center px-3">
+          <h1>Key Benefit of Our System for Your Business Efficiency</h1>
+          <h6 class="mt-3">Lorem ipsum dolor sit amet consectetur.</h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ll -->
