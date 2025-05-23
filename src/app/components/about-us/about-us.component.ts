@@ -16,6 +16,3 @@ export class AboutUsComponent {
     this.total = this.test.calcution(a, b);
   }
 }
-
-
-

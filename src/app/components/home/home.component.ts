@@ -81,6 +81,20 @@ export class HomeComponent {
       about:
         "Iconic Indian vehicles known for their rugged build and utility. A nostalgic reminder of early Indian road adventures.",
     },
+    {
+      Name: "Tata Old Cars",
+      Type: "Old",
+      img: "https://cdn.pixabay.com/photo/2016/05/18/10/52/buick-1400243_1280.jpg",
+      about:
+        "Iconic Indian vehicles known for their rugged build and utility. A nostalgic reminder of early Indian road adventures.",
+    },
+    {
+      Name: "Tata Old Cars",
+      Type: "Old",
+      img: "https://cdn.pixabay.com/photo/2016/05/18/10/52/buick-1400243_1280.jpg",
+      about:
+        "Iconic Indian vehicles known for their rugged build and utility. A nostalgic reminder of early Indian road adventures.",
+    },
   ];
 
   constructor(private home: HomeServicesService) {}
