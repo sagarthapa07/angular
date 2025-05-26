@@ -42,7 +42,6 @@
 </section>
 <section class="bg-body-tertiary">
   <div style="background-color: #142f32">
-
     <div class="container text-white p-4 min-vh-100 mt-5">
       <div class="row justify-content-center ">
         <div class="col-md-8 text-center">
@@ -79,7 +78,8 @@
 <section class="bg-body-tertiary py-5">
   <div class="container">
     <div class="row align-items-center">
-      <div class="col-12 col-sm-12 col-md-6 col-lg-4 m-5 rounded-4 text-center justify-content-center d-flex order-1 order-md-1">
+      <div
+        class="col-12 col-sm-12 col-md-6 col-lg-4 m-5 rounded-4 text-center justify-content-center d-flex order-1 order-md-1">
         <div class="rounded-4 text-center py-5 ms-auto"
           style="background-color: #edededeb;height: 500px; width: 400px;">
           <img src="https://cdn.pixabay.com/photo/2020/09/24/09/32/graph-5598156_960_720.jpg" alt="Graph Image"
@@ -131,7 +131,41 @@
   </div>
 </section>
 <section class="bg-body-tertiary">
-    <div style="background-color: #282930">
-      <h1></h1>
+  <div style="background-color: #282930">
+    <div class="row">
+      <div class="col-4 offset-md-4 text-center text-white mt-5">
+        <h1>Tailored Plans for Your Menufacturing Scale</h1>
+      </div>
     </div>
+    <div class="row text-center">
+      <div class="col-4 offset-md-4 text-center text-white mt-4">
+        <h6 class="fw-light">Flexible Pricing for any Business size.</h6>
+      </div>
+    </div>
+    <div class="row py-5">
+      @for(item3 of card3; track item3){
+      <div class="col-md-12 col-lg-6 g-2">
+        <div class=" d-flex justify-content-center">
+
+          <div class="card rounded-4 px-0 " style="width: 25rem; height: 450px">
+            <div class="card-body">
+              <h3 class="card-title">{{item3.title}}</h3>
+              <p class="card-text">{{item3.info}}</p>
+              <h1 class="">{{item3.Price}}</h1>
+              <a href="#" class="btn btn-primary ">Get Started</a>
+              <p class="">{{item3.Features}}</p>
+              <h5 class="">{{item3.Text1}}</h5>
+              <h5 class="">{{item3.Text2}}</h5>
+              <h5 class="">{{item3.Text3}}</h5>
+              <h5 class="">{{item3.Text4}}</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+    </div>
+    <div class="row">
+      <div class="col"></div>
+    </div>
+  </div>
 </section>

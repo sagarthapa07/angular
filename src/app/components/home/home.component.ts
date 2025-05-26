@@ -97,6 +97,27 @@ export class HomeComponent {
     },
   ];
 
+ card3 = [{
+    title:"Stater",
+    info:"This Packege offers the basics Features you need to get started.",
+    Price: "$39/Month",
+    Features:"Features",
+    Text1:"lorem ipsum dolor sit amet elit.",
+    Text2:"Sed do eiusmod dolore magna aliqua.",
+    Text3:"Ut enim ad minim veniam.",
+    Text4:"Ut enim ad minim veniam",},
+  {
+    title:"Enterprise",
+    info:"This Packege full access to all Premium Features.",
+    Price: "$99/Month",
+    Features:"Features",
+    Text1:"lorem ipsum dolor sit amet elit.",
+    Text2:"Sed do eiusmod dolore magna aliqua.",
+    Text3:"Ut enim ad minim veniam.",
+    Text4:"Ut enim ad minim veniam",},
+ ]
+
+
   constructor(private home: HomeServicesService) {}
   add(a: number, b: number) {
     this.total = this.home.add(a, b);
