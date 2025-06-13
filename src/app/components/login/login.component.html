@@ -1,31 +1,65 @@
-<section>
-  <div class="container">
+<section style="background-color: #d7d7d7">
+  <div class="container ">
     <div class="row">
-      <div class="col">
-        <h1 class="text-center">Login</h1>
+      <div class="col d-flex justify-content-center mt-5  " >
+        <div class="container rounded-4 mx-0 px-0" style="background-color:#eaeaea ;width: 28rem;margin-bottom: 10px;">
+          <div class=" py-4 rounded-3  "
+            style="background-color:#ffffff; box-shadow: 0 2px 6px rgba(174, 174, 174, 0.285);z-index: 1;">
+            <div>
+              <h3 class="text-center fs-5">Login in to shopcart</h3>
+              <h6 class="text-center font-weigt-light"
+                style="color: rgba(8, 8, 8, 0.695); font-weight: 400; font-size:medium ;">
+                Welcome back! Please sign in to continue
+              </h6>
+            </div>
+            <div class="row m-4 d-flex align-items-center">
+              <button class="btn mx-2"
+                style="width: 170px; height: 37px; color: #6a6868; background: #ffffff; border: 1.5px solid rgba(26, 26, 26, 0.1)"
+                type="submit"><img src="https://img.icons8.com/?size=20&id=62856&format=png&color=000000"
+                  alt="git image" class="me-2 pb-1">Github</button>
+              <button class="btn mx-2 "
+                style="width: 170px; height: 37px; color: #6a6868; background: #ffffff; border: 1.5px solid rgba(26, 26, 26, 0.1);"
+                type="submit"><img src="https://img.icons8.com/?size=20&id=V5cGWnc9R4xj&format=png&color=000000"
+                  alt="google png" class="me-2 pb-1">Google</button>
+            </div>
+            <!-- templatedrivenform -->
+            <!-- <form #ngform="ngForm" (ngSubmit)="onSubmit()"> -->
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" autocomplete="off" novalidate
+              class="m-4 d-flex flex-column align-items-start">
+              <div class="py-2 mx-2">
+                <label for="email" class="py-2">Email Adress:</label>
+                <!-- <input type="email" id="email" name="email" [(ngModel)]="email" /> -->
+                <input type="email" id="email" class="form-control" name="email" placeholder="Enter Email"
+                  style="width: 360px; height: 35px;" formControlName="email" />
+              </div>
 
-        <!-- templatedrivenform -->
-        <!-- <form #ngform="ngForm" (ngSubmit)="onSubmit()"> -->
-        <form [formGroup]="loginForm" autocomplete="off" novalidate>
-          <div>
-            <label for="email">Email:</label>
-            <!-- <input type="email" id="email" name="email" [(ngModel)]="email" /> -->
-            <input type="email" id="email" class="form-control" name="email" placeholder="Enter Email"
-              formControlName="email" />
+              <div class=" mx-2 ">
+                <label for="name" class="py-2">Password:</label>
+                <input type="text" id="Password" class="form-control" name="Password" placeholder="Enter Password"
+                  style="width: 360px;height: 35px;" formControlName="password" />
+              </div>
+              <div style="color: #ad1a1a;font-size: larger;">
+                {{ message }}
+              </div>
+              <div class="mt-4 mx-2 z-1">
+                <button class="btn fw-semibold d-flex align-items-center justify-content-center" type="submit"
+                  style="width: 360px;height: 35px; color:rgb(252, 252, 252); background-color:rgba(14, 14, 14, 0.749) ; border: 1.5px solid rgba(0, 0, 0, 0.926);">
+                  Continue
+                  <img src="https://img.icons8.com/?size=15&id=100698&format=png&color=FFFFFF" alt=""
+                    class="d-flex mx-1 pt-1"></button>
+              </div>
+            </form>
           </div>
+          <div class=" py-4 my-1 rounded-3" style="background-color: #eaeaea; ">
+            <div class="">
+              <h6 class="font-weigt-light d-flex justify-content-center align-items-center"
+                style="color:#5a5a5a; font-weight: 400;">Don’t have an account?
+                <a href="http://localhost:4200/sign-up" class="d-flex text-dark justify-content-center mx-2">Sign UP</a>
+              </h6>
 
-          <div>
-            <label for="name">Password:</label>
-            <input type="text" id="Password" class="form-control" name="Password" placeholder="Enter Password"
-              formControlName="password" />
+            </div>
           </div>
-
-          <div>
-            <button type="submit">Submit</button>
-          </div>
-        </form>
-        <!-- reactiveform -->
-
+        </div>
       </div>
     </div>
   </div>
