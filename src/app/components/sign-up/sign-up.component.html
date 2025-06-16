@@ -1,48 +1,105 @@
-<section>
+<section style="background-color: #d7d7d7; height: 100vh;">
     <div class="container">
         <div class="row">
-            <div class="col py-5">
-                <div>
-                    <h3 class="py-2">
-                        SignUp Page
-                    </h3>
-                    <h6>Wecome, Signup here</h6>
-                </div>
-                <div>
-                    <form             
-                    [formGroup]="signupForm"
-                    (ngSubmit)="onSubmit()"
-                    autocomplete="off"
-                    novalidate>
-                        <div class="">
-                            <div class="py-2">
-                                <label for="name" class="py-2">Name </label>
-                                <input type="text" id="name" class="form-control" name="name"
-                                    placeholder="Enter Your name" formControlName="name" />
+            <div class="row justify-content-center">
+                <div class="col-md-12 col-sm-6 d-flex justify-content-center mt-5  ">
+                    <div class="container rounded-4 mx-0 px-0"
+                        style="background-color:#eaeaea;width:28rem;">
+                        <div class=" py-4 rounded-3  "
+                            style="background-color:#ffffff; box-shadow: 0 2px 6px rgba(174, 174, 174, 0.285);z-index: 1;">
+                            <div class="d-flex justify-content-end align-items-end" >
+                                <button class=" mx-3 mb-2 border-0 bg-transparent fs-4 text-dark" style="margin-top: -20px;">×</button>
                             </div>
-                            <div class="py-2">
-                                <label for="email" class="py-2">Email:</label>
-                                <input type="email" id="email" class="form-control" name="email"
-                                    placeholder="Enter Email" formControlName="email" />
-                                    {{ this.isUserExist ?  "User Already exist" : "" }}  
+                            <div>
+                                <h3 class="text-center fs-5">Create your account</h3>
+                                <h6 class="text-center font-weigt-light mt-2"
+                                    style="color: rgba(8, 8, 8, 0.695); font-weight: 400; font-size:medium ;">
+                                    Welcome! Please fill the details to get started.
+                                </h6>
                             </div>
-                            <div class="py-2">   
-                                <label for="number" class="py-2">Enter your mobile number </label>
-                                <input type="number" id="number" class="form-control" name="number"
-                                    placeholder="Enter mob" formControlName="number" />
+
+
+                            <!-- templatedrivenform -->
+                            <!-- <form #ngform="ngForm" (ngSubmit)="onSubmit()"> -->
+                            <div class="d-flex justify-content-center align-items-center">
+                                <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" autocomplete="off" novalidate>
+                                    <div class="">
+                                        <div class="py-2 mx-2">
+                                            <label for="name" class="py-2"style="font-size: 13px;font-weight: 600px;">Name </label>
+                                            <input type="text" id="name" class="form-control" name="name"
+                                                placeholder="Enter Your name"style="width: 360px; height: 30px; font-size: 13px;font-weight: 400px;" formControlName="name" />
+                                        </div>
+                                        <div class="py-2 mx-2">
+                                            <label for="email" class="py-2" style="font-size: 13px;font-weight: 600px;">Email Adress</label>
+                                            <input type="email" id="email" class="form-control " name="email" placeholder="Enter Email"
+                                            style="width: 360px; height: 30px; font-size: 13px;font-weight: 400px;" formControlName="email" />
+                                        </div>
+                                        <div class="py-2 mx-2">
+                                            <label for="number" class="py-2" style="font-size: 13px;font-weight: 600px;" >Enter your mobile number </label>
+                                            <input type="number" id="number" class="form-control" name="number"
+                                                placeholder="Enter mob" style="width: 360px; height: 30px; font-size: 13px;font-weight: 400px;"  formControlName="number" />
+                                        </div>
+                                        <div class="py-2 mx-2">
+                                            <label for="password" class="py-2" style="font-size: 13px;font-weight: 600px;">Password </label>
+                                            <input type="text" id="password" class="form-control" name="password"
+                                                placeholder="Enter Password" style="width: 360px; height: 30px; font-size: 13px;font-weight: 400px;"  formControlName="password" />
+                                        </div>
+                                    </div>
+                                    <div class="mt-4 mx-2 z-1">
+                                        <button
+                                            class="btn fw-semibold d-flex align-items-center justify-content-center mb-4"
+                                            type="submit"
+                                            style="width: 360px;height: 30px; color:rgb(252, 252, 252); background-color:rgba(14, 14, 14, 0.749) ; border: 1.5px solid rgba(0, 0, 0, 0.926);">
+                                            Create Your Account
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
-                            <div class="py-2">
-                                <label for="password" class="py-2">Password </label>
-                                <input type="text" id="password" class="form-control" name="password"
-                                    placeholder="Enter Password" formControlName="password" />
+                            <div class="d-flex flex-column align-items-center justify-content-center">
+                                <span class="divider-text">or</span>
+                                <h6>Sign-up with</h6>
+                            </div>
+                            <div class="row d-flex justify-content-center align-items-center mt-4">
+                                <div class="col-12 col-sm-auto d-flex justify-content-center">
+                                    <button class="btn w-sm-auto"
+                                        style="width: 170px; height: 37px; color: #6a6868; background: #ffffff; border: 1.5px solid rgba(26, 26, 26, 0.1);"
+                                        type="submit">
+                                        <img src="https://img.icons8.com/?size=20&id=62856&format=png&color=000000"
+                                            alt="git png" class="me-2 pb-1">
+                                        Github
+                                    </button>
+                                </div>
+                                <div class="col-12 col-sm-auto d-flex justify-content-center">
+                                    <button class="btn w-sm-auto"
+                                        style="width: 170px; height: 37px; color: #6a6868; background: #ffffff; border: 1.5px solid rgba(26, 26, 26, 0.1);"
+                                        type="submit">
+                                        <img src="https://img.icons8.com/?size=20&id=V5cGWnc9R4xj&format=png&color=000000"
+                                            alt="google png" class="me-2 pb-1">
+                                        Google
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                        <div class="mt-3">
-                            <button class="btn btn-primary" type="submit">Submit</button>
+                        <div class=" py-2 my-2 rounded-3" style="background-color: #eaeaea; ">
+                            <div class="">
+                                <h6 class="font-weigt-light d-flex justify-content-center align-items-center"
+                                    style="color:#5a5a5a; font-weight: 400;">Do you have account already?
+                                    <a href="http://localhost:4200/Login"
+                                        class="d-flex text-dark justify-content-center mx-2">Login Here</a>
+                                </h6>
+                            </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+
+<!-- <div>
+                    <h3 class="py-2">
+                        SignUp Page
+                    </h3>
+                    <h6>Wecome, Signup here</h6>
+                </div> -->
