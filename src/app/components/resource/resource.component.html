@@ -1,1 +1,41 @@
-<p>resource works!</p>
+<div class="container grid">
+    <div class="row">
+        @for(item of items; track item){
+        <div class="col-lg-3 col-md-6 mt-5">
+            <div class="card">
+                <div class="cars-img d-flex align-items-center justify-content-center flex-column"
+                    style="background-color: rgb(246 246 246); height: 256px;">
+                    <img src="{{item.img}}" alt="" class="w-75 ">
+                </div>
+                <div class="px-2 pt-2">
+                    <div class="cards-type text-uppercase mt-2 ">
+                        <h5 class="text-truncate" style="font-size: 12px; font-weight: 400; color: rgb(172, 172, 172);">
+                            {{item.type}}</h5>
+                    </div>
+                    <div class="card-name text-uppercase ">
+                        <h2 class="text-truncate" style="font-size: 15px; font-weight: 600;">{{item.name}}</h2>
+                    </div>
+                    <div class="mt-1">
+                        <h6> In Stock <span class="" style="color: #063c28cc;">{{item.stock}}</span></h6>
+
+                    </div>
+                    <div class="card-price ">
+                        <h3 style="font-size: 18px; font-weight: 600; color: #063c28cc;">$ <span>{{item.price}}</span>
+                        </h3>
+                    </div>
+                    <div class="pb-3 mx-1">
+                        <button
+                            class="btn btn-success w-50 text-light fw-semibold d-flex justify-content-center gap-1 text-truncate"
+                            style="border-radius: 20px;" >
+                            <img src="https://img.icons8.com/?size=17&id=HtmDYmJyGCy7&format=png&color=FFFFFF"
+                                alt="nhi chal" style="height: 20px; width: 20px; margin-top: 2px;" class="">
+                            <span class="d-inline-block text-truncate">Add To Cart</span>
+                        </button>
+                        <a href="http://localhost:53456/detail">go to detail page </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>
