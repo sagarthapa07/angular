@@ -18,5 +18,5 @@ export const routes: Routes = [
 {path:"grant", component:GrantComponent},
 {path:"Login", component:LoginComponent},
 {path:"detail", component:DetailComponent},
-{path:"cartPage", component:CartPageComponent},
+{path:"cart-page", component:CartPageComponent}
 ];
