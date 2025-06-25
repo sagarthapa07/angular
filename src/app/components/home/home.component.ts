@@ -7,6 +7,7 @@ import { HomeServicesService } from '../../home-services.service';
   templateUrl: "./home.component.html",
   styleUrl: "./home.component.css",
 })
+
 export class HomeComponent {
   total: number = 0;
 
@@ -119,6 +120,8 @@ export class HomeComponent {
 
 
   constructor(private home: HomeServicesService) {}
+
+  
   add(a: number, b: number) {
     this.total = this.home.add(a, b);
   }

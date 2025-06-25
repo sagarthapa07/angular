@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root',
 })
+
 export class HomeServicesService {
   loginarr: any = [
     {
@@ -88,6 +89,8 @@ export class HomeServicesService {
   ];
 
   
+
+  
   isCheckUserExist(email: string) {
     return this.loginarr.some((user: any) => user.email == email);
   }
@@ -95,7 +98,6 @@ export class HomeServicesService {
   validatelogin(email: string, password: string){
     return this.loginarr.filter((user:any) => user.email == email && user.password == password);
   }
-
 
 
   add(a: number, b: number): number {
