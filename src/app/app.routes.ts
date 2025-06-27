@@ -7,6 +7,7 @@ import { GrantComponent } from './components/grant/grant.component';
 import { LoginComponent } from './components/login/login.component';
 import { DetailComponent } from './components/detail/detail.component';
 import { CartPageComponent } from './components/cart-page/cart-page.component';
+import { UserComponent } from './components/user/user.component';
 
 
 export const routes: Routes = [
@@ -18,5 +19,6 @@ export const routes: Routes = [
 {path:"grant", component:GrantComponent},
 {path:"Login", component:LoginComponent},
 {path:"detail", component:DetailComponent},
-{path:"cart-page", component:CartPageComponent}
+{path:"cart-page", component:CartPageComponent},
+{path:"user", component:UserComponent},
 ];

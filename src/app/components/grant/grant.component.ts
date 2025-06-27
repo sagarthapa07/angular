@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HomeServicesService } from '../../home-services.service';
+import { HomeServicesService } from '../../core/services/home/home-services.service';
 import { CommonModule } from '@angular/common';
 
 @Component({

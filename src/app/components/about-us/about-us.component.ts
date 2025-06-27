@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { TestService } from '../../services/test.service';
+import { TestService } from '../../core/services/test/test.service';
+
+
 
 @Component({
   selector: 'app-about-us',

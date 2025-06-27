@@ -18,8 +18,8 @@
         <div class="row pt-3 ">
             <div class="col-md-8 "> 
             @for(cart of cartArr; track cart){
-            <div class="col-md-12 d-grid d-flex flex-column flex-md-row align-items-start clear-fix">
-                <div class="rounded-2 border border-gray-400 gap-3 d-flex align-items-center px-2 rounded-3 mb-3 rounded-3 p-3 align-self-start">
+            <div class="col-md-12 d-grid d-flex flex-column flex-md-row align-items-start clear-fix"  >
+                <div class="rounded-2 border border-gray-400 gap-3 d-flex align-items-center px-2 rounded-3 mb-3 rounded-3 p-3 align-self-start" routerLink="/detail">
                     <a class="col-md-5 mx-2 border border-gray-400 rounded-3 w-25 h-75 d-flex align-items-center justify-content-center"
                         href="">
                         <img src="{{cart.img}}"
