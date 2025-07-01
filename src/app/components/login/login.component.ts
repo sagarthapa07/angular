@@ -6,10 +6,9 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { last } from 'rxjs';
 import { LoginService } from '../../core/services/login/login.service';
 import { CommonService } from '../../core/common/common.service';
-import { environment } from '../../../environments/environment';
+
 
 @Component({
   selector: 'app-login',
@@ -22,7 +21,7 @@ export class LoginComponent {
   message: string = '';
   loginForm!: FormGroup;
 
-  constructor(private login: LoginService,private common: CommonService){ }
+  constructor(private login: LoginService,private common: CommonService,){ }
 
   ngOnInit() {
     this.loginForm = new FormGroup({
@@ -36,36 +35,30 @@ export class LoginComponent {
   //
   onSubmit() {
 
-    this.login.loginUser({username : this.loginForm.value.email,password : this.loginForm.value.password}).subscribe((resp:any)=> {
-      // let valstring = JSON.stringify(resp);
-      // let anotherOBJ = JSON.parse(valstring);
-      // console.log();
-
-      const checkUserName = this.loginForm.value.username;
-      const checkUserPass = this.loginForm.value.password;
-
-      let usercheck = false
-      for(let user of valstring){
-        if(this.valstring.value. ===  checkUserName && valstring.password ===  checkUserPass )
-      }
-
-      
+    this.login.loginUser({
+      username : this.loginForm.value.email,
+      password : this.loginForm.value.password
+    }).subscribe((resp:any)=> {
+      let valstring = JSON.stringify(resp);
 
 
-
-
-      this.common.setCookie('sagar', valstring , 1);
-
+      this.common.setCookie('sagar', valstring , 1);     // to create cookies 
     });
   }
 }
 
-onLogin(){
+// onLogin(){
+      // let anotherOBJ = JSON.parse(valstring);
+      // console.log();
 
+      // const checkUserName = this.loginForm.value.username;
+      // const checkUserPass = this.loginForm.value.password;
 
-
-
-}
+      // let usercheck = false
+      // for(let user of valstring){
+      //   if(this.valstring.value. ===  checkUserName && valstring.password ===  checkUserPass )
+      // }
+// }
 
 
 

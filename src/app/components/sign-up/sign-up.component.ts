@@ -26,7 +26,7 @@ export class SignUpComponent {
 
   constructor(private signup: SignupService, private common: CommonService, private route: Router) {}
 
-  // constructor(private homeService: HomeServicesService) {}
+
 
   ngOnInit() {
     this.signupForm = new FormGroup({
