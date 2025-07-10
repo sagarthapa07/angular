@@ -8,17 +8,21 @@ import { LoginComponent } from './components/login/login.component';
 import { DetailComponent } from './components/detail/detail.component';
 import { CartPageComponent } from './components/cart-page/cart-page.component';
 import { UserComponent } from './components/user/user.component';
+import { loginGuard } from './core/gaurd/login.guard';
+import { beforeLoginGuard } from './core/gaurd/before-login.guard';
 
 
 export const routes: Routes = [
 
 {path:"home", component: HomeComponent},
 {path:"about-us", component: AboutUsComponent},
-{path:"resource", component:ResourceComponent},
-{path:"sign-up", component:SignUpComponent},
-{path:"grant", component:GrantComponent},
-{path:"Login", component:LoginComponent},
-{path:"detail", component:DetailComponent},
-{path:"cart-page", component:CartPageComponent},
-{path:"user", component:UserComponent},
+
+{path:"resource", component:ResourceComponent, canActivate:[loginGuard]},
+{path:"grant", component:GrantComponent, canActivate:[loginGuard]},
+{path:"detail", component:DetailComponent, canActivate:[loginGuard]},
+{path:"cart-page", component:CartPageComponent, canActivate:[loginGuard]},
+{path:"user", component:UserComponent, canActivate:[loginGuard]},
+
+{path:"sign-up", component:SignUpComponent, canActivate:[beforeLoginGuard]},
+{path:"Login", component:LoginComponent, canActivate:[beforeLoginGuard]},
 ];

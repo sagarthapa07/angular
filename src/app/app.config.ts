@@ -5,6 +5,8 @@ import {CookieService} from 'ngx-cookie-service';
 
 import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
+import { loginGuard } from './core/gaurd/login.guard';
+import { beforeLoginGuard } from './core/gaurd/before-login.guard';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -12,5 +14,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(),
     CookieService,
+
   ]
 };

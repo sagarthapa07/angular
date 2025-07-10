@@ -7,7 +7,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { LoginService } from '../../core/services/login/login.service';
-import { CommonService } from '../../core/common/common.service';
+import { CommonService } from '../../core/services/common/common.service';
+
 
 
 @Component({
@@ -21,7 +22,7 @@ export class LoginComponent {
   message: string = '';
   loginForm!: FormGroup;
 
-  constructor(private login: LoginService,private common: CommonService,){ }
+  constructor(private login: LoginService,private common: CommonService){ }
 
   ngOnInit() {
     this.loginForm = new FormGroup({

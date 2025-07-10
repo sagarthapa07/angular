@@ -8,13 +8,13 @@ import {
 } from '@angular/forms';
 import { HomeServicesService } from '../../core/services/home/home-services.service';
 // import { SignupService } from '../../core/services/signup/signup.service';
-import { CommonService } from '../../core/common/common.service';
+import { CommonService } from '../../core/services/common/common.service';
 import { SignupService } from '../../core/services/signup/signup.service';
 import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
-  imports: [FormsModule, ReactiveFormsModule,RouterLink],
+  imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.css',
 })
