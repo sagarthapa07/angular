@@ -3,15 +3,16 @@ import { CanActivateFn, Router } from '@angular/router';
 import { LoginService } from '../services/login/login.service';
 
 export const beforeLoginGuard: CanActivateFn = (route, state) => {
-  debugger
   const loginService = inject(LoginService);
+debugger
+
   const router = inject(Router);
 
+  
   if (loginService.isLogin()) {
     router.navigate(['/resource']);
   }
   return true;
-
 };
 
 

@@ -7,7 +7,7 @@ import { environment } from '../../../../environments/environment.development';
 })
 export class CommonService {
 
-  constructor(private cookieService:CookieService) { }
+  constructor(public cookieService:CookieService) { }
 
   public setCookie(key: string, value: string, expireTime: any) {
     this.cookieService.set(key, JSON.stringify(value), {
@@ -21,4 +21,7 @@ export class CommonService {
   getCookie(name: string) {
     return this.cookieService.get(name);
   }
+  deleteCookie(name: string) {
+    this.cookieService.delete(name);
+}
 }

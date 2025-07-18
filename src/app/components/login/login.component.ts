@@ -8,12 +8,14 @@ import {
 } from '@angular/forms';
 import { LoginService } from '../../core/services/login/login.service';
 import { CommonService } from '../../core/services/common/common.service';
-
+import { Router } from '@angular/router';
+import { HeaderComponent } from "../header/header.component";
+import { VikalpComponent } from '../vikalp/vikalp.component';
 
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule, HeaderComponent,VikalpComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
@@ -22,12 +24,16 @@ export class LoginComponent {
   message: string = '';
   loginForm!: FormGroup;
 
-  constructor(private login: LoginService,private common: CommonService){ }
+  constructor(private login: LoginService,
+    private common: CommonService,
+    private router: Router
+  ){ }
 
   ngOnInit() {
     this.loginForm = new FormGroup({
       email: new FormControl("",Validators.required),
       password: new FormControl("", Validators.required),
+      
     });
   }
   
@@ -44,9 +50,17 @@ export class LoginComponent {
 
 
       this.common.setCookie('sagar', valstring , 1);     // to create cookies 
+      this.router.navigate(['/resource']);
+        
     });
   }
+  // onClick(){
+  //   if(this.login.isLogin=){
+
+  //   }
+  // }
 }
+
 
 // onLogin(){
       // let anotherOBJ = JSON.parse(valstring);

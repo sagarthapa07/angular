@@ -11,10 +11,11 @@ import { HomeServicesService } from '../../core/services/home/home-services.serv
 import { CommonService } from '../../core/services/common/common.service';
 import { SignupService } from '../../core/services/signup/signup.service';
 import { Router, RouterLink } from '@angular/router';
+import { HeaderComponent } from "../header/header.component";
 
 @Component({
   selector: 'app-sign-up',
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule, HeaderComponent],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.css',
 })

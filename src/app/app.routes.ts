@@ -25,4 +25,8 @@ export const routes: Routes = [
 
 {path:"sign-up", component:SignUpComponent, canActivate:[beforeLoginGuard]},
 {path:"Login", component:LoginComponent, canActivate:[beforeLoginGuard]},
+
+
+
+
 ];

@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { HomeServicesService } from '../../core/services/home/home-services.service';
 import { CommonModule } from '@angular/common';
+import { HeaderComponent } from "../header/header.component";
 
 @Component({
   selector: 'app-grant',
-  imports: [CommonModule],
+  imports: [CommonModule, HeaderComponent],
   templateUrl: './grant.component.html',
   styleUrl: './grant.component.css',
 })
