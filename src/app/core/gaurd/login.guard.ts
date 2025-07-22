@@ -10,7 +10,8 @@ debugger
   const router = inject(Router);
   
 
-  if (loginService.isLogin()) {
+  if (loginService.isLogin()()) {
+    debugger;
   }
   else{
     router.navigate(['/home']);

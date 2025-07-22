@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, effect } from '@angular/core';
 import { Router, RouterLink,  } from '@angular/router';
 import { LoginService } from '../../core/services/login/login.service';
 import { CommonModule } from '@angular/common';
@@ -10,23 +10,32 @@ import { CommonModule } from '@angular/common';
   styleUrl: './header.component.css',
 })
 export class HeaderComponent {
+
+
+  isLoggedIn:boolean = false;
   
   constructor(private login:LoginService,
+
   private router: Router
-  ){}
-  isLoggedIn: boolean = false;
+  ){
+
+    effect(() => {
+       this.isLoggedIn = this.login.isLogin()();
+      
+    });
+
+  }
+
 
 
   ngOnInit(){
-    this.isLoggedIn = this.login.isLogin();
-    if(this.isLoggedIn){
-      this.router.navigate(['/resource']);
-    }
+
   }
   
   logout() {
-    this.login.common.deleteCookie('sagar');
-    this.isLoggedIn = false; 
+ 
+    this.login.logOutUser()
+   
     this.router.navigate(['/home']);
     
 } 

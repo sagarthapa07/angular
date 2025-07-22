@@ -17,14 +17,14 @@ export const routes: Routes = [
 {path:"home", component: HomeComponent},
 {path:"about-us", component: AboutUsComponent},
 
-{path:"resource", component:ResourceComponent, canActivate:[loginGuard]},
-{path:"grant", component:GrantComponent, canActivate:[loginGuard]},
-{path:"detail", component:DetailComponent, canActivate:[loginGuard]},
+{path:"resource", component:ResourceComponent,},
+{path:"grant", component:GrantComponent,},
+{path:"detail", component:DetailComponent,},
 {path:"cart-page", component:CartPageComponent, canActivate:[loginGuard]},
 {path:"user", component:UserComponent, canActivate:[loginGuard]},
 
-{path:"sign-up", component:SignUpComponent, canActivate:[beforeLoginGuard]},
-{path:"Login", component:LoginComponent, canActivate:[beforeLoginGuard]},
+{path:"sign-up", component:SignUpComponent, },
+{path:"Login", component:LoginComponent, },
 
 
 

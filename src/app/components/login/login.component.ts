@@ -26,7 +26,8 @@ export class LoginComponent {
 
   constructor(private login: LoginService,
     private common: CommonService,
-    private router: Router
+    private router: Router,
+    private loginService : LoginService,
   ){ }
 
   ngOnInit() {
@@ -48,8 +49,8 @@ export class LoginComponent {
     }).subscribe((resp:any)=> {
       let valstring = JSON.stringify(resp);
 
-
-      this.common.setCookie('sagar', valstring , 1);     // to create cookies 
+      this.login.setAuth(valstring)
+    // to create cookies 
       this.router.navigate(['/resource']);
         
     });
