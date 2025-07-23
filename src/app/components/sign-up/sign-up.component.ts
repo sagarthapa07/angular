@@ -52,7 +52,7 @@ export class SignUpComponent {
         'sagar',
         signupString,1
       );
-     this.route.navigate(['resource']);
+     this.route.navigate(['products']);
      
 
     });

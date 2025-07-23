@@ -9,8 +9,6 @@ import { Router } from '@angular/router';
 export class LoginService {
   loginUrl: string = 'https://dummyjson.com/user/login'; // API store kiya LoginUrl mai
 
-  // private http = inject(HttpClient);
-
   private isUserLogin = signal(false);
 
   constructor(private http: HttpClient, public common: CommonService) {}

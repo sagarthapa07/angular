@@ -51,8 +51,7 @@ export class LoginComponent {
 
       this.login.setAuth(valstring)
     // to create cookies 
-      this.router.navigate(['/resource']);
-        
+      this.router.navigate(['/products']);
     });
   }
   // onClick(){

@@ -5,13 +5,11 @@ import { LoginService } from '../services/login/login.service';
 
 // Angular 16 se pehele ye classs hota tha pehele constructor banana padta tha 
 export const loginGuard: CanActivateFn = (route, state) => {
-debugger
  const loginService = inject(LoginService);
   const router = inject(Router);
   
 
   if (loginService.isLogin()()) {
-    debugger;
   }
   else{
     router.navigate(['/home']);

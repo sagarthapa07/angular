@@ -7,12 +7,12 @@ export const beforeLoginGuard: CanActivateFn = (route, state) => {
 
   const router = inject(Router);
 
-  
-  // if (loginService.isLogin()) {
-  //   router.navigate(['/resource']);
-  // }
+
   return true;
 };
+// if (loginService.isLogin()) {
+//   router.navigate(['/products']);
+// }
 
 
 // @Injectable({

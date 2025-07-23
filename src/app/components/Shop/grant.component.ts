@@ -11,7 +11,11 @@ import { HeaderComponent } from "../header/header.component";
 })
 export class GrantComponent {
 
-  activeForm: 'login' | 'register' = 'register'
+
+
+
+
+  // activeForm: 'login' | 'register' = 'register'
   // total: number = 0;
 
   // constructor(private home: HomeServicesService) {}
@@ -32,4 +36,6 @@ export class GrantComponent {
   // reset(){
   //   this.total=0;
   // }
+
+  
 }

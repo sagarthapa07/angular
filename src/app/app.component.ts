@@ -17,7 +17,7 @@ export class AppComponent {
 
 
 
-// import { ResourceComponent } from "./components/resource/resource.component";
+// import { productsComponent } from "./components/products/products.component";
 // import { SignUpComponent } from "./components/sign-up/sign-up.component";
 // import { GrantComponent } from "./components/grant/grant.component";
 // import { LoginComponent } from "./components/login/login.component";
@@ -25,4 +25,4 @@ export class AppComponent {
 
 
 
-//  ResourceComponent, SignUpComponent, GrantComponent, LoginComponent, DetailComponent,
+//  productsComponent, SignUpComponent, GrantComponent, LoginComponent, DetailComponent,
