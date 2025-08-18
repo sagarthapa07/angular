@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { HomeServicesService } from '../../core/services/home/home-services.service';
-import { HeaderComponent } from "../header/header.component";
+
 
 @Component({
   selector: "app-home",
-  imports: [HeaderComponent],
+  imports: [],
   templateUrl: "./home.component.html",
   styleUrl: "./home.component.css",
 })
@@ -122,11 +122,4 @@ export class HomeComponent {
 
   constructor(private home: HomeServicesService) {}
 
-  
-  add(a: number, b: number) {
-    this.total = this.home.add(a, b);
-  }
-  subtract(a: number, b: number) {
-    this.total = this.home.subtract(a, b);
-  }
 }

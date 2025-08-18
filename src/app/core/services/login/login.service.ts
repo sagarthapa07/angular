@@ -21,28 +21,21 @@ export class LoginService {
   }
 
   setAuth(valstring: any) {
-   
-        this.isUserLogin.set(true);
+    this.isUserLogin.set(true);
 
     this.common.setCookie('sagar', valstring, 1);
-
   }
-  
+
   isLogin() {
     let userLogin = this.common.getCookie('sagar');
     if (userLogin) {
-          this.isUserLogin.set(true);
+      this.isUserLogin.set(true);
       return this.isUserLogin;
     } else {
-          this.isUserLogin.set(false);
+      this.isUserLogin.set(false);
       return this.isUserLogin;
     }
   }
-
- 
-
-
-
 
   // isLogin() WritableSignal<boolean>  {
   //   let userLogin = this.common.getCookie('sagar');
@@ -71,5 +64,10 @@ export class LoginService {
   logOutUser() {
     this.common.deleteCookie('sagar');
     this.isUserLogin.set(false);
+  }
+
+  getUserData() {
+    let userData =  JSON.parse(this.common.getCookie('sagar'));
+    return userData ? userData : null;
   }
 }

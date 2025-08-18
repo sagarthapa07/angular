@@ -1,0 +1,10 @@
+.product-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 15px;
+  margin: 10px;
+  width: 250px;
+  display: inline-block;
+  vertical-align: top;
+  background-color: #f9f9f9;
+}

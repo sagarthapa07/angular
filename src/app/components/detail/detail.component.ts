@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { HeaderComponent } from "../header/header.component";
+
 
 
 @Component({
   selector: 'app-detail',
-  imports: [RouterLink, HeaderComponent],
+  imports: [RouterLink, ],
   templateUrl: './detail.component.html',
   styleUrl: './detail.component.css'
 })

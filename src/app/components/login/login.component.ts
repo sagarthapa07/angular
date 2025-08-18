@@ -9,13 +9,11 @@ import {
 import { LoginService } from '../../core/services/login/login.service';
 import { CommonService } from '../../core/services/common/common.service';
 import { Router } from '@angular/router';
-import { HeaderComponent } from "../header/header.component";
-import { VikalpComponent } from '../vikalp/vikalp.component';
 
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, ReactiveFormsModule, HeaderComponent,VikalpComponent],
+  imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
@@ -41,24 +39,29 @@ export class LoginComponent {
 
 
   //
-  onSubmit() {
+ onSubmit() {
+  this.message = ''; // Reset previous error message
 
-    this.login.loginUser({
-      username : this.loginForm.value.email,
-      password : this.loginForm.value.password
-    }).subscribe((resp:any)=> {
+  this.login.loginUser({
+    username: this.loginForm.value.email,
+    password: this.loginForm.value.password
+  }).subscribe({
+    next: (resp: any) => {
       let valstring = JSON.stringify(resp);
-
-      this.login.setAuth(valstring)
-    // to create cookies 
+      this.login.setAuth(valstring);
       this.router.navigate(['/products']);
-    });
-  }
-  // onClick(){
-  //   if(this.login.isLogin=){
-
-  //   }
-  // }
+    },
+    error: (error) => {
+      if (error.status === 401) {
+        this.message = 'Wrong Password';
+      } else if (error.status === 404) {
+        this.message = 'User not found';
+      } else {
+        this.message = 'Something went wrong. Please try again.';
+      }
+    }
+  });
+}
 }
 
 

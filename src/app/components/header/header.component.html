@@ -33,7 +33,8 @@
         <button class="btn btn-outline-success" routerLink="/sign-up" type="submit">Signup</button>
         <button class="btn btn-outline-success" routerLink="/Login" type="submit">Login</button>
       </div>
-      <div *ngIf="isLoggedIn">
+      <div *ngIf="isLoggedIn" class="d-flex gap-">
+        <button class="btn cart btn-outline-success" routerLink="/cart-page">Cart</button>
         <button class="btn btn-outline-success" routerLink="/Login" type="submit" (click)="logout()">Logout</button>
       </div>
       <!-- <form class="d-flex" role="search">

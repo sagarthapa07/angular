@@ -1,21 +1,36 @@
 import { HttpClient } from '@angular/common/http';
 import { computed, Injectable, signal } from '@angular/core';
+import { LoginService } from '../login/login.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-  cartApi:string = "https://dummyjson.com/carts/1"
+  cartApi:string = ""
 
  private _cartItems = signal<any[]>([]);
 
   // Public readonly signal
   readonly cartItems = this._cartItems;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+    private loginService : LoginService
+  ) {
+ 
+
+
+
+  }
 
   fetchCartData(): void {
+
+      let user =  this.loginService.getUserData()
+    let userdata =  JSON.parse(user)
+        debugger;
+  this.cartApi = "https://dummyjson.com/carts/"+userdata.id
+
     this.http.get<any>(this.cartApi).subscribe((res) => {
+      debugger
       const data = res.products.map((item: any) => ({
         img: item.thumbnail,
         name: item.title,

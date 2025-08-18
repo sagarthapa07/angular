@@ -1,11 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { HeaderComponent } from "../header/header.component";
+
 import { CartService } from '../../core/services/cart/cart.service';
 
 @Component({
   selector: 'app-cart-page',
-  imports: [RouterLink, HeaderComponent],
+  imports: [RouterLink, ],
   templateUrl: './cart-page.component.html',
   styleUrl: './cart-page.component.css'
 })
@@ -32,11 +32,12 @@ export class CartPageComponent {
 
   constructor() {
     // call API on component load
-    this.cartService.fetchCartData();
+
   }
 
 
-//   ngOnInit(): void {
+ngOnInit(): void {
+      this.cartService.fetchCartData();
 //   this.cartService.getCartData().subscribe((res) => {
 //     this.cartService = res.products.map((item: any) => ({
 //       img: item.thumbnail,
@@ -47,7 +48,7 @@ export class CartPageComponent {
 //       quantity: item.quantity,
 //     }));
 //   });
-// }
+}
   
   // cartArr = [
   //   {
