@@ -33,14 +33,10 @@
         <button class="btn btn-outline-success" routerLink="/sign-up" type="submit">Signup</button>
         <button class="btn btn-outline-success" routerLink="/Login" type="submit">Login</button>
       </div>
-      <div *ngIf="isLoggedIn" class="d-flex gap-">
-        <button class="btn cart btn-outline-success" routerLink="/cart-page">Cart</button>
+      <div *ngIf="isLoggedIn" class="d-flex gap-3">
+        <button class="btn cart btn-outline-success bi bi-cart4" routerLink="/cart-page"></button>
         <button class="btn btn-outline-success" routerLink="/Login" type="submit" (click)="logout()">Logout</button>
       </div>
-      <!-- <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-
-        </form> -->
     </div>
   </div>
 </nav>
