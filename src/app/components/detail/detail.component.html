@@ -1,35 +1,22 @@
-
 <section>
-    <div class="container mt-5">
+    <div class="container mt-5" *ngIf="product; else loading">
         <div class="row">
             <div class="col-md-6">
                 <div class=" group overflow-hidden d-flex justify-content-center align-items-center px-5"
-                style="border: 0.01px solid rgba(221, 221, 221, 0.834);border-radius: 5px; height: 550px;">
-                <img src="https://shopcart.reactbd.com/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Foe6m9gg8%2Fproduction%2Fc6e0da93e884e6ab9fc7b2a884c6d28ad7f2020e-500x500.png&w=750&q=75"
-                    alt="" width="500" height="500" class="img-fluid ">
-            </div>
-            <div class="d-flex flex-wrap align-items-center gap-1 pt-3 ">
-                <div>
-                    <img src="https://shopcart.reactbd.com/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Foe6m9gg8%2Fproduction%2Fc6e0da93e884e6ab9fc7b2a884c6d28ad7f2020e-500x500.png&w=750&q=75" alt="" width="90" height="90" class="img-fluid rounded-3"  style="border:1.5px solid rgba(221, 221, 221, 0.834);">
+                    style="border: 0.01px solid rgba(221, 221, 221, 0.834);border-radius: 5px; height: 550px;">
+                    <img [src]="product.thumbnail" alt="" width="500" height="500" class="img-fluid ">
                 </div>
-                <div>
-                    <img src="https://shopcart.reactbd.com/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Foe6m9gg8%2Fproduction%2Fcbea05f5e49e25766307efbc164568152c658f57-300x300.jpg&w=750&q=75" alt="" width="90" height="90" class="img-fluid rounded-3" style="border: 1.5px solid rgba(221, 221, 221, 0.834);">
+                <div class="d-flex flex-wrap align-items-center gap-1 pt-3 ">
+                    <div>
+                        <img [src]="product.thumbnail" alt="" width="90" height="90" class="img-fluid rounded-3"
+                            style="border:1.5px solid rgba(221, 221, 221, 0.834);">
+                    </div>
                 </div>
-                <div>
-                    <img src="https://shopcart.reactbd.com/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Foe6m9gg8%2Fproduction%2F4bf833dd1a0dc0d8465e925971e763b7fdd706fb-300x300.jpg&w=750&q=75" alt="" width="90" height="90" class="img-fluid rounded-3" style="border: 1.5px solid rgba(221, 221, 221, 0.834);">
-                </div>
-                <div>
-                    <img src="https://shopcart.reactbd.com/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Foe6m9gg8%2Fproduction%2F66bca89e38ffd2a370db223e52ac7f051b93fe87-300x300.jpg&w=750&q=75" alt="" width="90" height="90" class="img-fluid rounded-3" style="border: 1.5px solid rgba(221, 221, 221, 0.834);">
-                </div>
-                <div>
-                    <img src="https://shopcart.reactbd.com/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Foe6m9gg8%2Fproduction%2F6a0ed86eaba3270eb3e07650f17fce7c83132d3d-300x300.jpg&w=750&q=75" alt="" width="90" height="90" class="img-fluid rounded-3" style="border: 1.5px solid rgba(221, 221, 221, 0.834);">
-                </div>
-            </div>
             </div>
 
             <div class="col-md-6 px-4">
-                <p class="text-2xl fw-bold fs-4 text-gray-600 ">Canon EOS 250D 24.1MP Full HD WI-FI DSLR Camera with 18-55mm</p>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus neque maxime hic cum? Libero, nisi sint suscipit vel ea dolorum rerum, laboriosam tempore nemo repellendus cumque ver?</p>
+                <p class="text-2xl fw-bold fs-4 text-gray-600 ">{{product.title}}</p>
+                <p>{{product.description}}</p>
                 <div class="">
                     <span class="star">★</span>
                     <span class="star">★</span>
@@ -40,62 +27,99 @@
                 </div>
                 <hr class="text-gray-400">
                 <div class="price">
-                    <span class="fw-bold fs-5 " style="color: #063c28cc;">$750.00 </span>
-                    <span class="m-1 fw-semibold fs-5 " style="color: rgb(146, 146, 146); text-decoration: line-through;">$810.00</span>
-                    <p class=" text-start py-1.5 fw-semibold text-green-600 d-flex justify-content-center align-items-center mt-3" style="color:#063c28cc; background-color: rgb(180, 248, 205);width: 90px; height:30px; border-radius: 10px;">In Stock</p>
+                    <span class="fw-bold fs-5 " style="color: #063c28cc;">${{ getDiscountedPrice(product.price,
+                        product.discountPercentage)}} </span>
+                    <span class="m-1 fw-semibold fs-5 "
+                        style="color: rgb(146, 146, 146); text-decoration: line-through;">{{product.price}}</span>
+                    <p class=" text-start py-1.5 fw-semibold text-green-600 d-flex justify-content-center align-items-center mt-3"
+                        style="color:#063c28cc; background-color: rgb(180, 248, 205);width: 90px; height:30px; border-radius: 10px;">
+                        In Stock</p>
                 </div>
                 <hr class="text-gray-400">
                 <div class="d-flex align-items-center justify-content-center gap-1">
-                        <button
-                            class="btn btn-success w-100 text-light fw-bold d-flex justify-content-center align-items-center"
-                            style="border-radius: 5px;" routerLink="cart-page" [routerLink]="['/cart-page']">
-                            <img src="https://img.icons8.com/?size=17&id=HtmDYmJyGCy7&format=png&color=FFFFFF"
-                                alt="nhi chal" style="height: 20px; width: 20px; margin-top: 2px;" class="img-fluid mx-2">
-                            Add To Cart
-                        </button>
-                        <button class="btn">
-                            <img src="https://img.icons8.com/?size=50&id=67656&format=png&color=063c28cc" alt="">
-                        </button>
+                    <button
+                        class="btn btn-success w-100 text-light fw-bold d-flex justify-content-center align-items-center"
+                        style="border-radius: 5px;" routerLink="cart-page" [routerLink]="['/cart-page']">
+                        <img src="https://img.icons8.com/?size=17&id=HtmDYmJyGCy7&format=png&color=FFFFFF"
+                            alt="nhi chal" style="height: 20px; width: 20px; margin-top: 2px;" class="img-fluid mx-2">
+                        Add To Cart
+                    </button>
+                    <button class="btn">
+                        <img src="https://img.icons8.com/?size=50&id=67656&format=png&color=063c28cc" alt="">
+                    </button>
+                </div>
+                <button class="btn d-flex justify-content-between align-items-center w-100 border-0 my-hover"
+                    type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
+                    [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample"
+                    (click)="isCollapsed = !isCollapsed">
+                    <span class="fw-bold">{{ product.title }}:Characteristics</span>
+                    <img src="https://img.icons8.com/?size=20&id=60662&format=png&color=000000"
+                        [ngClass]="{ 'rotate-180': !isCollapsed }"
+                        style="height: 15px; width: 15px; transition: transform 0.3s ease;" alt="toggle icon" />
+                </button>
+
+                <div class="collapse mt-0" id="collapseExample" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+                    <div class="d-flex flex-column">
+                        <div class="d-flex justify-content-between align-items-center ms-3 me-3 py-1">
+                            <p class="mb-0">Category:</p>
+                            <b>{{ product.category }}</b>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center ms-3 me-3 py-1">
+                            <p class="mb-0">Brand:</p>
+                            <b>{{ product.brand }}</b>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center ms-3 me-3 py-1">
+                            <p class="mb-0">Price:</p>
+                            <b>${{ product.price }}</b>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center ms-3 me-3 py-1">
+                            <p class="mb-0">Stock:</p>
+                            <b>{{ product.stock }}</b>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center ms-3 me-3 py-1">
+                            <p class="mb-0">Rating:</p>
+                            <b>{{ product.rating }}</b>
+                        </div>
                     </div>
-                    <div class="dropdown d-flex items-center justify-between mx-0 gap-2 pt-4" >
-                        <span class="fw-bold text-truncate fs-6 text-left" >
-                            Canon EOS 250D 24.1MP Full HD WI-FI DSLR Camera with 18-55mm: Characteristics
-                        </span>
-                        <img src="https://img.icons8.com/?size=20&id=60662&format=png&color=000000" style="height: 15px; width: 15px; margin-top: 5px;" alt="img-fluid">
+                </div>
+
+                <hr>
+                <div class="d-flex flex-wrap align-items-center my-4 w-100">
+                    <div class="d-flex align-items-center hov flex-fill justify-content-center">
+                        <i class="bi bi-fullscreen"></i>
+                        <span class="fw-semibold px-2">Compare color</span>
                     </div>
-                    <hr>
-                    <div class="d-flex flex-wrap align-items-center gap-4 my-4">
-                        <div>
-                            <img src="https://img.icons8.com/?size=20&id=r549xECVRsg2&format=png&color=000000" alt="nhi chali" srcset="" class="mb-1">
-                            <span class="fw-semibold px-2">Compare color</span>
-                        </div>
-                        <div>
-                            <img src="https://img.icons8.com/?size=20&id=646&format=png&color=000000" alt="nhi chali" srcset="" class="mb-1">
-                            <span class="fw-semibold px-2">Ask a question</span>
-                        </div>
-                        <div>
-                            <img src="https://img.icons8.com/?size=20&id=86719&format=png&color=000000" alt="nhi chali" srcset="" class="mb-1">
-                            <span class="fw-semibold px-2">Delivery & Return</span>
-                        </div>
-                        <div>
-                            <img src="https://img.icons8.com/?size=20&id=TDCU7KRViM2Q&format=png&color=000000" alt="nhi chali" srcset="" class="mb-1">
-                            <span class="fw-semibold px-2">Share</span>
-                        </div>
+                    <div class="d-flex align-items-center hov flex-fill justify-content-center">
+                        <i class="bi bi-question-circle"></i>
+                        <span class="fw-semibold px-2">Ask a question</span>
                     </div>
-                    <hr>
-                    <div class="mt-4">
-                        <div class="d-flex flex-wrap align-items-center gap-4 w-100 px-3 py-2" style="border: 2px solid rgba(230, 230, 230, 0.834);margin-bottom: -1px;">
+                    <div class="d-flex align-items-center hov flex-fill justify-content-center">
+                        <i class="bi bi-truck"></i>
+                        <span class="fw-semibold px-2">Delivery & Return</span>
+                    </div>
+                    <div class="d-flex align-items-center hov flex-fill justify-content-center">
+                        <i class="bi bi-share"></i>
+                        <span class="fw-semibold px-2">Share</span>
+                    </div>
+                </div>
+                <hr>
+                <div class="mt-4">
+                    <div class="d-flex flex-wrap align-items-center gap-4 w-100 px-3 py-2"
+                        style="border: 2px solid rgba(230, 230, 230, 0.834);margin-bottom: -1px;">
                         <img src="https://img.icons8.com/?size=30&id=3562&format=png&color=D08A12CC" alt="">
                         <div class="">
                             <p class="text-sm fw-bold text-black mb-1">Free Delivery</p>
-                            <p class="text-sm text-secondary mb-0" ><u>Enter your Postel Code for Dilivery Availability</u></p>
+                            <p class="text-sm text-secondary mb-0"><u>Enter your Postel Code for Dilivery
+                                    Availability</u></p>
                         </div>
                     </div>
-                    <div class="d-flex flex-wrap align-items-center gap-4 w-100 px-3 py-2 " style="border: 2px solid rgba(230, 230, 230, 0.834);">
+                    <div class="d-flex flex-wrap align-items-center gap-4 w-100 px-3 py-2 "
+                        style="border: 2px solid rgba(230, 230, 230, 0.834);">
                         <img src="https://img.icons8.com/?size=30&id=WLCxIISDsS1o&format=png&color=D08A12CC" alt="">
                         <div class="d-flex align-items-start justify-content-center flex-column">
                             <p class="text-sm fw-bold text-black mb-1">Free Delivery</p>
-                            <p class="text-sm text-secondary mb-0"><u>Enter your Postel Code for Dilivery Availability</u></p>
+                            <p class="text-sm text-secondary mb-0"><u>Enter your Postel Code for Dilivery
+                                    Availability</u></p>
                         </div>
                     </div>
                 </div>
@@ -105,28 +129,39 @@
             <div class="col-md-8 mx-sx-auto mx-md-0 mt-5 rounded-3" style="background-color: #063c281a;">
                 <div class="d-flex flex-wrap justify-content-center align-items-center ">
                     <div class="flex-fill px-1 d-flex align-items-center">
-                        <button class="btn d-flex align-items-center justify-content-center bg-light fw-bold w-100 h-75 rounded-3"
+                        <button
+                            class="btn d-flex align-items-center justify-content-center bg-light fw-bold w-100 h-75 rounded-3"
                             style="color:#063c28cc ;">Description</button>
                     </div>
                     <div class="flex-fill px-1 d-flex align-items-center">
-                        <button class="btn w-100 h-75 d-flex align-items-center justify-content-center fw-normal rounded-3">Additional Information</button>
+                        <button
+                            class="btn w-100 h-75 d-flex align-items-center justify-content-center fw-normal rounded-3">Additional
+                            Information</button>
                     </div>
                     <div class="flex-fill px-1 d-flex align-items-center">
-                        <button class="btn w-100 h-75 d-flex align-items-center justify-content-center fw-normal rounded-3">Reviews</button>
+                        <button
+                            class="btn w-100 h-75 d-flex align-items-center justify-content-center fw-normal rounded-3">Reviews</button>
                     </div>
                 </div>
             </div>
             <div class="mt-5 text-2xl fs-4 mx-1" style="width: 800px; color: #4b5563;">
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit facilis architecto tempora cum
-                    necessitatibus, doloremque fugit dolorum nesciunt a optio, minus nisi, earum officia? Illo debitis neque
+                    necessitatibus, doloremque fugit dolorum nesciunt a optio, minus nisi, earum officia? Illo debitis
+                    neque
                     nemo at quae dolorem amet, quos illum mollitia nesciunt temporibus veniam officiis!</p>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit facilis architecto tempora cum
-                    necessitatibus, doloremque fugit dolorum nesciunt a optio, minus nisi, earum officia? Illo a? Blanditiis
-                    voluptas, ab voluptatibus eveniet neque nemo at quae dolorem amet, quos illum mollitia nesciunt temporibus
+                    necessitatibus, doloremque fugit dolorum nesciunt a optio, minus nisi, earum officia? Illo a?
+                    Blanditiis
+                    voluptas, ab voluptatibus eveniet neque nemo at quae dolorem amet, quos illum mollitia nesciunt
+                    temporibus
                     veniam officiis!</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt aliquid repellendus iusto sunt ex obcaecati
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt aliquid repellendus iusto sunt ex
+                    obcaecati
                     nemo. Sapiente molestiae hic inventore?</p>
             </div>
         </div>
     </div>
+    <ng-template #loading>
+        <p>Loading product details...</p>
+    </ng-template>
 </section>

@@ -1,6 +1,18 @@
 .star {
-    font-size: 20px;
-    color: #063c28cc;
-    margin-right: 1px;
-    margin-top: 0px;
-  }
+  font-size: 20px;
+  color: #063c28cc;
+  margin-right: 1px;
+  margin-top: 0px;
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
+}
+.my-hover:hover {
+  color: black;        /* hover pe text color change */
+  text-decoration: underline;  /* hover pe underline */
+}
+.hov:hover{
+  color:red;
+  text-decoration: underline;
+}

@@ -1,17 +1,23 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Product } from '../../../dataType';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShopService {
-async getAllProducts(): Promise<any[]> {
-    const response = await fetch('https://dummyjson.com/products');
-    if (!response.ok) {
-      throw new Error('Failed to fetch products');
-    }
-    const result = await response.json();
-    return await response.json();
-  }
+  constructor(private http:HttpClient){}
+Product(): Observable<{ products: Product[] }> {
+  return this.http.get<{ products: Product[] }>('https://dummyjson.com/products');
+}
+
+
+getProduct(id:string){
+  return this.http.get<Product>(`https://dummyjson.com/products/${id}`)
+}
+
 
 }
+
+// return this.http.get<{ products: Product[] }>('https://dummyjson.com/products?limit=12');
