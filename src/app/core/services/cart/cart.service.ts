@@ -3,83 +3,53 @@ import { computed, Injectable, signal } from '@angular/core';
 import { LoginService } from '../login/login.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CartService {
-  cartApi:string = ""
+  cartApi: string = '';
 
- private _cartItems = signal<any[]>([]);
+  userdata:any = {}
+  private _cartItems = signal<any[]>([]);
 
   // Public readonly signal
   readonly cartItems = this._cartItems;
 
-  constructor(private http: HttpClient,
-    private loginService : LoginService
-  ) {
- 
+  constructor(private http: HttpClient, private loginService: LoginService) {}
 
-
-
+  fetchCartData() {
+    let user = this.loginService.getUserData();
+    this.userdata = JSON.parse(user);
+    this.cartApi = 'https://dummyjson.com/carts/' + this.userdata.id;
+    return this.http.get<any>(this.cartApi) 
+    
   }
 
-  fetchCartData(): void {
-
-      let user =  this.loginService.getUserData()
-    let userdata =  JSON.parse(user)
-        debugger;
-  this.cartApi = "https://dummyjson.com/carts/"+userdata.id
-
-    this.http.get<any>(this.cartApi).subscribe((res) => {
-      debugger
-      const data = res.products.map((item: any) => ({
-        img: item.thumbnail,
-        name: item.title,
-        Variant: 'Default',
-        status: 'In Stock',
-        price: item.discountedPrice || item.total,
-        quantity: item.quantity,
-      }));
-      this._cartItems.set(data); // Set signal value
-    });
-  }
-
-  // Bonus: total amount computed signal
+  // total amount computed signal
   totalAmount = computed(() =>
     this._cartItems().reduce((acc, item) => acc + item.price * item.quantity, 0)
   );
 
+  //
+
+  addItemsApi = 'https://dummyjson.com/carts/add';
+
+  cartAddItem( P_id: string, P_quantity: any) {
+    const body = {
+      userId: this.userdata.id,
+      products: [
+        {
+          id: P_id,
+          quantity: P_quantity,
+        },
+      ],
+    };
+
+  
+    return this.http.post(this.addItemsApi, body);
+  }
 
 
-
-
-
-
-
-
-//   constructor(private http: HttpClient) {}
-
-//   getCartData() {
-//   return this.http.get<any>('https://dummyjson.com/carts/1');
-// }
-
-
-
-//   getCartData(): Observable<any[]> {
-//   return new Observable((observer) => {
-//     this.http.get<any>('https://dummyjson.com/carts/1').subscribe((res) => {
-//       const cartItems = res.products.map((item: any) => {
-//         return {
-//           img: item.thumbnail,
-//           name: item.title,
-//           Variant: 'Default',
-//           status: 'In Stock',
-//           price: item.discountedPrice || item.total,
-//           quantity: item.quantity,
-//         };
-//       });
-//       observer.next(cartItems);
-//       observer.complete();
-//     });
-//   });
-// }
+ updateCartItems(items: any[]) {
+  this._cartItems.set(items);
+}
 }

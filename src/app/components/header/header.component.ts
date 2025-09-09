@@ -10,30 +10,18 @@ import { CommonModule } from '@angular/common';
   styleUrl: './header.component.css',
 })
 export class HeaderComponent {
-
-
   isLoggedIn:boolean = false;
-  
   constructor(private login:LoginService,
-
   private router: Router
   ){
-
     effect(() => {
-       this.isLoggedIn = this.login.isLogin()();
-      
+       this.isLoggedIn = this.login.isLogin()();   
     });
-
   }
-
-
-
   ngOnInit(){
-
   }
   
   logout() {
- 
     this.login.logOutUser()
    
     this.router.navigate(['/home']);

@@ -15,7 +15,7 @@ import { HeaderComponent } from "../header/header.component";
 
 @Component({
   selector: 'app-sign-up',
-  imports: [FormsModule, ReactiveFormsModule, HeaderComponent],
+  imports: [FormsModule, ReactiveFormsModule, ],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.css',
 })
