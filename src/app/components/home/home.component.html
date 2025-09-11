@@ -1,166 +1,395 @@
-
-<section class="bg-body-tertiary">
-  <div class="container py-5">
-    <div class="row justify-content-center">
-      <div class="col-md-8 text-center">
-        <h1 class="fs-1 fs-md-2 fs-lg-3">
-          The Future of Menufecturing with Latest Technology
+<section class="mt-3">
+  <div class="container mt-5">
+    <div class="row rounded-3 px-4 " style="background-color: #fcf0e4;">
+      <div class="col-12 col-md-6 d-flex flex-column justify-content-center">
+        <h1 class="mx-5 fw-bold fs-3 w-50 text-wrap" style="color: #063c28;">
+          Grab Upto 50% Off on Selected Headphone
         </h1>
-        <h6 class="mt-3">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Culpa,
-          facilis.
-        </h6>
+        <button class="mx-5 btn text-light mt-3" style="background-color: #063c28; width: 100px;">Buy now</button>
       </div>
-      <div class="d-flex justify-content-center gap-3 mt-4">
-        <button class="btn btn-primary"> Hey </button>
-        <button class="btn btn-primary"> Hey </button>
-      </div>
-      <div></div>
-    </div>
-  </div>
-  <div class="container py-3">
-    <div class=" py-3 ">
-      <div class="row col-12 row-col-md-2 justify-content-center d-flex gap-3">
-        @for(item of arr; track item){
-        <div class="card rounded-4 text-center px-0" style=" width: 15rem; height: 350px">
-          <img src="{{item.img}}" alt="" class="card-img-top object-fit: cover" style="height: 150px;">
-          <div class="card-body">
-            <h5 class="card-title ">Card {{item.name}}</h5>
-            <p class="card-text text-truncate">{{item.val}} </p>
-            <a href="# " class="btn btn-primary mt-5 py-2">Go somewhere</a>
-          </div>
-        </div>
-        }
+      <div class="col-12 col-md-6 text-center mt-4 mt-md-0">
+        <img
+          src="https://shopcart.reactbd.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fbanner_1.2a2263aa.png&w=640&q=100"
+          alt="Headphone" class="img-fluid" style="max-height: 256px;">
       </div>
     </div>
   </div>
 </section>
-<section class="bg-body-tertiary">
-  <div style="background-color: #142f32">
-    <div class="container text-white p-4 min-vh-100 mt-5">
-      <div class="row justify-content-center ">
-        <div class="col-md-8 text-center">
-          <h1 class="fs-1 fs-md-2 fs-lg-3">
-            Efficient and integrated <br />Menufecturing Service
-          </h1>
-          <h6 class="mt-3">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Culpa,
-            facilis.
-          </h6>
+<section class="my-5">
+  <div class="container">
+    <div class="row gap-5">
+      <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center">
+          <ul ngbNav #nav="ngbNav" [(activeId)]="active" (activeIdChange)="onTabChange($event)"
+            class="nav nav-tabs gap-4 flex-wrap" style="border: none;">
+            <li [ngbNavItem]="1">
+              <button ngbNavLink class="btn custom-gadget-btn mb-4">Gadget</button>
+              <ng-template ngbNavContent>
+                <div class="productGri">
+                  <div class="row g-2">
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let item of productList">
+                      <div class="border rounded shadow-sm h-100 p-2">
+                        <div class="d-flex align-items-center justify-content-center flex-column"
+                          style="background-color: rgb(246, 246, 246); height: 256px" routerLink="detail"
+                          [routerLink]="['/detail', item.id]">
+                          <img [src]="item.thumbnail" alt="{{ item.title }}" class="w-75 h-100" />
+                        </div>
+                        <div class="px-1 pt-2">
+                          <div class="text-uppercase mt-2">
+                            <h3 class="text-truncate"
+                              style="font-size: 12px; font-weight: 600; color: rgb(172, 172, 172);">
+                              {{ item.brand }}
+                            </h3>
+                          </div>
+                          <div class="text-uppercase">
+                            <h2 class="text-truncate" style="font-size: 15px; font-weight: 600;">
+                              {{ item.title }}
+                            </h2>
+                          </div>
+                          <div>
+                            <p [class.text-truncate]="!item.expanded" style="font-size: 15px; font-weight: 200;">
+                              {{ item.description }}
+                            </p>
+                            <button class="btn btn-link p-0" (click)="item.expanded = !item.expanded">
+                              {{ item.expanded ? 'Show less' : 'Read more' }}
+                            </button>
+                          </div>
+                          <div class="mt-3">
+                            <h6> In Stock <span class="" style="color: #063c28cc;">{{item.stock}}</span></h6>
+                          </div>
+                          <div class="mt-3 d-flex">
+                            <h3 style="font-size: 18px; font-weight: 600; color: #063c28cc;">
+                              $<span>{{ getDiscountedPrice(item.price, item.discountPercentage)}}</span>
+                            </h3>
+                            <h6 class="text-sm mx-2 text-decoration-line-through text-secondary">
+                              $ {{ item.price}}
+                            </h6>
+                          </div>
+                          <button
+                            class="btn btn-success w-100 text-light fw-semibold d-flex justify-content-center gap-1 text-truncate mt-2"
+                            style="border-radius: 20px;">
+                            <img src="https://img.icons8.com/?size=17&id=HtmDYmJyGCy7&format=png&color=FFFFFF"
+                              alt="icon" style="height: 20px; width: 20px; margin-top: 2px;" />
+                            <span class="text-truncate fs-6">Add To Cart</span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </li>
+
+            <li [ngbNavItem]="2">
+              <button ngbNavLink class="btn custom-gadget-btn mb-4">Beauty</button>
+              <ng-template ngbNavContent>
+                <div class="productGri">
+                  <div class="row g-2">
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let item of beatyItem">
+                      <div class="border rounded shadow-sm h-100 p-2">
+                        <div class="d-flex align-items-center justify-content-center flex-column"
+                          style="background-color: rgb(246, 246, 246); height: 256px;" routerLink="detail"
+                          [routerLink]="['/detail', item.id]">
+                          <img [src]="item.thumbnail" alt="{{ item.title }}" class="w-75 h-100" />
+                        </div>
+                        <div class="px-1 pt-2">
+                          <div class="text-uppercase mt-2">
+                            <h3 class="text-truncate"
+                              style="font-size: 12px; font-weight: 600; color: rgb(172, 172, 172);">
+                              {{ item.brand }}
+                            </h3>
+                          </div>
+                          <div class="text-uppercase">
+                            <h2 class="text-truncate" style="font-size: 15px; font-weight: 600;">
+                              {{ item.title }}
+                            </h2>
+                          </div>
+                          <div>
+                            <p [class.text-truncate]="!item.expanded" style="font-size: 15px; font-weight: 200;">
+                              {{ item.description }}
+                            </p>
+                            <button class="btn btn-link p-0" (click)="item.expanded = !item.expanded">
+                              {{ item.expanded ? 'Show less' : 'Read more' }}
+                            </button>
+                          </div>
+                          <div class="mt-3">
+                            <h6> In Stock <span class="" style="color: #063c28cc;">{{item.stock}}</span></h6>
+                          </div>
+                          <div class="mt-3 d-flex">
+                            <h3 style="font-size: 18px; font-weight: 600; color: #063c28cc;">
+                              $<span>{{ getDiscountedPrice(item.price, item.discountPercentage)}}</span>
+                            </h3>
+                            <h6 class="text-sm mx-2 text-decoration-line-through text-secondary">
+                              $ {{ item.price}}
+                            </h6>
+                          </div>
+                          <button
+                            class="btn btn-success w-100 text-light fw-semibold d-flex justify-content-center gap-1 text-truncate mt-2"
+                            style="border-radius: 20px;">
+                            <img src="https://img.icons8.com/?size=17&id=HtmDYmJyGCy7&format=png&color=FFFFFF"
+                              alt="icon" style="height: 20px; width: 20px; margin-top: 2px;" />
+                            <span class="text-truncate fs-6">Add To Cart</span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </li>
+
+            <li [ngbNavItem]="3">
+              <button ngbNavLink class="btn custom-gadget-btn mb-4">Furniture</button>
+              <ng-template ngbNavContent>
+                <div class="productGri">
+                  <div class="row g-2">
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let item of furnitureItem">
+                      <div class="border rounded shadow-sm h-100 p-2">
+                        <div class="d-flex align-items-center justify-content-center flex-column"
+                          style="background-color: rgb(246, 246, 246); height: 256px;" routerLink="detail"
+                          [routerLink]="['/detail', item.id]">
+                          <img [src]="item.thumbnail" alt="{{ item.title }}" class="w-75" />
+                        </div>
+                        <div class="px-1 pt-2">
+                          <div class="text-uppercase mt-2">
+                            <h3 class="text-truncate"
+                              style="font-size: 12px; font-weight: 600; color: rgb(172, 172, 172);">
+                              {{ item.brand }}
+                            </h3>
+                          </div>
+                          <div class="text-uppercase">
+                            <h2 class="text-truncate" style="font-size: 15px; font-weight: 600;">
+                              {{ item.title }}
+                            </h2>
+                          </div>
+                          <div>
+                            <p [class.text-truncate]="!item.expanded" style="font-size: 15px; font-weight: 200;">
+                              {{ item.description }}
+                            </p>
+                            <button class="btn btn-link p-0" (click)="item.expanded = !item.expanded">
+                              {{ item.expanded ? 'Show less' : 'Read more' }}
+                            </button>
+                          </div>
+                          <div class="mt-3">
+                            <h6> In Stock <span class="" style="color: #063c28cc;">{{item.stock}}</span></h6>
+                          </div>
+                          <div class="mt-3 d-flex">
+                            <h3 style="font-size: 18px; font-weight: 600; color: #063c28cc;">
+                              $<span>{{ getDiscountedPrice(item.price, item.discountPercentage)}}</span>
+                            </h3>
+                            <h6 class="text-sm mx-2 text-decoration-line-through text-secondary">
+                              $ {{ item.price}}
+                            </h6>
+                          </div>
+                          <button
+                            class="btn btn-success w-100 text-light fw-semibold d-flex justify-content-center gap-1 text-truncate mt-2"
+                            style="border-radius: 20px;">
+                            <img src="https://img.icons8.com/?size=17&id=HtmDYmJyGCy7&format=png&color=FFFFFF"
+                              alt="icon" style="height: 20px; width: 20px; margin-top: 2px;" />
+                            <span class="text-truncate fs-6">Add To Cart</span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </li>
+
+            <li [ngbNavItem]="4">
+              <button ngbNavLink class="btn custom-gadget-btn mb-4">Others</button>
+              <ng-template ngbNavContent>
+                <div class="productGri">
+                  <div class="row g-2">
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let item of othersItem">
+                      <div class="border rounded shadow-sm h-100 p-2">
+                        <div class="d-flex align-items-center justify-content-center flex-column"
+                          style="background-color: rgb(246, 246, 246); height: 256px;" routerLink="detail"
+                          [routerLink]="['/detail', item.id]">
+                          <img [src]="item.thumbnail" alt="{{ item.title }}" class="w-75" />
+                        </div>
+                        <div class="px-1 pt-2">
+                          <div class="text-uppercase mt-2">
+                            <h3 class="text-truncate"
+                              style="font-size: 12px; font-weight: 600; color: rgb(172, 172, 172);">
+                              {{ item.brand }}
+                            </h3>
+                          </div>
+                          <div class="text-uppercase">
+                            <h2 class="text-truncate" style="font-size: 15px; font-weight: 600;">
+                              {{ item.title }}
+                            </h2>
+                          </div>
+                          <div>
+                            <p [class.text-truncate]="!item.expanded" style="font-size: 15px; font-weight: 200;">
+                              {{ item.description }}
+                            </p>
+                            <button class="btn btn-link p-0" (click)="item.expanded = !item.expanded">
+                              {{ item.expanded ? 'Show less' : 'Read more' }}
+                            </button>
+                          </div>
+                          <div class="mt-3">
+                            <h6> In Stock <span class="" style="color: #063c28cc;">{{item.stock}}</span></h6>
+                          </div>
+                          <div class="mt-3 d-flex">
+                            <h3 style="font-size: 18px; font-weight: 600; color: #063c28cc;">
+                              $<span>{{ getDiscountedPrice(item.price, item.discountPercentage)}}</span>
+                            </h3>
+                            <h6 class="text-sm mx-2 text-decoration-line-through text-secondary">
+                              $ {{ item.price}}
+                            </h6>
+                          </div>
+                          <button
+                            class="btn btn-success w-100 text-light fw-semibold d-flex justify-content-center gap-1 text-truncate mt-2"
+                            style="border-radius: 20px;">
+                            <img src="https://img.icons8.com/?size=17&id=HtmDYmJyGCy7&format=png&color=FFFFFF"
+                              alt="icon" style="height: 20px; width: 20px; margin-top: 2px;" />
+                            <span class="text-truncate fs-6">Add To Cart</span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </li>
+          </ul>
+          <button class="see btn btn-light border-2 border-secondary-subtle rounded-5 ms-auto mb-4"
+            [routerLink]="['/shop']">
+            See all
+          </button>
         </div>
-        <div class="text-center py-5 px-0 mx-0">
-          <div class="row justify-content-center px-0 mx-0">
-            @for(item2 of cars; track item2){
-            <div class="col-12 col-md-4 col-lg-3 d-flex justify-content-center p-0 my-3">
-              <div class="card" style="width: 18rem; height: 350px">
-                <img src="{{item2.img}}" class="card-img-top" alt="..." style="height: 150px;" />
-                <div class="card-text mt-2 text-start"><strong>Name:</strong> {{item2.Name}}
-                </div>
-                <div class="card-text mt-2 text-start">
-                  <strong>Type:</strong> {{item2.Type}}
-                </div>
-                <div class="card-text mt-1 text-start"><strong>About:</strong> {{item2.about}}
+        <div [ngbNavOutlet]="nav" class="mt-2"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container border my-5">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="border-bottom my-4 mx-3">
+          <h1 class="fw-semibold fs-4 pb-3">Popular Categories</h1>
+        </div>
+        <div class="row">
+          <div class="col-md-4" *ngFor="let item of allCategories">
+            <div class="mb-3 g-3">
+              <div class="card">
+                <div class="row g-1 d-flex p-2" style="background-color: #f6f6f6;">
+                  <div
+                    class="col-md-3 border border-danger-subtle align-items-center d-flex justify-content-center mx-3 my-3"
+                    style="background-color: #f6f6f6;">
+                    <img
+                      src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=958&auto=format&fit=crop"
+                      class="img img-fluid overflow-hidden" [alt]="item.name || item" />
+                  </div>
+                  <div class="col-md-7">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ item.name}}</h5>
+                      <p class="card-text">{{item}}
+                        <small class="text-body-secondary">items Available</small>
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-            }
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
-<section class="bg-body-tertiary py-5">
-  <div class="container">
-    <div class="row align-items-center">
-      <div
-        class="col-12 col-sm-12 col-md-6 col-lg-4 m-5 rounded-4 text-center justify-content-center d-flex order-1 order-md-1">
-        <div class="rounded-4 text-center py-5 ms-auto"
-          style="background-color: #edededeb;height: 500px; width: 400px;">
-          <img src="https://cdn.pixabay.com/photo/2020/09/24/09/32/graph-5598156_960_720.jpg" alt="Graph Image"
-            class="rounded-4" style="height: 400px;" />
-        </div>
-      </div>
-
-      <div class="col-12 col-sm-12 col-m-6 col-lg-7 d-flex flex-column order-2 order-md-2">
-        <div class="justify-content-center text-center ms-auto py-5 ps-5">
-          <div class="text-md-start">
-            <h1 class="text-start">Key Benefit of Our System for Your Business Efficiency</h1>
-            <h6 class="mt-3">Lorem ipsum dolor sit amet consectetur.</h6>
-          </div>
-          <div class="text-md-start">
-            <div class="text-md-start py-3">
-              <h4>
-                Lorem ipsum dolor sit amet, adipisicing.
-              </h4>
-              <h6>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magnam doloribus laborum, dignissimos
-                repudiandae
-                quas excepturi?
-              </h6>
-            </div>
-            <div class="text-md-start py-3">
-              <h4>
-                Lorem ipsum dolor sit amet, adipisicing.
-              </h4>
-              <h6>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magnam doloribus laborum, dignissimos
-                repudiandae
-                quas excepturi?
-              </h6>
-            </div>
-            <div class="text-md-start py-3">
-              <h4>
-                Lorem ipsum dolor sit amet, adipisicing.
-              </h4>
-              <h6>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magnam doloribus laborum, dignissimos
-                repudiandae
-                quas excepturi?
-              </h6>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<section class="bg-body-tertiary">
-  <div style="background-color: #282930">
+<section>
+  <div class="container border my-5">
     <div class="row">
-      <div class="col-4 offset-md-4 text-center text-white mt-5">
-        <h1>Tailored Plans for Your Menufacturing Scale</h1>
-      </div>
-    </div>
-    <div class="row text-center">
-      <div class="col-4 offset-md-4 text-center text-white mt-4">
-        <h6 class="fw-light">Flexible Pricing for any Business size.</h6>
-      </div>
-    </div>
-    <div class="row py-5">
-      @for(item3 of card3; track item3){
-      <div class="col-md-12 col-lg-6 g-2">
-        <div class=" d-flex justify-content-center">
-
-          <div class="card rounded-4 px-0 " style="width: 25rem; height: 450px">
-            <div class="card-body">
-              <h3 class="card-title">{{item3.title}}</h3>
-              <p class="card-text">{{item3.info}}</p>
-              <h1 class="">{{item3.Price}}</h1>
-              <a href="#" class="btn btn-primary ">Get Started</a>
-              <p class="">{{item3.Features}}</p>
-              <h5 class="">{{item3.Text1}}</h5>
-              <h5 class="">{{item3.Text2}}</h5>
-              <h5 class="">{{item3.Text3}}</h5>
-              <h5 class="">{{item3.Text4}}</h5>
+      <div class="col-md-12" style="background-color: #f6f6f6;">
+        <div class="border-bottom my-4 mx-3">
+          <h1 class="fw-semibold fs-4 pb-3">Shop By Brands</h1>
+        </div>
+        
+        <div class="row">
+          <div class="col-12 d-flex flex-row align-items-center justify-content-evenly ">
+              <a class="ihov bg-white d-flex align-items-center justify-content-center rounded-2 overflow-hidden custom-hover-shadow"
+              style="width: 9rem; height: 6rem;" href=""><img
+                src="https://banner2.cleanpng.com/20180407/ake/avgu7o8fg.webp"
+                style="overflow: hidden; width: 128px; height: 80px;" alt="" srcset=""></a>
+            <a class="ihov bg-white d-flex align-items-center justify-content-center rounded-2 overflow-hidden custom-hover-shadow"
+              href=""><img src="https://banner2.cleanpng.com/20180502/tbw/avduxgayu.webp" alt="" srcset=""
+                style="overflow: hidden; width: 128px; height: 80px;"></a>
+            <a class="ihov bg-white d-flex align-items-center justify-content-center rounded-2 overflow-hidden custom-hover-shadow"
+              href=""><img src="https://banner2.cleanpng.com/20180330/tdw/avig32480.webp"
+                style="overflow: hidden; width: 128px; height: 80px;" alt="" srcset=""></a>
+            <a class="ihov bg-white d-flex align-items-center justify-content-center rounded-2 overflow-hidden custom-hover-shadow"
+              href=""><img src="https://banner2.cleanpng.com/20180730/biw/d4d755363d9b06f9862a8c7845477cb2.webp"
+                style="overflow: hidden; width: 128px; height: 80px;" alt="" srcset=""></a>
+            <a class="ihov bg-white d-flex align-items-center justify-content-center rounded-2 overflow-hidden custom-hover-shadow"
+              href=""><img src="https://banner2.cleanpng.com/20180629/bo/aayu5rk0r.webp"
+                style="overflow: hidden; width: 128px; height: 80px;" alt="" srcset=""></a>
+            <a class="ihov bg-white d-flex align-items-center justify-content-center rounded-2 overflow-hidden custom-hover-shadow"
+              href=""><img
+                src="https://banner2.cleanpng.com/20181116/oik/kisspng-logo-huawei-font-brand-vector-graphics-1713919803434.webp"
+                style="overflow: hidden; width: 128px; height: 80px;" alt="" srcset=""></a>
+            <a class="ihov bg-white d-flex align-items-center justify-content-center rounded-2 overflow-hidden custom-hover-shadow"
+              href=""><img src="https://banner2.cleanpng.com/20180417/jse/avfn4r5l6.webp"
+                style="overflow: hidden; width: 128px; height: 80px;" alt="" srcset=""></a>
+            <a class="ihov bg-white d-flex align-items-center justify-content-center rounded-2 overflow-hidden custom-hover-shadow"
+              href=""><img
+                src="https://banner2.cleanpng.com/20180616/cic/kisspng-headphones-sony-zx310-sony-h-ear-in-logo-brand-5b25635cc25199.2459578315291769247959.jpg"
+                style="overflow: hidden; width: 128px; height: 80px;" alt="" srcset=""></a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="d-flex flex-wrap align-items-center my-4 w-100">
+            <div class="d-flex align-items-center flex-fill justify-content-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="hov bi bi-truck"
+                viewBox="0 0 16 16">
+                <path
+                  d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5zm1.294 7.456A2 2 0 0 1 4.732 11h5.536a2 2 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456M12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2" />
+              </svg>
+              <p class="flex-column d-flex align-items-start mx-3">
+                <span class="fw-semibold">
+                  Free Delivery</span>
+                Free shipping over $100
+              </p>
+            </div>
+            <div class="d-flex align-items-center  flex-fill justify-content-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor"
+                class="hov bi bi-repeat" viewBox="0 0 16 16">
+                <path
+                  d="M11 5.466V4H5a4 4 0 0 0-3.584 5.777.5.5 0 1 1-.896.446A5 5 0 0 1 5 3h6V1.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192m3.81.086a.5.5 0 0 1 .67.225A5 5 0 0 1 11 13H5v1.466a.25.25 0 0 1-.41.192l-2.36-1.966a.25.25 0 0 1 0-.384l2.36-1.966a.25.25 0 0 1 .41.192V12h6a4 4 0 0 0 3.585-5.777.5.5 0 0 1 .225-.67Z" />
+              </svg>
+              <p class="d-flex mx-3 align-items-start flex-column">
+                <span class="fw-semibold">Free Return</span>
+                Free shipping over $100
+              </p>
+            </div>
+            <div class="d-flex align-items-center  flex-fill justify-content-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor"
+                class="hov bi bi-person-fill-gear" viewBox="0 0 16 16">
+                <path
+                  d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0m-9 8c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4m9.886-3.54c.18-.613 1.048-.613 1.229 0l.043.148a.64.64 0 0 0 .921.382l.136-.074c.561-.306 1.175.308.87.869l-.075.136a.64.64 0 0 0 .382.92l.149.045c.612.18.612 1.048 0 1.229l-.15.043a.64.64 0 0 0-.38.921l.074.136c.305.561-.309 1.175-.87.87l-.136-.075a.64.64 0 0 0-.92.382l-.045.149c-.18.612-1.048.612-1.229 0l-.043-.15a.64.64 0 0 0-.921-.38l-.136.074c-.561.305-1.175-.309-.87-.87l.075-.136a.64.64 0 0 0-.382-.92l-.148-.045c-.613-.18-.613-1.048 0-1.229l.148-.043a.64.64 0 0 0 .382-.921l-.074-.136c-.306-.561.308-1.175.869-.87l.136.075a.64.64 0 0 0 .92-.382zM14 12.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0" />
+              </svg>
+              <p class="d-flex mx-3 align-items-start flex-column">
+                <span class="fw-semibold">Customer Support</span>
+                Friendly 27/7 customer support
+              </p>
+            </div>
+            <div class="d-flex align-items-center  flex-fill justify-content-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor"
+                class="hov bi bi-shield-fill-check" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                  d="M8 0c-.69 0-1.843.265-2.928.56-1.11.3-2.229.655-2.887.87a1.54 1.54 0 0 0-1.044 1.262c-.596 4.477.787 7.795 2.465 9.99a11.8 11.8 0 0 0 2.517 2.453c.386.273.744.482 1.048.625.28.132.581.24.829.24s.548-.108.829-.24a7 7 0 0 0 1.048-.625 11.8 11.8 0 0 0 2.517-2.453c1.678-2.195 3.061-5.513 2.465-9.99a1.54 1.54 0 0 0-1.044-1.263 63 63 0 0 0-2.887-.87C9.843.266 8.69 0 8 0m2.146 5.146a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 7.793z" />
+              </svg>
+              <p class="d-flex mx-3 align-items-start flex-column">
+                <span class="fw-semibold">Money Back guarantee</span>
+                Quality checked by our team
+              </p>
             </div>
           </div>
         </div>
       </div>
-    }
-    </div>
-    <div class="row">
-      <div class="col"></div>
     </div>
   </div>
 </section>

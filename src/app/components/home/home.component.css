@@ -1,0 +1,43 @@
+.custom-gadget-btn {
+  background-color: #3B9C3C4D;
+  border: 1px solid #198754;
+  font-weight: 600;
+  border-radius: 2rem;
+  color: black;
+  transition: all 0.3s ease;
+}
+
+.custom-gadget-btn:hover,
+.custom-gadget-btn:focus,
+.custom-gadget-btn.active {
+  background-color: #3b9c3c !important;
+  color: #ffffff !important;
+}
+.see:hover{
+    background-color: #3b9c3c !important;
+  color: #ffffff !important;
+}
+.star {
+  font-size: 20px;
+  color: #063c28cc;
+  margin-right: 1px;
+  margin-top: 0px;
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
+}
+.my-hover:hover {
+  color: black;        /* hover pe text color change */
+  text-decoration: underline;  /* hover pe underline */
+}
+.hov:hover{
+  color:green;
+  text-decoration: underline;
+}
+.ihov{
+  transition: box-shadow 0.4s ease;
+}
+.ihov:hover{
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15); 
+}

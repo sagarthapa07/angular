@@ -20,43 +20,43 @@ import { HeaderComponent } from "../header/header.component";
   styleUrl: './sign-up.component.css',
 })
 export class SignUpComponent {
-  message: string = '';
-  signupForm!: FormGroup;
+  // message: string = '';
+  // signupForm!: FormGroup;
 
-  isUserExist: boolean = false;
+  // isUserExist: boolean = false;
 
-  constructor(private signup: SignupService, private common: CommonService, private route: Router) {}
-
-
-
-  ngOnInit() {
-    this.signupForm = new FormGroup({
-      name: new FormControl('', Validators.required),
-      lastname: new FormControl('', Validators.required),
-      age: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required),
-    });
-  }
-
-  onSubmit() {
-    const signUpData = this.signupForm.value;
-
-    console.log('Signup Data:', signUpData);
-
-    this.signup.signupUser(signUpData).subscribe((res: any) => {
-      const signupString = JSON.stringify(signUpData);
-      console.log(typeof signupString);
+  // constructor(private signup: SignupService, private common: CommonService, private route: Router) {}
 
 
-      this.common.setCookie(
-        'sagar',
-        signupString,1
-      );
-     this.route.navigate(['products']);
+
+  // ngOnInit() {
+  //   this.signupForm = new FormGroup({
+  //     name: new FormControl('', Validators.required),
+  //     lastname: new FormControl('', Validators.required),
+  //     age: new FormControl('', Validators.required),
+  //     password: new FormControl('', Validators.required),
+  //   });
+  // }
+
+  // onSubmit() {
+  //   const signUpData = this.signupForm.value;
+
+  //   console.log('Signup Data:', signUpData);
+
+  //   this.signup.signupUser(signUpData).subscribe((res: any) => {
+  //     const signupString = JSON.stringify(signUpData);
+  //     console.log(typeof signupString);
+
+
+  //     this.common.setCookie(
+  //       'sagar',
+  //       signupString,1
+  //     );
+  //    this.route.navigate(['products']);
      
 
-    });
-  }
+  //   });
+  // }
 
 }
 

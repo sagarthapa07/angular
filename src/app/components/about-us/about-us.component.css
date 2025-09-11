@@ -1,9 +1,6 @@
 .about-wrapper {
-  max-width: 900px;
   margin: 40px auto;
   padding: 20px;
-  background: #fff;
-  box-shadow: 0 0 12px rgba(0,0,0,0.1);
   font-family: 'Segoe UI', sans-serif;
   border-radius: 10px;
 }

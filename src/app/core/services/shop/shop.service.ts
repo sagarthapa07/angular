@@ -17,7 +17,4 @@ getProduct(id:string){
   return this.http.get<Product>(`https://dummyjson.com/products/${id}`)
 }
 
-
 }
-
-// return this.http.get<{ products: Product[] }>('https://dummyjson.com/products?limit=12');

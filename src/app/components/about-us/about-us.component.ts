@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { TestService } from '../../core/services/test/test.service';
 
 import { CommonModule } from '@angular/common';
+import { Blogs } from '../../dataType';
 
 
 
@@ -12,6 +13,21 @@ import { CommonModule } from '@angular/common';
   styleUrl: './about-us.component.css',
 })
 export class AboutUsComponent {
+
+ constructor(private blogService:TestService,){}
+
+ blogArray :undefined | Blogs[]
+
+ ngOnInit():void{
+  this.blogService.blogs().subscribe((data)=>{
+    console.warn(data);
+    this.blogArray=data;
+  })
+ }
+
+
+
+
 blogs = [
   {
       id: 1,
@@ -90,5 +106,11 @@ blogs = [
         Bonus: patterns with BehaviorSubject, Subject vs ReplaySubject, and when to use tap() instead of subscribe().
       `
     },
-]
+];
+
+
+
+
+
+
 }

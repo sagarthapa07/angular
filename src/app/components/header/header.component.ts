@@ -23,9 +23,7 @@ export class HeaderComponent {
   
   logout() {
     this.login.logOutUser()
-   
     this.router.navigate(['/home']);
-    
 } 
 }
 

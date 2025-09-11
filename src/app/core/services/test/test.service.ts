@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -6,13 +7,9 @@ import { Router } from '@angular/router';
 })
 export class TestService {
 
-  constructor(private router:Router) { }
-
-calcution(a:number,b:number){
-  return a+b;
+  constructor(private router:Router,private http:HttpClient) { }
+   blogs(){
+    return this.http.get<any[]>("http://localhost:3000/cars")
+  }
 }
 
-check(){
-  
-}
-}
