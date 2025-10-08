@@ -41,7 +41,7 @@ export class HomeComponent {
       case 1:
         this.homeService.smartPhonesItems().subscribe((data) => {
           console.warn('Smartphone Products loaded', data);
-          this.productList = data.products;
+          this.productList = data.products.slice(0, 10);
         });
         break;
       case 2:
@@ -61,7 +61,7 @@ export class HomeComponent {
       case 4:
         this.homeService.groceriesItem().subscribe((data) => {
           console.warn('Groceries Products loaded', data);
-          this.othersItem = data.products;
+          this.othersItem = data.products.slice(0,10);
         });
         break;
     }

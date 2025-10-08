@@ -15,24 +15,24 @@
     </div>
   </div>
 </section>
-<section class="my-5">
+<section class="py-5">
   <div class="container">
-    <div class="row gap-5">
+    <div class="row">
       <div class="col-12">
         <div class="d-flex justify-content-between align-items-center">
           <ul ngbNav #nav="ngbNav" [(activeId)]="active" (activeIdChange)="onTabChange($event)"
-            class="nav nav-tabs gap-4 flex-wrap" style="border: none;">
+            class="nav nav-tabs gap-2 flex-wrap" style="border: none;">
             <li [ngbNavItem]="1">
-              <button ngbNavLink class="btn custom-gadget-btn mb-4">Gadget</button>
+              <button ngbNavLink class="custom-gadget-btn mb-4 "><span class="mx-2">Gadget</span></button>
               <ng-template ngbNavContent>
                 <div class="productGri">
-                  <div class="row g-2">
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let item of productList">
+                  <div class="row row-cols-md-5 g-3">
+                    <div class="col-6 col-sm-4" *ngFor="let item of productList">
                       <div class="border rounded shadow-sm h-100 p-2">
                         <div class="d-flex align-items-center justify-content-center flex-column"
-                          style="background-color: rgb(246, 246, 246); height: 256px" routerLink="detail"
+                          style="background-color: rgb(246, 246, 246);" routerLink="detail"
                           [routerLink]="['/detail', item.id]">
-                          <img [src]="item.thumbnail" alt="{{ item.title }}" class="w-75 h-100" />
+                          <img [src]="item.thumbnail" alt="{{ item.title }}" class="img-fluid " />
                         </div>
                         <div class="px-1 pt-2">
                           <div class="text-uppercase mt-2">
@@ -42,17 +42,14 @@
                             </h3>
                           </div>
                           <div class="text-uppercase">
-                            <h2 class="text-truncate" style="font-size: 15px; font-weight: 600;">
+                            <h2 class="text-truncate" style="font-size: 14px; font-weight: 700;">
                               {{ item.title }}
                             </h2>
                           </div>
-                          <div>
-                            <p [class.text-truncate]="!item.expanded" style="font-size: 15px; font-weight: 200;">
+                          <div class="mb-2">
+                            <p class="line-clamp-2 fs-6 fw-light;">
                               {{ item.description }}
                             </p>
-                            <button class="btn btn-link p-0" (click)="item.expanded = !item.expanded">
-                              {{ item.expanded ? 'Show less' : 'Read more' }}
-                            </button>
                           </div>
                           <div class="mt-3">
                             <h6> In Stock <span class="" style="color: #063c28cc;">{{item.stock}}</span></h6>
@@ -81,16 +78,16 @@
             </li>
 
             <li [ngbNavItem]="2">
-              <button ngbNavLink class="btn custom-gadget-btn mb-4">Beauty</button>
+              <button ngbNavLink class="btn custom-gadget-btn mb-4"><span class="mx-2">Beauty</span></button>
               <ng-template ngbNavContent>
                 <div class="productGri">
-                  <div class="row g-2">
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let item of beatyItem">
+                  <div class="row row-cols-md-5 g-3">
+                    <div class="col-6 col-sm-4" *ngFor="let item of beatyItem">
                       <div class="border rounded shadow-sm h-100 p-2">
                         <div class="d-flex align-items-center justify-content-center flex-column"
-                          style="background-color: rgb(246, 246, 246); height: 256px;" routerLink="detail"
+                          style="background-color: rgb(246, 246, 246);" routerLink="detail"
                           [routerLink]="['/detail', item.id]">
-                          <img [src]="item.thumbnail" alt="{{ item.title }}" class="w-75 h-100" />
+                          <img [src]="item.thumbnail" alt="{{ item.title }}" class="img-fluid" />
                         </div>
                         <div class="px-1 pt-2">
                           <div class="text-uppercase mt-2">
@@ -100,7 +97,7 @@
                             </h3>
                           </div>
                           <div class="text-uppercase">
-                            <h2 class="text-truncate" style="font-size: 15px; font-weight: 600;">
+                            <h2 class="text-truncate" style="font-size: 14px; font-weight: 700;">
                               {{ item.title }}
                             </h2>
                           </div>
@@ -139,16 +136,16 @@
             </li>
 
             <li [ngbNavItem]="3">
-              <button ngbNavLink class="btn custom-gadget-btn mb-4">Furniture</button>
+              <button ngbNavLink class="btn custom-gadget-btn mb-4"><span class="mx-2">Furniture</span></button>
               <ng-template ngbNavContent>
                 <div class="productGri">
-                  <div class="row g-2">
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let item of furnitureItem">
+                  <div class="row row-cols-md-5 g-3">
+                    <div class="col-6 col-sm-4" *ngFor="let item of furnitureItem">
                       <div class="border rounded shadow-sm h-100 p-2">
                         <div class="d-flex align-items-center justify-content-center flex-column"
-                          style="background-color: rgb(246, 246, 246); height: 256px;" routerLink="detail"
+                          style="background-color: rgb(246, 246, 246);" routerLink="detail"
                           [routerLink]="['/detail', item.id]">
-                          <img [src]="item.thumbnail" alt="{{ item.title }}" class="w-75" />
+                          <img [src]="item.thumbnail" alt="{{ item.title }}" class="img-fluid" />
                         </div>
                         <div class="px-1 pt-2">
                           <div class="text-uppercase mt-2">
@@ -158,7 +155,7 @@
                             </h3>
                           </div>
                           <div class="text-uppercase">
-                            <h2 class="text-truncate" style="font-size: 15px; font-weight: 600;">
+                            <h2 class="text-truncate" style="font-size: 14px; font-weight: 700;">
                               {{ item.title }}
                             </h2>
                           </div>
@@ -197,16 +194,16 @@
             </li>
 
             <li [ngbNavItem]="4">
-              <button ngbNavLink class="btn custom-gadget-btn mb-4">Others</button>
+              <button ngbNavLink class="btn custom-gadget-btn mb-4"><span class="mx-2">Others</span></button>
               <ng-template ngbNavContent>
                 <div class="productGri">
-                  <div class="row g-2">
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let item of othersItem">
+                  <div class="row row-cols-md-5 g-3">
+                    <div class="col-6 col-sm-4" *ngFor="let item of othersItem">
                       <div class="border rounded shadow-sm h-100 p-2">
                         <div class="d-flex align-items-center justify-content-center flex-column"
-                          style="background-color: rgb(246, 246, 246); height: 256px;" routerLink="detail"
+                          style="background-color: rgb(246, 246, 246);" routerLink="detail"
                           [routerLink]="['/detail', item.id]">
-                          <img [src]="item.thumbnail" alt="{{ item.title }}" class="w-75" />
+                          <img [src]="item.thumbnail" alt="{{ item.title }}" class="img-fluid" />
                         </div>
                         <div class="px-1 pt-2">
                           <div class="text-uppercase mt-2">
@@ -216,7 +213,7 @@
                             </h3>
                           </div>
                           <div class="text-uppercase">
-                            <h2 class="text-truncate" style="font-size: 15px; font-weight: 600;">
+                            <h2 class="text-truncate" style="font-size: 14px; font-weight: 700;">
                               {{ item.title }}
                             </h2>
                           </div>
@@ -265,42 +262,49 @@
   </div>
 </section>
 
+
 <section>
-  <div class="container border my-5">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="border-bottom my-4 mx-3">
-          <h1 class="fw-semibold fs-4 pb-3">Popular Categories</h1>
-        </div>
-        <div class="row">
-          <div class="col-md-4" *ngFor="let item of allCategories">
-            <div class="mb-3 g-3">
-              <div class="card">
-                <div class="row g-1 d-flex p-2" style="background-color: #f6f6f6;">
-                  <div
-                    class="col-md-3 border border-danger-subtle align-items-center d-flex justify-content-center mx-3 my-3"
-                    style="background-color: #f6f6f6;">
-                    <img
-                      src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=958&auto=format&fit=crop"
-                      class="img img-fluid overflow-hidden" [alt]="item.name || item" />
-                  </div>
-                  <div class="col-md-7">
-                    <div class="card-body">
-                      <h5 class="card-title">{{ item.name}}</h5>
-                      <p class="card-text">{{item}}
-                        <small class="text-body-secondary">items Available</small>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+  <div class="container border">
+    <div class="row p-3">
+      <div class="col-12 border-bottom mx-3">
+        <h1 class="fs-4 my-4">
+          <span class="fw-semibold">Popular Categories</span>
+        </h1>
+      </div>
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 pb-4">
+        <div class="col" *ngFor="let item of allCategories">
+          <div class="d-flex flex-row p-2 rounded shadow-sm h-100" style="background-color: #f6f6f6;">
+            <div class="d-flex align-items-center justify-content-center me-3" style="width: 100px; height: 100px;">
+              <img
+                src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=958&auto=format&fit=crop"
+                class="img-hover-zoom img-fluid rounded"
+                [alt]="item.name || item"
+                style="object-fit: cover; width: 100%; height: 100%; transition: transform 0.3s ease;" />
+            </div>
+            <div class="d-flex flex-column justify-content-center">
+              <h5 class="mb-1">{{ item.name }}</h5>
+              <p class="card-text fw-semibold text-success mb-0">
+                (5) <small class="text-body-secondary">items available</small>
+              </p>
             </div>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
+
+
+
+
+
+
+
+
+
+
+
 <section>
   <div class="container border my-5">
     <div class="row">
@@ -308,10 +312,10 @@
         <div class="border-bottom my-4 mx-3">
           <h1 class="fw-semibold fs-4 pb-3">Shop By Brands</h1>
         </div>
-        
+
         <div class="row">
           <div class="col-12 d-flex flex-row align-items-center justify-content-evenly ">
-              <a class="ihov bg-white d-flex align-items-center justify-content-center rounded-2 overflow-hidden custom-hover-shadow"
+            <a class="ihov bg-white d-flex align-items-center justify-content-center rounded-2 overflow-hidden custom-hover-shadow"
               style="width: 9rem; height: 6rem;" href=""><img
                 src="https://banner2.cleanpng.com/20180407/ake/avgu7o8fg.webp"
                 style="overflow: hidden; width: 128px; height: 80px;" alt="" srcset=""></a>

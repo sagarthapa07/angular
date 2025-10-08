@@ -48,5 +48,5 @@ export interface Items{
 export interface Categories{
     name:string,
     slug:string,
-    url:string
+    url:string,
 }
