@@ -53,5 +53,5 @@
 }
 /* component CSS file (e.g., popular-categories.component.css) */
 .img-hover-zoom:hover {
-  transform: scale(1.8);
+  transform: scale(1.1);
 }

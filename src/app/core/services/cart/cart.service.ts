@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { computed, Injectable, signal } from '@angular/core';
 import { LoginService } from '../login/login.service';
+import { Product } from '../../../dataType';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +23,6 @@ export class CartService {
     this.userdata = JSON.parse(user);
     this.cartApi = 'https://dummyjson.com/carts/' + this.userdata.id;
     return this.http.get<any>(this.cartApi) 
-    
   }
 
   // total amount computed signal
@@ -52,4 +53,23 @@ export class CartService {
  updateCartItems(items: any[]) {
   this._cartItems.set(items);
 }
+
+
+
+
+
+
+
+ private apiUrl = 'http://localhost:3000/cart';
+  getCartFromLocalStorage() {
+    const cartData = localStorage.getItem('cartProducts');
+    return cartData ? JSON.parse(cartData) : [];
+  }
+
+
+sendCartToServer(): Observable<any> {
+    const cartProducts = this.getCartFromLocalStorage();
+    return this.http.post(this.apiUrl, cartProducts);
+  }
+
 }

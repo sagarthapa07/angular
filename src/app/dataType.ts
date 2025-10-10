@@ -50,3 +50,15 @@ export interface Categories{
     slug:string,
     url:string,
 }
+export interface cart{
+    title: string,
+    price: number,
+    category: string,
+    color: string,
+    description: string,
+    thumbnail: string,
+    id: number| undefined ,
+    stock: undefined | number,
+    userId: number,
+    productId: number
+}
