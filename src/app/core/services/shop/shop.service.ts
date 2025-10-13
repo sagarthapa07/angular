@@ -12,6 +12,8 @@ export class ShopService {
 
 
   constructor(private http: HttpClient) { }
+
+
   Product(): Observable<{ products: Product[] }> {
     return this.http.get<{ products: Product[] }>('https://dummyjson.com/products');
   }
@@ -20,9 +22,6 @@ export class ShopService {
   getProduct(id: string) {
     return this.http.get<Product>(`https://dummyjson.com/products/${id}`)
   };
-
-
-
 
 
   private apiUrl = 'http://localhost:3000/cart';
@@ -40,7 +39,7 @@ export class ShopService {
     }
   }
 
-localAddToCart(data: Product) {
+  localAddToCart(data: Product) {
     let cartData: Product[] = [];
     let localCart = localStorage.getItem('localCart');
     if (!localCart) {

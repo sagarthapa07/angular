@@ -18,11 +18,14 @@ export class DetailComponent {
   isCollapsed = true;
   productId: string | null = null;
   product: Product | null = null;
-  removeCart = false;
+  isInCart = false;
 
 
 
   constructor(private shopService: ShopService, private route: ActivatedRoute) { }
+
+
+
   ngOnInit(): void {
     this.productId = this.route.snapshot.paramMap.get("id");
 
@@ -30,23 +33,23 @@ export class DetailComponent {
       this.shopService.getProduct(this.productId).subscribe({
         next: (data) => {
           this.product = data;
-          console.warn('Product:', this.product);
+          this.isInCart = this.shopService.isProductInCart(+this.productId!);
         },
         error: (err) => {
           console.warn('Error fetching product:', err);
         }
       });
     }
-    let cartData = localStorage.getItem('cartProducts');
-    if(this.productId && cartData){
-      let items= JSON.parse(cartData);
-      items = items.filter((items:Product)=>this.productId==items.id.toString())
-      if(items.length){
-        this.removeCart=true
-      }else{
-        this.removeCart=false
-      }
-    }
+    // let cartData = localStorage.getItem('cartProducts');
+    // if (this.productId && cartData) {
+    //   let items = JSON.parse(cartData);
+    //   items = items.filter((items: Product) => this.productId == items.id.toString())
+    //   if (items.length) {
+    //     this.removeCart = true
+    //   } else {
+    //     this.removeCart = false
+    //   }
+    // }
   }
 
   getDiscountedPrice(price: number, discount: number): number {
@@ -65,7 +68,7 @@ export class DetailComponent {
       if (!found) {
         productsArray.push(this.product);
         localStorage.setItem('cartProducts', JSON.stringify(productsArray));
-        this.removeCart = true
+        this.isInCart = true
         this.shopService.addToCartAPI(this.product).subscribe({
           next: (res) => {
             console.log('Product successfully sent to API:', res);
@@ -77,13 +80,13 @@ export class DetailComponent {
       }
     }
   }
-  removeToCart(productId:number) {
+  removeToCart(productId: number) {
     let cartProducts = localStorage.getItem('cartProducts');
     if (cartProducts) {
       let productsArray = JSON.parse(cartProducts);
       productsArray = productsArray.filter((p: any) => p.id !== this.product?.id);
       localStorage.setItem('cartProducts', JSON.stringify(productsArray));
-      this.removeCart = false;
+      this.isInCart = false;
     }
   }
 }

@@ -55,3 +55,6 @@
 .img-hover-zoom:hover {
   transform: scale(1.1);
 }
+.icons{
+  border-bottom: 1px solid #dfe2e6;
+}
