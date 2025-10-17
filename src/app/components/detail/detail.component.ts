@@ -1,15 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, numberAttribute } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ShopService } from '../../core/services/shop/shop.service';
 import { cart, Product } from '../../dataType';
 import { CommonModule } from '@angular/common';
 import { NgbCollapseModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+import { LoginService } from '../../core/services/login/login.service';
+import { CommonService } from '../../core/services/common/common.service';
 
 
 
 @Component({
   selector: 'app-detail',
-  imports: [RouterLink, CommonModule, NgbCollapseModule, NgbNavModule],
+  imports: [CommonModule, NgbCollapseModule, NgbNavModule],
   templateUrl: './detail.component.html',
   styleUrl: './detail.component.css'
 })
@@ -19,10 +21,12 @@ export class DetailComponent {
   productId: string | null = null;
   product: Product | null = null;
   isInCart = false;
+  userLogedIn = false;
+  cartData: Product | undefined
 
 
 
-  constructor(private shopService: ShopService, private route: ActivatedRoute) { }
+  constructor(private shopService: ShopService, private route: ActivatedRoute, private common: CommonService) { }
 
 
 
@@ -33,59 +37,85 @@ export class DetailComponent {
       this.shopService.getProduct(this.productId).subscribe({
         next: (data) => {
           this.product = data;
-          this.isInCart = this.shopService.isProductInCart(+this.productId!);
         },
         error: (err) => {
           console.warn('Error fetching product:', err);
         }
       });
     }
-    // let cartData = localStorage.getItem('cartProducts');
-    // if (this.productId && cartData) {
-    //   let items = JSON.parse(cartData);
-    //   items = items.filter((items: Product) => this.productId == items.id.toString())
-    //   if (items.length) {
-    //     this.removeCart = true
-    //   } else {
-    //     this.removeCart = false
-    //   }
-    // }
+    let cartData = localStorage.getItem('localCart');
+    if (this.productId && cartData) {
+      let items = JSON.parse(cartData);
+      items = items.filter((items: Product) => this.productId == items.id.toString())
+      if (items.length) {
+        this.isInCart = true
+      } else {
+        this.isInCart = false
+      }
+    }
+    let user = this.common.getCookie('sagar');
+    if (user) {
+      let userId = JSON.parse(user).id
+      this.shopService.getCartList(userId);
+      this.shopService.cartData.subscribe((result) => {
+        let items = result.filter((item: Product) => this.productId?.toString() === item.productId?.toString())
+        if (items.length) {
+          this.cartData = items[0];
+          this.isInCart = true
+        }
+      })
+    }
   }
 
   getDiscountedPrice(price: number, discount: number): number {
     const discounted = price - (price * discount) / 100;   //Formula of discount
-    return parseFloat(discounted.toFixed(2));     // parseFloat => turns that string back into a number: 477.82
+    return parseFloat(discounted.toFixed(2));
   }
-
 
   AddToCart() {
     if (this.product) {
-      // LocalStorage se existing cart products nikaalo
-      let cartProducts = localStorage.getItem('cartProducts');
-      let productsArray = cartProducts ? JSON.parse(cartProducts) : [];
+      if (!this.common.getCookie('sagar')) {
+        this.shopService.localAddToCart(this.product);
+        this.isInCart = true;
+      }
+      else {
+        let user = this.common.getCookie('sagar');
+        let userId = JSON.parse(user).id
+        console.warn(userId);
 
-      let found = productsArray.find((p: any) => p.id === this.product?.id);
-      if (!found) {
-        productsArray.push(this.product);
-        localStorage.setItem('cartProducts', JSON.stringify(productsArray));
-        this.isInCart = true
-        this.shopService.addToCartAPI(this.product).subscribe({
-          next: (res) => {
-            console.log('Product successfully sent to API:', res);
-          },
-          error: (err) => {
-            console.error('Error sending product to API:', err);
+
+        let cartData: cart = {
+          ...this.product,
+          userId,
+          productId: this.product.id,
+        }
+    
+        console.warn(cartData);
+
+        delete cartData.id
+        this.shopService.addTocart(cartData).subscribe((result) => {
+          if (result) {
+            this.shopService.getCartList(userId);
+            this.isInCart = true;
           }
         })
       }
     }
   }
+
   removeToCart(productId: number) {
-    let cartProducts = localStorage.getItem('cartProducts');
-    if (cartProducts) {
-      let productsArray = JSON.parse(cartProducts);
-      productsArray = productsArray.filter((p: any) => p.id !== this.product?.id);
-      localStorage.setItem('cartProducts', JSON.stringify(productsArray));
+    if (!this.common.getCookie('sagar')) {
+      this.shopService.removeItemFromCart(productId);
+    } else {
+      let user = this.common.getCookie('sagar');
+      let userId = JSON.parse(user).id
+      console.warn(this.cartData);
+      this.cartData && this.shopService.removeToCart(this.cartData.id)
+        .subscribe((result) => {
+          if (result) {
+            this.shopService.getCartList(userId)
+          }
+        })
       this.isInCart = false;
     }
   }

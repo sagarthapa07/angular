@@ -16,6 +16,8 @@ import { NgForOf } from '@angular/common';
 export class HomeComponent {
   total: number = 0;
   active = 1;
+  cartData: Product | undefined
+
 
 
   productList: undefined | Items[]
@@ -75,10 +77,7 @@ export class HomeComponent {
 
   getDiscountedPrice(price: number, discount: number): number {
     const discounted = price - (price * discount) / 100;   //Formula of discount
-    return parseFloat(discounted.toFixed(2));     // parseFloat => turns that string back into a number: 477.82
-
-
-
+    return parseFloat(discounted.toFixed(2));     // parseFloat => turns that string back into a number: 477.8
 
   }
 

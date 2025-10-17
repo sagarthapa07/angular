@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { computed, Injectable, signal } from '@angular/core';
 import { LoginService } from '../login/login.service';
-import { Product } from '../../../dataType';
+import { cart, Product } from '../../../dataType';
 import { Observable } from 'rxjs';
+import { CommonService } from '../common/common.service';
 
 @Injectable({
   providedIn: 'root',
@@ -10,19 +11,19 @@ import { Observable } from 'rxjs';
 export class CartService {
   cartApi: string = '';
 
-  userdata:any = {}
+  userdata: any = {}
   private _cartItems = signal<any[]>([]);
 
   // Public readonly signal
   readonly cartItems = this._cartItems;
 
-  constructor(private http: HttpClient, private loginService: LoginService) {}
+  constructor(private http: HttpClient, private loginService: LoginService, private common: CommonService) { }
 
   fetchCartData() {
     let user = this.loginService.getUserData();
     this.userdata = JSON.parse(user);
     this.cartApi = 'https://dummyjson.com/carts/' + this.userdata.id;
-    return this.http.get<any>(this.cartApi) 
+    return this.http.get<any>(this.cartApi)
   }
 
   // total amount computed signal
@@ -30,11 +31,9 @@ export class CartService {
     this._cartItems().reduce((acc, item) => acc + item.price * item.quantity, 0)
   );
 
-  //
+  addItemsApi = 'http://localhost:3000/cart';
 
-  addItemsApi = 'https://dummyjson.com/carts/add';
-
-  cartAddItem( P_id: string, P_quantity: any) {
+  cartAddItem(P_id: number, P_quantity: number) {
     const body = {
       userId: this.userdata.id,
       products: [
@@ -45,31 +44,40 @@ export class CartService {
       ],
     };
 
-  
     return this.http.post(this.addItemsApi, body);
   }
 
 
- updateCartItems(items: any[]) {
-  this._cartItems.set(items);
-}
+
+  updateCartItems(items: any[]) {
+    this._cartItems.set(items);
+  }
 
 
 
 
-
-
-
- private apiUrl = 'http://localhost:3000/cart';
+  private apiUrl = 'http://localhost:3000/cart';
   getCartFromLocalStorage() {
     const cartData = localStorage.getItem('cartProducts');
     return cartData ? JSON.parse(cartData) : [];
   }
 
 
-sendCartToServer(): Observable<any> {
+  sendCartToServer(): Observable<any> {
     const cartProducts = this.getCartFromLocalStorage();
     return this.http.post(this.apiUrl, cartProducts);
   }
+
+
+
+  currentCart() {
+    let userStore = this.common.getCookie('sagar')
+    let userData = userStore && JSON.parse(userStore);
+    return this.http.get<cart[]>('http://localhost:3000/cart?userId=' + userData.id);
+  }
+
+
+
+
 
 }

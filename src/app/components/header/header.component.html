@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
   <div class="container">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#" routerLink="">Navbar</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -21,16 +21,14 @@
         </li>
       </ul>
       <div *ngIf="!isLoggedIn">
-        <button class="btn btn-outline-success bi bi-search mx-2" routerLink=""></button>
-        <button class="btn cart btn-outline-success bi bi-cart3" routerLink="/cart-page"></button>
-        <!-- <button class="btn btn-outline-success mx-4" [routerLink]="['/Login']" [queryParams]="{ mode: 'signup' }"
-          type="button">Signup</button> -->
+        <button class="btn btn-outline-success bi bi-search mx-2" ></button>
+        <button class="btn cart btn-outline-success bi bi-cart3"><span>({{cartItems}})</span></button>
         <button class="btn btn-outline-success mx-2" [routerLink]="['/Login']" [queryParams]="{ mode: 'login' }"
           type="button">Login</button>
       </div>
       <div *ngIf="isLoggedIn" class="d-flex gap-3">
-        <button class="btn cart btn-outline-success bi bi-cart3" routerLink="/cart-page"></button>
-        <button class="btn btn-outline-success" routerLink="/Login" type="submit" (click)="logout()">Logout</button>
+        <button class="btn cart btn-outline-success bi bi-cart3" routerLink="/cart-page"><span>({{cartItems}})</span></button>
+        <button class="btn btn-outline-success" type="submit" (click)="logout()">Logout</button>
       </div>
     </div>
   </div>

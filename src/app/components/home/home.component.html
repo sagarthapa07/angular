@@ -17,7 +17,7 @@
 </section>
 <section class="py-5">
   <div class="container">
-    <div class="row">
+    <div class="row ">
       <div class="col-12">
         <div class="d-flex justify-content-between align-items-center">
           <ul ngbNav #nav="ngbNav" [(activeId)]="active" (activeIdChange)="onTabChange($event)"
@@ -26,8 +26,8 @@
               <button ngbNavLink class="custom-gadget-btn mb-4 "><span class="mx-2">Gadget</span></button>
               <ng-template ngbNavContent>
                 <div class="productGri">
-                  <div class="row row-cols-md-5 g-3">
-                    <div class="col-6 col-sm-4" *ngFor="let item of productList">
+                  <div class="row row-cols-md-3 row-cols-lg-5 g-3">
+                    <div class="col" *ngFor="let item of productList">
                       <div class="border rounded shadow-sm h-100 p-2">
                         <div class="d-flex align-items-center justify-content-center flex-column"
                           style="background-color: rgb(246, 246, 246);" routerLink="detail"
@@ -62,12 +62,19 @@
                               $ {{ item.price}}
                             </h6>
                           </div>
-                          <button
+                          <!-- <button
                             class="btn btn-success w-100 text-light fw-semibold d-flex justify-content-center gap-1 text-truncate mt-2"
                             style="border-radius: 20px;">
                             <img src="https://img.icons8.com/?size=17&id=HtmDYmJyGCy7&format=png&color=FFFFFF"
                               alt="icon" style="height: 20px; width: 20px; margin-top: 2px;" />
                             <span class="text-truncate fs-6">Add To Cart</span>
+                          </button> -->
+                          <button
+                            class="btn w-75 text-light fw-semibold d-flex justify-content-center gap-1 text-truncate mt-2"
+                            style="border-radius: 20px; background-color: #336454;">
+                            <img src="https://img.icons8.com/?size=17&id=HtmDYmJyGCy7&format=png&color=FFFFFF"
+                              alt="icon" style="height: 20px; width: 20px; margin-top: 2px;" />
+                            <span class="text-truncate fw-semibold fs-6 text">Add To Cart</span>
                           </button>
                         </div>
                       </div>
@@ -354,10 +361,10 @@
                 style="overflow: hidden" class="img-fluid"></a>
           </div>
         </div>
-        <div class="row row-cols-md-5 g-3 mt-5 mb-5">
-          <div class="col-6 col-sm-4 d-flex align-items-center flex-fill justify-content-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="currentColor" class="mb-3 hov bi bi-truck"
-              viewBox="0 0 16 16">
+        <div class="row row-cols-md-2 row-cols-lg-4 g-3 mt-5   mb-5">
+          <div class="col d-flex align-items-center flex-fill justify-content-start">
+            <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="currentColor"
+              class="mb-3 hov bi bi-truck" viewBox="0 0 16 16">
               <path
                 d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5zm1.294 7.456A2 2 0 0 1 4.732 11h5.536a2 2 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456M12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2" />
             </svg>
@@ -367,9 +374,9 @@
               Free shipping over $100
             </p>
           </div>
-          <div class="col-6 col-sm-4 d-flex align-items-center  flex-fill justify-content-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="currentColor" class="mb-3 hov bi bi-repeat"
-              viewBox="0 0 16 16">
+          <div class="col d-flex align-items-center  flex-fill justify-content-start">
+            <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="currentColor"
+              class="mb-3 hov bi bi-repeat" viewBox="0 0 16 16">
               <path
                 d="M11 5.466V4H5a4 4 0 0 0-3.584 5.777.5.5 0 1 1-.896.446A5 5 0 0 1 5 3h6V1.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192m3.81.086a.5.5 0 0 1 .67.225A5 5 0 0 1 11 13H5v1.466a.25.25 0 0 1-.41.192l-2.36-1.966a.25.25 0 0 1 0-.384l2.36-1.966a.25.25 0 0 1 .41.192V12h6a4 4 0 0 0 3.585-5.777.5.5 0 0 1 .225-.67Z" />
             </svg>
@@ -378,7 +385,7 @@
               Free shipping over $100
             </p>
           </div>
-          <div class="col-6 col-sm-4 d-flex align-items-center  flex-fill justify-content-center">
+          <div class="col d-flex align-items-center  flex-fill justify-content-start">
             <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="currentColor"
               class="mb-3 hov bi bi-person-fill-gear" viewBox="0 0 16 16">
               <path
@@ -389,7 +396,7 @@
               Friendly 27/7 customer support
             </p>
           </div>
-          <div class="col-6 col-sm-4 d-flex align-items-center  flex-fill justify-content-center">
+          <div class="col d-flex align-items-center  flex-fill justify-content-start">
             <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="currentColor"
               class="mb-3 hov bi bi-shield-fill-check" viewBox="0 0 16 16">
               <path fill-rule="evenodd"

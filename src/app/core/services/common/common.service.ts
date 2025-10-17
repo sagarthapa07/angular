@@ -25,3 +25,4 @@ export class CommonService {
     this.cookieService.delete(name);
 }
 }
+

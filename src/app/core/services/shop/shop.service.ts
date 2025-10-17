@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
-import { Product } from '../../../dataType';
+import { cart, Product } from '../../../dataType';
 import { Observable } from 'rxjs';
+import { CommonService } from '../common/common.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class ShopService {
   cartData = new EventEmitter<Product[]>();
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private common: CommonService) { }
 
 
   Product(): Observable<{ products: Product[] }> {
@@ -65,5 +66,26 @@ export class ShopService {
       this.cartData.emit(items);
     }
   }
+  addTocart(cartData:cart){
+    return this.http.post('http://localhost:3000/cart',cartData)
+  }
 
+getCartList(userId:number){
+this.http.get<Product[]>('http://localhost:3000/cart?userId='+userId,{observe:'response'}).subscribe((result)=>{
+  console.warn(result);
+  
+  if(result && result.body){
+
+    this.cartData.emit(result.body);
+  }      
+})
+}
+removeToCart(cartId:number){
+  return this.http.delete('http://localhost:3000/cart/'+cartId)
+}
+ currentCart() {
+    let userStore = this.common.getCookie('sagar')
+    let userData = userStore && JSON.parse(userStore);
+    return this.http.get<cart[]>('http://localhost:3000/cart?userId='+userData.id);
+  }
 }

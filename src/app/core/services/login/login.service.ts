@@ -29,6 +29,7 @@ export class LoginService {
 
 
   setAuth(valstring: any) {
+ 
     this.isUserLogin.set(true);
     this.common.setCookie('sagar', valstring, 1);
   }
@@ -90,7 +91,7 @@ export class LoginService {
   userSignup(data: Signup) {
     return this.http.post('https://dummyjson.com/users/add', data, { observe: 'response' }).pipe(
       tap((res: any) => {
-        this.setAuth(JSON.stringify(res.body));
+        this.setAuth(res.body);
         this.router.navigate(['/']);
         console.log("User account registered and logged in");
       }),

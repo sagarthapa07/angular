@@ -12,6 +12,9 @@ export interface Product {
     expanded?: boolean;
     discountPercentage: number,
     rating: number,
+    productId: number| undefined,
+    quantity:number,
+    availabilityStatus:string,
 }
 export interface Signup {
     firstName:string
@@ -57,8 +60,10 @@ export interface cart{
     color: string,
     description: string,
     thumbnail: string,
-    id: number| undefined ,
+    id: number|undefined,
     stock: undefined | number,
     userId: number,
-    productId: number
+    productId: number,
+    quantity:number,
+    availabilityStatus:string,
 }
