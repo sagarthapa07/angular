@@ -30,8 +30,6 @@ export class ShopService {
     return this.http.post(this.apiUrl, product);
   }
 
-
-
   LocalAddToCart(data: Product) {
     let cartData = [];
     let localCart = localStorage.getItem('cartProducts');
@@ -55,7 +53,6 @@ export class ShopService {
     //ye subscribe kar sakte hai
   }
 
-
   removeItemFromCart(productId: number) {
     let cartData = localStorage.getItem('localCart');
     if (cartData) {
@@ -66,26 +63,27 @@ export class ShopService {
       this.cartData.emit(items);
     }
   }
-  addTocart(cartData:cart){
-    return this.http.post('http://localhost:3000/cart',cartData)
+  addTocart(cartData: cart) {
+    return this.http.post('http://localhost:3000/cart', cartData)
   }
 
-getCartList(userId:number){
-this.http.get<Product[]>('http://localhost:3000/cart?userId='+userId,{observe:'response'}).subscribe((result)=>{
-  console.warn(result);
-  
-  if(result && result.body){
+  // addTocart(id: number, quantity: number) {
+  //   return this.http.post('http://localhost:3000/cart', { id, quantity });
+  // }
 
-    this.cartData.emit(result.body);
-  }      
-})
-}
-removeToCart(cartId:number){
-  return this.http.delete('http://localhost:3000/cart/'+cartId)
-}
- currentCart() {
+  getCartList(userId: number) {
+    this.http.get<Product[]>('http://localhost:3000/cart?userId=' + userId, { observe: 'response' }).subscribe((result) => {
+      if (result && result.body) {
+        this.cartData.emit(result.body);
+      }
+    })
+  }
+  removeToCart(cartId: number) {
+    return this.http.delete('http://localhost:3000/cart/' + cartId);
+  }
+  currentCart() {
     let userStore = this.common.getCookie('sagar')
     let userData = userStore && JSON.parse(userStore);
-    return this.http.get<cart[]>('http://localhost:3000/cart?userId='+userData.id);
+    return this.http.get<cart[]>('http://localhost:3000/cart?userId=' + userData.id);
   }
 }

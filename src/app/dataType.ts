@@ -60,7 +60,7 @@ export interface cart{
     color: string,
     description: string,
     thumbnail: string,
-    id: number|undefined,
+    id?: number,
     stock: undefined | number,
     userId: number,
     productId: number,

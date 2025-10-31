@@ -1,4 +1,4 @@
-import { Component, numberAttribute } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ShopService } from '../../core/services/shop/shop.service';
 import { cart, Product } from '../../dataType';
@@ -74,6 +74,10 @@ export class DetailComponent {
 
   AddToCart() {
     if (this.product) {
+      if (!this.product.quantity) {
+        this.product.quantity = 1;
+      }
+
       if (!this.common.getCookie('sagar')) {
         this.shopService.localAddToCart(this.product);
         this.isInCart = true;
@@ -88,8 +92,9 @@ export class DetailComponent {
           ...this.product,
           userId,
           productId: this.product.id,
+          quantity: this.product.quantity
         }
-    
+
         console.warn(cartData);
 
         delete cartData.id
@@ -102,7 +107,6 @@ export class DetailComponent {
       }
     }
   }
-
   removeToCart(productId: number) {
     if (!this.common.getCookie('sagar')) {
       this.shopService.removeItemFromCart(productId);

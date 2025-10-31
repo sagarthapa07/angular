@@ -38,7 +38,7 @@
                                             d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
                                     </svg>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-trash" viewBox="0 0 16 16">
+                                        class="bi bi-trash" (click)="removeToCart(cart.id!)" viewBox="0 0 16 16">
                                         <path
                                             d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
                                         <path
@@ -52,7 +52,7 @@
                                     <!-- <p class="fs-4 fw-semibold ps-3 ">${{ cart.item.price * cart.item.quantity }}</p> -->
                                 </div>
 
-                                <!-- <div *ngIf="cart.id !== undefined" class="d-flex flex-wrap pt-5">
+                                <div *ngIf="cart.id !== undefined" class="d-flex flex-wrap pt-5">
                                     <button (click)="handleCounter('sub', cart.id, cart.quantity)"
                                         class="btn fs-3 shadow-sm p-3 bg-body rounded d-flex justify-content-center align-items-center"
                                         style="width: 1px; height: 1px;">-</button>
@@ -62,9 +62,9 @@
                                     <button (click)="handleCounter('plus', cart.id, cart.quantity)"
                                         class="btn fs-3 shadow-sm p-3 bg-body rounded d-flex justify-content-center align-items-center"
                                         style="width: 1px; height: 1px;">+</button>
-                                </div> -->
+                                </div>
 
-                                <div class="quantity-group d-flex flex-wrap pt-5 gap-2 justify-content-center">
+                                <!-- <div class="quantity-group d-flex flex-wrap pt-5 gap-2 justify-content-center">
                                     <button
                                         class="btn fs-3 shadow-sm p-3 bg-body rounded d-flex justify-content-center align-items-center"
                                         (click)="handleQuantity('min')" style="width: 1px; height: 1px;">-</button>
@@ -73,7 +73,7 @@
                                     <button
                                         class="btn fs-3 shadow-sm p-3 bg-body rounded d-flex justify-content-center align-items-center"
                                         style="width: 1px; height: 1px;" (click)="handleQuantity('plus')">+</button>
-                                </div>
+                                </div> -->
 
                             </div>
                         </div>
