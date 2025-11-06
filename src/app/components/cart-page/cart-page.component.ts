@@ -13,7 +13,7 @@ import { CommonService } from '../../core/services/common/common.service';
   styleUrl: './cart-page.component.css',
 })
 export class CartPageComponent implements OnInit {
-  cartData: cart[] | undefined;
+  cartData: any[] = [];
   total: any;
   cartProducts: any[] = [];
   productQuantity: number = 1;
@@ -21,23 +21,24 @@ export class CartPageComponent implements OnInit {
 
   constructor(private cartService: CartService, private http: HttpClient, private shopservice: ShopService, private route: Router, private common: CommonService) { }
 
-handleCounter(type: string, id: number, quantity: number) {
-  const qty = type === "plus" ? quantity + 1 : quantity - 1;
+  handleCounter(type: string, id: number, quantity: number) {
+    const qty = type === "plus" ? quantity + 1 : quantity - 1;
+    let item: any = this.cartData?.filter((val) => val.id == id)
+    item[0].quantity = qty
 
-const cartData = { id, quantity: qty };
+  
+    this.shopservice.updateCart(id +"", item[0]).subscribe((res: any) => {
+      if (res) {
+     
+        this.cartData = this.cartData.map((val) =>
+          id === val.id ? { ...val, quantity: res.quantity } : val
+        );
+
+      }
+    });
+  }
 
 
-//  this.shopservice.addTocart(cartData).subscribe((res: any) => {
-//     console.warn(res);
-//     if (res) {
-//       this.cartData = this.cartProducts.map((val) =>
-//         id === val.id ? { ...val, quantity: res.product[0].quantity } : val
-//       );
-//     }
-//   });
-}
-
- 
   price(id: number, quantity: number, price: number) {
     this.cartService.cartAddItem(id, price).subscribe((resPrice: any) => {
     });

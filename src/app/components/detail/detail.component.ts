@@ -32,7 +32,7 @@ export class DetailComponent {
 
   ngOnInit(): void {
     this.productId = this.route.snapshot.paramMap.get("id");
-
+    
     if (this.productId) {
       this.shopService.getProduct(this.productId).subscribe({
         next: (data) => {

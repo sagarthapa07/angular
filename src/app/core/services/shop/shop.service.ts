@@ -30,6 +30,11 @@ export class ShopService {
     return this.http.post(this.apiUrl, product);
   }
 
+  updateCart(productId:string, product: any) {
+    return this.http.patch(this.apiUrl+ '/' +productId, product);
+  }
+
+
   LocalAddToCart(data: Product) {
     let cartData = [];
     let localCart = localStorage.getItem('cartProducts');
@@ -39,6 +44,7 @@ export class ShopService {
   }
 
   localAddToCart(data: Product) {
+
     let cartData: Product[] = [];
     let localCart = localStorage.getItem('localCart');
     if (!localCart) {
@@ -63,7 +69,8 @@ export class ShopService {
       this.cartData.emit(items);
     }
   }
-  addTocart(cartData: cart) {
+
+  addTocart(cartData: any) {
     return this.http.post('http://localhost:3000/cart', cartData)
   }
 
@@ -72,6 +79,7 @@ export class ShopService {
   // }
 
   getCartList(userId: number) {
+
     this.http.get<Product[]>('http://localhost:3000/cart?userId=' + userId, { observe: 'response' }).subscribe((result) => {
       if (result && result.body) {
         this.cartData.emit(result.body);
@@ -79,6 +87,7 @@ export class ShopService {
     })
   }
   removeToCart(cartId: number) {
+    debugger;
     return this.http.delete('http://localhost:3000/cart/' + cartId);
   }
   currentCart() {
