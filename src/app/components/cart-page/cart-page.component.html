@@ -96,17 +96,21 @@
                             <div>
                                 <div class="py-2 d-flex justify-content-between">
                                     <span class="fs-5 fw-normal">SubTotal</span>
-                                    <span class="fw-bold ">$5,192.85</span>
+                                    <span class="fw-bold "> ({{ totalItems }} items)</span>
                                 </div>
                                 <div class="py-2 d-flex justify-content-between">
                                     <span class="fs-5 fw-normal">Discount</span>
-                                    <span class="fw-bold ">$533.85</span>
+                                    <span class="fw-bold ">${{ subTotal | number: '1.2-2' }}</span>
+                                </div>
+                                <div class="py-2 d-flex justify-content-between">
+                                    <span class="fs-5 fw-normal">Total Discount</span>
+                                    <span class="fw-bold ">${{ totalDiscount | number: '1.2-2' }}</span>
                                 </div>
                             </div>
                             <hr class="text-gray-400">
                             <div class="pb-4 d-flex justify-content-between">
-                                <span class="fw-semibold fs-4">Total</span>
-                                <span class="fw-bold fs-4 ">$4,659.00</span>
+                                <span class="fw-semibold fs-4">Grand Total</span>
+                                <span class="fw-bold fs-4 ">${{ grandTotal | number: '1.2-2' }}</span>
                             </div>
                             <div class="d-flex justify-content-center">
                                 <button

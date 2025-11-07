@@ -20,7 +20,7 @@ export const routes: Routes = [
 {path:"products", component:ResourceComponent,},
 {path:"shop", component:GrantComponent,},
 {path:"detail/:id", component:DetailComponent,},
-{path:"cart-page", component:CartPageComponent, canActivate:[loginGuard]},
+{path:"cart-page", component:CartPageComponent,},
 {path:"user", component:UserComponent, canActivate:[loginGuard]},
 
 {path:"sign-up", component:SignUpComponent, },
