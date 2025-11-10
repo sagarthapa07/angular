@@ -126,7 +126,7 @@ export class HomeComponent {
       const localCart = localStorage.getItem('localCart');
       if (localCart) {
         const items = JSON.parse(localCart);
-        debugger;
+
         //this.cartItemsIds = items.map((item: Product) => item.id);
 
         this.cartItem = items.map((item: Product) => {
@@ -163,70 +163,136 @@ export class HomeComponent {
   }
 
 
+  // AddToCart(item: Items) {
+
+  //   // Convert Items → Product (cart format)
+  //   let productData: Product = {
+  //     ...item,
+  //     productId: item.id,
+  //     quantity: 1,
+  //     availabilityStatus: "In stock"
+  //   };
+
+  //   //  Guest User
+  //   if (!this.common.getCookie('sagar')) {
+  //     this.shopService.localAddToCart(productData);
+  //     this.cartItem  = [...this.cartItem, ...[{
+  //         productId: productData.productId,
+  //         id: ""
+  //     }]]
+  //     return;
+  //   }
+
+  //   //  Logged-in user
+  //   let user = this.common.getCookie('sagar');
+  //   let userId = JSON.parse(user).id;
+
+  //   let cartData: cart = {
+  //     ...productData,
+  //     userId
+  //   };
+
+  //   delete (cartData as any).id; // cart id backend generate karega
+
+  //   this.shopService.addToCartAPI(cartData).subscribe(result => {
+  //     if (result) {
+  //       this.shopService.getCartList(userId);
+  //    //   this.cartItemsIds.push(item.id); // UI update
+  //       console.log("")
+  //     }
+  //   });
+  // }
+
+
+
   AddToCart(item: Items) {
+  let productData: Product = {
+    ...item,
+    productId: item.id,
+    quantity: 1,
+    availabilityStatus: "In stock"
+  };
 
-    // Convert Items → Product (cart format)
-    let productData: Product = {
-      ...item,
-      productId: item.id,
-      quantity: 1,
-      availabilityStatus: "In stock"
-    };
+  // 🟦 Guest user (not logged in)
+  if (!this.common.getCookie('sagar')) {
+    this.shopService.localAddToCart(productData);
 
-    //  Guest User
-    if (!this.common.getCookie('sagar')) {
-      this.shopService.localAddToCart(productData);
-      this.cartItem  = [...this.cartItem, ...[{
-          productId: productData.productId,
-          id: ""
-      }]]
-      return;
+    // update your local cart array (if used in component)
+    this.cartItem = JSON.parse(localStorage.getItem('localCart') || '[]');
+    return;
+  }
+
+  // 🟩 Logged in user (API)
+  let user = this.common.getCookie('sagar');
+  let userId = JSON.parse(user).id;
+
+  let cartData: cart = {
+    ...productData,
+    userId
+  };
+
+  delete (cartData as any).id;
+
+  this.shopService.addToCartAPI(cartData).subscribe(result => {
+    if (result) {
+      this.shopService.getCartList(userId);
     }
+  });
+}
 
-    //  Logged-in user
-    let user = this.common.getCookie('sagar');
-    let userId = JSON.parse(user).id;
+removeToCart(productId: number) {
 
-    let cartData: cart = {
-      ...productData,
-      userId
-    };
+  let cartProduct = this.cartItem.filter((val) => val.productId == productId);
+  const user = this.common.getCookie('sagar');
 
-    delete (cartData as any).id; // cart id backend generate karega
+  if (user) {
 
-    this.shopService.addToCartAPI(cartData).subscribe(result => {
-      if (result) {
+    const userId = JSON.parse(user).id;
+
+    this.shopService.removeToCart(cartProduct[0]?.id).subscribe((res) => {
+      if (res) {
+ 
+        this.cartItem = this.cartItem.filter((val) => val.productId !== cartProduct[0]?.productId);
+
         this.shopService.getCartList(userId);
-     //   this.cartItemsIds.push(item.id); // UI update
-        console.log("")
       }
     });
+
+  } else {
+
+    this.shopService.removeItemFromCart(cartProduct[0]?.productId);
+
+
+    this.cartItem = this.cartItem.filter((val) => val.productId !== cartProduct[0]?.productId);
+
+  
+    const localCart = JSON.parse(localStorage.getItem('localCart') || '[]');
+    this.shopService.cartData.emit(localCart);
   }
+}
 
 
 
-  removeToCart(productId: number) {
-    debugger;
-  //  let cartProduct= 15
-    let cartProduct = this.cartItem.filter((val) => val.productId == productId)
-    const user = this.common.getCookie('sagar');
-    if (user) {
-          debugger;
-      const userId = JSON.parse(user).id;
-      this.shopService.removeToCart(cartProduct[0]?.id).subscribe((res) => {
-          debugger;
-       this.cartItem = this.cartItem.filter((val)=> val.productId !==  cartProduct[0]?.productId)
-    debugger;
-      })
+
+  // removeToCart(productId: number) {
+    
+  // //  let cartProduct= 15
+  //   let cartProduct = this.cartItem.filter((val) => val.productId == productId)
+  //   const user = this.common.getCookie('sagar');
+  //   if (user) {
+  //     const userId = JSON.parse(user).id;
+  //     this.shopService.removeToCart(cartProduct[0]?.id).subscribe((res) => {
+  //      this.cartItem = this.cartItem.filter((val)=> val.productId !==  cartProduct[0]?.productId)
+  //     })
 
 
-    } else {
-      this.shopService.removeItemFromCart(cartProduct[0]?.productId);
-      // this.cartItemsIds = this.cartItemsIds.filter(id => id !== cartProduct[0]?.productId);
+  //   } else {
+  //     this.shopService.removeItemFromCart(cartProduct[0]?.productId);
+  //     // this.cartItemsIds = this.cartItemsIds.filter(id => id !== cartProduct[0]?.productId);
       
-    this.cartItem = this.cartItem.filter((val)=> val.productId !==  cartProduct[0]?.productId)
-    }
-  }
+  //   this.cartItem = this.cartItem.filter((val)=> val.productId !==  cartProduct[0]?.productId)
+  //   }
+  // }
 
 
   isProductInCart(id: number) {

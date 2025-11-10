@@ -31,27 +31,49 @@ export class CartPageComponent implements OnInit {
     this.loadDetails();
   }
 
-  // ✅ Load the cart from API or Local
+  //Load the cart from API or Local
   loadDetails() {
-    this.shopservice.currentCart().subscribe((result) => {
-      this.cartData = result || [];
-      console.log('Cart Data:', this.cartData);
+  const userCookie = this.common.getCookie('sagar');
+  const isLoggedIn = !!userCookie;
 
-      // Calculate totals after data is loaded
+  if (isLoggedIn) {
+    const userId = JSON.parse(userCookie).id;
+
+    this.shopservice.currentCart(userId).subscribe((result) => {
+ 
+      this.cartData = result || [];
+      console.log('Cart Data (API):', this.cartData);
+
+      // Calculate totals
       this.calculateTotals();
 
-      // Redirect if empty cart
+      // If empty cart, redirect to cart page
       if (!this.cartData.length) {
         this.route.navigate(['/']);
       }
     });
-  }
 
-  // ✅ Handle quantity change
+  } else {
+    //User not logged in
+    const localCart = JSON.parse(localStorage.getItem('localCart') || '[]');
+
+    this.cartData = localCart;
+    console.log('Cart Data (Local):', this.cartData);
+
+
+    this.calculateTotals();
+
+    if (!this.cartData.length) {
+      this.route.navigate(['/']);
+    }
+  }
+}
+
+  // Handle quantity change
   handleCounter(type: string, id: number, quantity: number) {
     const newQty = type === "plus" ? quantity + 1 : quantity - 1;
 
-    // Remove if quantity becomes 0
+    // Remove if quantity becomes
     if (newQty < 1) {
       this.removeToCart(id);
       return;
@@ -67,13 +89,13 @@ export class CartPageComponent implements OnInit {
             id === val.id ? { ...val, quantity: res.quantity } : val
           );
 
-          this.calculateTotals(); // 🧮 Recalculate after quantity update
+          this.calculateTotals(); 
         }
       });
     }
   }
 
-  // ✅ Remove from cart (API or Local)
+
   removeToCart(productId: number) {
     if (!this.common.getCookie('sagar')) {
       this.shopservice.removeItemFromCart(productId);
@@ -84,7 +106,7 @@ export class CartPageComponent implements OnInit {
 
       this.shopservice.removeToCart(productId).subscribe((result) => {
         if (result) {
-          this.shopservice.getCartList(userId); // ✅ Correct API call
+          this.shopservice.getCartList(userId); 
           this.loadDetails();
         }
       });
@@ -93,7 +115,7 @@ export class CartPageComponent implements OnInit {
     this.calculateTotals();
   }
 
-  // ✅ Calculate totals dynamically
+
   calculateTotals() {
     this.subTotal = 0;
     this.totalDiscount = 0;
@@ -119,4 +141,48 @@ export class CartPageComponent implements OnInit {
     console.log('Discount:', this.totalDiscount);
     console.log('GrandTotal:', this.grandTotal);
   }
+
+
+
+
+  resetCart() {
+  const userCookie = this.common.getCookie('sagar');
+  const isLoggedIn = !!userCookie;
+
+  if (isLoggedIn) {
+    //Logged-in User → delete all from API
+    const userId = JSON.parse(userCookie).id;
+
+    // Get all user cart items first
+    this.shopservice.currentCart(userId).subscribe((result) => {
+      if (result && result.length > 0) {
+        // Delete each cart item from backend
+        result.forEach((item: any) => {
+          this.shopservice.removeToCart(item.id).subscribe();
+        });
+      }
+
+      // Clear local data and refresh view
+      this.cartData = [];
+      this.calculateTotals();
+
+      // Refresh header count
+      this.shopservice.getCartList(userId);
+    });
+
+  } else {
+    //Guest User → delete from localStorage
+    localStorage.removeItem('localCart');
+
+    // Clear local data
+    this.cartData = [];
+    this.calculateTotals();
+
+    // Update header immediately
+    this.shopservice.cartData.emit([]);
+  }
+
+  console.log("🗑️ All cart items removed!");
+}
+
 }

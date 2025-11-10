@@ -22,7 +22,7 @@
       </ul>
       <div *ngIf="!isLoggedIn">
         <button class="btn btn-outline-success bi bi-search mx-2" ></button>
-        <button class="btn cart btn-outline-success bi bi-cart3"><span>({{cartItems}})</span></button>
+        <button class="btn cart btn-outline-success bi bi-cart3" (click)="gotoCartPage()"><span>({{cartItems}})</span></button>
         <button class="btn btn-outline-success mx-2" [routerLink]="['/Login']" [queryParams]="{ mode: 'login' }"
           type="button">Login</button>
       </div>

@@ -107,20 +107,55 @@ export class DetailComponent {
       }
     }
   }
+
+
   removeToCart(productId: number) {
-    if (!this.common.getCookie('sagar')) {
-      this.shopService.removeItemFromCart(productId);
-    } else {
-      let user = this.common.getCookie('sagar');
-      let userId = JSON.parse(user).id
-      console.warn(this.cartData);
-      this.cartData && this.shopService.removeToCart(this.cartData.id)
-        .subscribe((result) => {
-          if (result) {
-            this.shopService.getCartList(userId)
-          }
-        })
-      this.isInCart = false;
-    }
+  const userCookie = this.common.getCookie('sagar');
+
+  if (userCookie) {
+    // Logged-in user
+    const userId = JSON.parse(userCookie).id;
+
+    // agar backend cartData ke andar id store hai to usko use karo
+    const cartId = this.cartData?.id || productId;
+
+    this.shopService.removeToCart(cartId).subscribe({
+      next: () => {
+        this.shopService.getCartList(userId);
+        this.isInCart = false;
+        console.log('Product removed from logged-in user cart');
+      },
+      error: (err) => {
+        console.error('Error removing from server cart:', err);
+      }
+    });
+  } else {
+    this.shopService.removeItemFromCart(productId);
+    this.isInCart = false;
+    console.log('Product removed from guest cart');
   }
+}
+
+
+
+
+
+
+  // removeToCart(productId: number) {
+  //   debugger
+  //   if (!this.common.getCookie('sagar')) {
+  //     this.shopService.removeItemFromCart(productId);
+  //   } else {
+  //     let user = this.common.getCookie('sagar');
+  //     let userId = JSON.parse(user).id
+  //     console.warn(this.cartData);
+  //     this.cartData && this.shopService.removeToCart(this.cartData.id)
+  //       .subscribe((result) => {
+  //         if (result) {
+  //           this.shopService.getCartList(userId)
+  //         }
+  //       })
+  //     this.isInCart = false;
+  //   }
+  // }
 }

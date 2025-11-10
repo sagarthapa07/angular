@@ -35,13 +35,46 @@ export class ShopService {
   }
 
 
+  // LocalAddToCart(data: Product) {
+  //   let cartData = [];
+  //   let localCart = localStorage.getItem('cartProducts');
+  //   if (!localCart) {
+  //     localStorage.setItem('localCart', JSON.stringify([data]));
+  //   }
+  // }
+
   LocalAddToCart(data: Product) {
-    let cartData = [];
-    let localCart = localStorage.getItem('cartProducts');
-    if (!localCart) {
-      localStorage.setItem('localCart', JSON.stringify([data]));
+  let cartData: Product[] = [];
+  let localCart = localStorage.getItem('localCart');
+
+  if (!localCart) {
+    // first item
+    localStorage.setItem('localCart', JSON.stringify([data]));
+    this.cartData.emit([data]);
+  } else {
+    cartData = JSON.parse(localCart);
+
+    // ✅ check if product already exists
+    const existing = cartData.find((item) => item.productId === data.productId);
+    if (existing) {
+      existing.quantity += 1;
+    } else {
+      cartData.push(data);
     }
+
+    // ✅ save updated cart
+    localStorage.setItem('localCart', JSON.stringify(cartData));
+
+    // ✅ emit updated data for header
+    this.cartData.emit(cartData);
   }
+}
+
+
+  loadLocalCart() {
+  const localCart = JSON.parse(localStorage.getItem('localCart') || '[]');
+  this.cartData.emit(localCart);
+}
 
   localAddToCart(data: Product) {
 
@@ -87,10 +120,10 @@ export class ShopService {
     })
   }
   removeToCart(cartId: number) {
-    debugger;
+
     return this.http.delete('http://localhost:3000/cart/' + cartId);
   }
-  currentCart() {
+  currentCart(userId: any) {
     let userStore = this.common.getCookie('sagar')
     let userData = userStore && JSON.parse(userStore);
     return this.http.get<cart[]>('http://localhost:3000/cart?userId=' + userData.id);

@@ -71,6 +71,7 @@ export class LoginService {
   logOutUser() {
     this.common.deleteCookie('sagar');
     this.isUserLogin.set(false);
+    this.router.navigate(['/']);
   }
 // logOutUser: logout ke liye:
 // "sagar" cookie delete karta hai.
