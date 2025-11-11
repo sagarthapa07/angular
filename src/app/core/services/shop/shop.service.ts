@@ -128,4 +128,7 @@ export class ShopService {
     let userData = userStore && JSON.parse(userStore);
     return this.http.get<cart[]>('http://localhost:3000/cart?userId=' + userData.id);
   }
+  searchProduct(query:string){
+    return this.http.get<Product[]>(`https://dummyjson.com/products?q=${query}`);
+  }
 }

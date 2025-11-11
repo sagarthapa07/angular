@@ -4,6 +4,7 @@ import { LoginService } from '../../core/services/login/login.service';
 import { CommonModule } from '@angular/common';
 import { ShopService } from '../../core/services/shop/shop.service';
 import { CommonService } from '../../core/services/common/common.service';
+import { Product } from '../../dataType';
 
 @Component({
   selector: 'app-header',
@@ -15,6 +16,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   isLoggedIn: boolean = false;
   cartItems = 0;
   menuType: string = 'default';
+  searchResult:undefined|Product[];
 
   constructor(
     private login: LoginService,
@@ -60,6 +62,18 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
     this.shopService.cartData.emit([]);
     this.login.logOutUser();
+
+  }
+  searchProduct(query:KeyboardEvent){
+    if(query){
+      const element = query.target as HTMLInputElement;
+      // console.warn(element.value);
+      this.shopService.searchProduct(element.value).subscribe((result)=>{
+        console.warn(result);
+        this.searchResult=result;
+      })
+      
+    }
 
   }
 

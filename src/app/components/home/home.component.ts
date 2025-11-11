@@ -12,8 +12,9 @@ import { CommonService } from '../../core/services/common/common.service';
   selector: "app-home",
   imports: [NgbNavModule, RouterLink, NgForOf, NgIf],
   templateUrl: "./home.component.html",
-  styleUrl: "./home.component.css",
+  styleUrls: ["./home.component.css"], 
 })
+
 
 export class HomeComponent {
   total: number = 0;
@@ -32,8 +33,9 @@ export class HomeComponent {
   productQuantity: number = 1;
   productId: string | null = null;
   // cartItemsIds: number[] = [];
-
   cartItem: any[] = []
+  alertMessage: string = '';
+  showPopup: boolean = false;
 
   constructor(private homeService: HomeServicesService,
     private home: HomeServicesService,
@@ -147,7 +149,7 @@ export class HomeComponent {
       this.shopService.getCartList(userId);
 
       this.shopService.cartData.subscribe((cartList) => {
-      //  this.cartItemsIds = cartList.map((item: Product) => + item.productId);
+        //  this.cartItemsIds = cartList.map((item: Product) => + item.productId);
         this.cartItem = cartList.map((item: Product) => {
           return {
             productId: item.productId,
@@ -155,12 +157,97 @@ export class HomeComponent {
 
           }
         })
-
-
-
       });
     }
   }
+
+
+
+  AddToCart(item: Items) {
+    let productData: Product = {
+      ...item,
+      productId: item.id,
+      quantity: 1,
+      availabilityStatus: "In stock"
+    };
+
+    // Guest user (not logged in)
+    if (!this.common.getCookie('sagar')) {
+      this.shopService.localAddToCart(productData);
+
+      // update your local cart array (if used in component)
+      this.cartItem = JSON.parse(localStorage.getItem('localCart') || '[]');
+      this.showA("Added to cart!");
+      return;
+    }
+
+    // Logged in user (API)
+    let user = this.common.getCookie('sagar');
+    let userId = JSON.parse(user).id;
+
+    let cartData: cart = {
+      ...productData,
+      userId
+    };
+
+    delete (cartData as any).id;
+    this.shopService.addToCartAPI(cartData).subscribe(result => {
+      if (result) {
+        this.shopService.getCartList(userId);
+      }
+    });
+    this.showA("Added to cart!");
+  }
+
+  removeToCart(productId: number) {
+
+    let cartProduct = this.cartItem.filter((val) => val.productId == productId);
+    const user = this.common.getCookie('sagar');
+
+    if (user) {
+
+      const userId = JSON.parse(user).id;
+
+      this.shopService.removeToCart(cartProduct[0]?.id).subscribe((res) => {
+        if (res) {
+
+          this.cartItem = this.cartItem.filter((val) => val.productId !== cartProduct[0]?.productId);
+
+          this.shopService.getCartList(userId);
+          this.showA("Removed from cart!");
+        }
+      });
+
+    } else {
+
+      this.shopService.removeItemFromCart(cartProduct[0]?.productId);
+
+
+      this.cartItem = this.cartItem.filter((val) => val.productId !== cartProduct[0]?.productId);
+
+
+      const localCart = JSON.parse(localStorage.getItem('localCart') || '[]');
+      this.shopService.cartData.emit(localCart);
+      this.showA("Removed from cart!");
+    }
+  }
+
+  showA(message: string) {
+    this.alertMessage = message;
+    this.showPopup = true;
+    setTimeout(() => {
+      this.showPopup = false;   
+    }, 2000); 
+  }
+
+  isProductInCart(id: number) {
+    return this.cartItem.some((val: any) => val.productId === id)
+  }
+
+}
+
+
+
 
 
   // AddToCart(item: Items) {
@@ -204,78 +291,8 @@ export class HomeComponent {
   // }
 
 
-
-  AddToCart(item: Items) {
-  let productData: Product = {
-    ...item,
-    productId: item.id,
-    quantity: 1,
-    availabilityStatus: "In stock"
-  };
-
-  // 🟦 Guest user (not logged in)
-  if (!this.common.getCookie('sagar')) {
-    this.shopService.localAddToCart(productData);
-
-    // update your local cart array (if used in component)
-    this.cartItem = JSON.parse(localStorage.getItem('localCart') || '[]');
-    return;
-  }
-
-  // 🟩 Logged in user (API)
-  let user = this.common.getCookie('sagar');
-  let userId = JSON.parse(user).id;
-
-  let cartData: cart = {
-    ...productData,
-    userId
-  };
-
-  delete (cartData as any).id;
-
-  this.shopService.addToCartAPI(cartData).subscribe(result => {
-    if (result) {
-      this.shopService.getCartList(userId);
-    }
-  });
-}
-
-removeToCart(productId: number) {
-
-  let cartProduct = this.cartItem.filter((val) => val.productId == productId);
-  const user = this.common.getCookie('sagar');
-
-  if (user) {
-
-    const userId = JSON.parse(user).id;
-
-    this.shopService.removeToCart(cartProduct[0]?.id).subscribe((res) => {
-      if (res) {
- 
-        this.cartItem = this.cartItem.filter((val) => val.productId !== cartProduct[0]?.productId);
-
-        this.shopService.getCartList(userId);
-      }
-    });
-
-  } else {
-
-    this.shopService.removeItemFromCart(cartProduct[0]?.productId);
-
-
-    this.cartItem = this.cartItem.filter((val) => val.productId !== cartProduct[0]?.productId);
-
-  
-    const localCart = JSON.parse(localStorage.getItem('localCart') || '[]');
-    this.shopService.cartData.emit(localCart);
-  }
-}
-
-
-
-
   // removeToCart(productId: number) {
-    
+
   // //  let cartProduct= 15
   //   let cartProduct = this.cartItem.filter((val) => val.productId == productId)
   //   const user = this.common.getCookie('sagar');
@@ -289,16 +306,7 @@ removeToCart(productId: number) {
   //   } else {
   //     this.shopService.removeItemFromCart(cartProduct[0]?.productId);
   //     // this.cartItemsIds = this.cartItemsIds.filter(id => id !== cartProduct[0]?.productId);
-      
+
   //   this.cartItem = this.cartItem.filter((val)=> val.productId !==  cartProduct[0]?.productId)
   //   }
   // }
-
-
-  isProductInCart(id: number) {
-
-    return this.cartItem.some((val: any) => val.productId === id)
-
-  }
-
-}

@@ -143,8 +143,6 @@ export class CartPageComponent implements OnInit {
   }
 
 
-
-
   resetCart() {
   const userCookie = this.common.getCookie('sagar');
   const isLoggedIn = !!userCookie;
@@ -182,7 +180,7 @@ export class CartPageComponent implements OnInit {
     this.shopservice.cartData.emit([]);
   }
 
-  console.log("🗑️ All cart items removed!");
+  console.log("All cart items removed!");
 }
 
 }
