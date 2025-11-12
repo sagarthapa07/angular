@@ -80,4 +80,11 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   gotoCartPage() {
     this.route.navigate(['/cart-page']);
   }
+
+
+  showSearchInput = false; // initially hidden
+
+toggleSearch() {
+  this.showSearchInput = !this.showSearchInput; // toggle visibility
+}
 }

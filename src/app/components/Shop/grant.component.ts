@@ -28,6 +28,8 @@ export class GrantComponent {
     cartData: Product | undefined
     productQuantity: number = 1;
     productId: string | null = null;
+  alertMessage: string = '';
+  showPopup: boolean = false;
  
   constructor (private shopService: ShopService,
     private common: CommonService,
@@ -138,6 +140,7 @@ this.productId = this.route.snapshot.paramMap.get("id");
   
       // update your local cart array (if used in component)
       this.cartItem = JSON.parse(localStorage.getItem('localCart') || '[]');
+            this.showA("Added to cart!");
       return;
     }
   
@@ -155,6 +158,7 @@ this.productId = this.route.snapshot.paramMap.get("id");
     this.shopService.addToCartAPI(cartData).subscribe(result => {
       if (result) {
         this.shopService.getCartList(userId);
+              this.showA("Added to cart!");
       }
     });
   }
@@ -172,8 +176,8 @@ this.productId = this.route.snapshot.paramMap.get("id");
         if (res) {
    
           this.cartItem = this.cartItem.filter((val) => val.productId !== cartProduct[0]?.productId);
-  
           this.shopService.getCartList(userId);
+          this.showA("Removed from cart!");
         }
       });
   
@@ -187,12 +191,19 @@ this.productId = this.route.snapshot.paramMap.get("id");
     
       const localCart = JSON.parse(localStorage.getItem('localCart') || '[]');
       this.shopService.cartData.emit(localCart);
+      this.showA("Removed from cart!");
     }
   }
 
   isProductInCart(id: number) {
     return this.cartItem.some((val: any) => val.productId === id)
   }
+    showA(message: string) {
+    this.alertMessage = message;
+    this.showPopup = true;
+    setTimeout(() => {
+      this.showPopup = false;   
+    }, 2000); 
+  }
 
-  
 }

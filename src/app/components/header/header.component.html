@@ -20,21 +20,25 @@
           <a class="nav-link" routerLink="/products"> Hot Deals</a>
         </li>
       </ul>
-      <div *ngIf="!isLoggedIn"> 
-        <input type="text" (keyup)="searchProduct($event)" placeholder="Search Product">
-        <button class="btn btn-outline-success bi bi-search mx-2" ></button>
-        <ul class="suggested-result">
-          <li><a href="">Hello</a></li>
-        </ul>
-        <button class="btn cart btn-outline-success bi bi-cart3" (click)="gotoCartPage()"><span>({{cartItems}})</span></button>
-        <button class="btn btn-outline-success mx-2" [routerLink]="['/Login']" [queryParams]="{ mode: 'login' }"
-          type="button">Login</button>
+      <div *ngIf="!isLoggedIn" class="d-flex align-items-center">
+        <input *ngIf="showSearchInput" type="text" (keyup)="searchProduct($event)" placeholder="Search Product"
+          class="form-control w-auto me-2">
+        <button class="btn btn-outline-success bi bi-search me-2" (click)="toggleSearch()"></button>
+        <ul class="suggested-result m-0 p-0"></ul>
+        <button class="btn cart btn-outline-success bi bi-cart3 me-2" (click)="gotoCartPage()">
+          <span>({{cartItems}})</span>
+        </button>
+        <button class="btn btn-outline-success" [routerLink]="['/Login']" [queryParams]="{ mode: 'login' }"
+          type="button">
+          Login
+        </button>
       </div>
-      <div *ngIf="isLoggedIn" class="d-flex gap-3">
-        <input type="text" (keyup)="searchProduct($event)" placeholder="Search Product">
-        <button class="btn btn-outline-success bi bi-search"></button>
-        <ul class="suggested-result"></ul>
-        <button class="btn cart btn-outline-success bi bi-cart3" routerLink="/cart-page"><span>({{cartItems}})</span></button>
+      <div *ngIf="isLoggedIn" class="d-flex align-items-center ">
+        <input *ngIf="showSearchInput" type="text" (keyup)="searchProduct($event)" placeholder="Search Product"
+          class="form-control w-auto me-2">
+        <button class="btn btn-outline-success bi bi-search me-2" (click)="toggleSearch()"></button>
+        <button class="btn cart btn-outline-success bi bi-cart3"
+          routerLink="/cart-page"><span>({{cartItems}})</span></button>
         <button class="btn btn-outline-success" type="submit" (click)="logout()">Logout</button>
       </div>
     </div>

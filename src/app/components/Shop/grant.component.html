@@ -57,3 +57,7 @@
     </div>
   </div>
 </section>
+<div *ngIf="showPopup" class="alert-popup">
+  {{ alertMessage }}
+  <span class="close-btn" (click)="showPopup = false">&times;</span>
+</div>
