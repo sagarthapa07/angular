@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   isLoggedIn: boolean = false;
   cartItems = 0;
   menuType: string = 'default';
-  searchResult:undefined|Product[];
+  searchResult: Product[] = [];
 
   constructor(
     private login: LoginService,
@@ -29,14 +29,12 @@ export class HeaderComponent implements OnInit, AfterViewInit {
       this.isLoggedIn = this.login.isLogin()();
     });
   }
-
   ngOnInit() {
     this.shopService.cartData.subscribe((result) => {
       if (result) {
         this.cartItems = result.length;
       }
     });
-
     window.addEventListener('storage', () => {
       const localCart = JSON.parse(localStorage.getItem('localCart') || '[]');
       this.shopService.cartData.emit(localCart);
@@ -58,33 +56,23 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   logout() {
     this.cartItems = 0;
-
-
     this.shopService.cartData.emit([]);
     this.login.logOutUser();
-
   }
-  searchProduct(query:KeyboardEvent){
-    if(query){
+  searchProduct(query: KeyboardEvent) {
+    if (query) {
       const element = query.target as HTMLInputElement;
-      // console.warn(element.value);
-      this.shopService.searchProduct(element.value).subscribe((result)=>{
+      this.shopService.searchProduct(element.value).subscribe((result: any) => {
         console.warn(result);
-        this.searchResult=result;
-      })
-      
+        this.searchResult = result.products;
+      });
     }
-
   }
-
   gotoCartPage() {
     this.route.navigate(['/cart-page']);
   }
-
-
-  showSearchInput = false; // initially hidden
-
-toggleSearch() {
-  this.showSearchInput = !this.showSearchInput; // toggle visibility
-}
+  showSearchInput = false; //initially hidden
+  toggleSearch() {
+    this.showSearchInput = !this.showSearchInput; //toggle visibility
+  }
 }

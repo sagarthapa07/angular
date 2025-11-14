@@ -24,7 +24,11 @@
         <input *ngIf="showSearchInput" type="text" (keyup)="searchProduct($event)" placeholder="Search Product"
           class="form-control w-auto me-2">
         <button class="btn btn-outline-success bi bi-search me-2" (click)="toggleSearch()"></button>
-        <ul class="suggested-result m-0 p-0"></ul>
+        <ul class="suggested-result">
+          <li *ngFor="let result of searchResult">
+            <a href="">{{result.title}}</a>
+          </li>
+        </ul>
         <button class="btn cart btn-outline-success bi bi-cart3 me-2" (click)="gotoCartPage()">
           <span>({{cartItems}})</span>
         </button>
