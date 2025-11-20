@@ -10,6 +10,7 @@ import { CartPageComponent } from './components/cart-page/cart-page.component';
 import { UserComponent } from './components/user/user.component';
 import { loginGuard } from './core/gaurd/login.guard';
 import { beforeLoginGuard } from './core/gaurd/before-login.guard';
+import { CheckoutPageComponent } from './components/checkout-page/checkout-page.component';
 
 
 export const routes: Routes = [
@@ -25,6 +26,7 @@ export const routes: Routes = [
 
 {path:"sign-up", component:SignUpComponent, },
 {path:"Login", component:LoginComponent, },
+{path:"checkout", component:CheckoutPageComponent, },
 
 
 

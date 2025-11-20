@@ -175,8 +175,10 @@ export class CartPageComponent implements OnInit {
     const userCookie = this.common.getCookie('sagar');
     const isLoggedIn = !!userCookie;
 
-    if(!userCookie){
-      this.route.navigate(['/Login'])
+    if(userCookie){
+      this.route.navigate(['/checkout'])
+    }else{
+this.route.navigate(['/Login'])
     }
   }
 }

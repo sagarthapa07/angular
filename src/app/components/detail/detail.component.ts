@@ -9,6 +9,7 @@ import { CommonService } from '../../core/services/common/common.service';
 
 
 
+
 @Component({
   selector: 'app-detail',
   imports: [CommonModule, NgbCollapseModule, NgbNavModule],

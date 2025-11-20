@@ -21,12 +21,12 @@
         </li>
       </ul>
       <div *ngIf="!isLoggedIn" class="d-flex align-items-center">
-        <input *ngIf="showSearchInput" type="text" (keyup)="searchProduct($event)" placeholder="Search Product"
+        <input *ngIf="showSearchInput" type="text" (keyup)="searchProduct($event)" (blur)="hideSearch()" placeholder="Search Product"
           class="form-control w-auto me-2">
         <button class="btn btn-outline-success bi bi-search me-2" (click)="toggleSearch()"></button>
-        <ul class="suggested-result">
-          <li *ngFor="let result of searchResult">
-            <a href="">{{result.title}}</a>
+        <ul class="suggested-result" *ngIf="searchResult">
+          <li *ngFor="let item of searchResult!">
+            <a (mousedown)="redirectToDetail(item.id)" >{{ item.title }}</a>
           </li>
         </ul>
         <button class="btn cart btn-outline-success bi bi-cart3 me-2" (click)="gotoCartPage()">
@@ -38,9 +38,14 @@
         </button>
       </div>
       <div *ngIf="isLoggedIn" class="d-flex align-items-center ">
-        <input *ngIf="showSearchInput" type="text" (keyup)="searchProduct($event)" placeholder="Search Product"
+        <input *ngIf="showSearchInput" type="text" (keyup)="searchProduct($event)" (blur)="hideSearch()" placeholder="Search Product"
           class="form-control w-auto me-2">
         <button class="btn btn-outline-success bi bi-search me-2" (click)="toggleSearch()"></button>
+        <ul class="suggested-result" *ngIf="searchResult">
+          <li *ngFor="let item of searchResult!">
+            <a (mousedown)="redirectToDetail(item.id)" >{{ item.title }}</a>
+          </li>
+        </ul>
         <button class="btn cart btn-outline-success bi bi-cart3"
           routerLink="/cart-page"><span>({{cartItems}})</span></button>
         <button class="btn btn-outline-success" type="submit" (click)="logout()">Logout</button>

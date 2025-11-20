@@ -16,11 +16,10 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   isLoggedIn: boolean = false;
   cartItems = 0;
   menuType: string = 'default';
-  searchResult: Product[] = [];
+  searchResult: Product[] | undefined;
 
   constructor(
     private login: LoginService,
-    private router: Router,
     private shopService: ShopService,
     private common: CommonService,
     private route: Router
@@ -39,6 +38,8 @@ export class HeaderComponent implements OnInit, AfterViewInit {
       const localCart = JSON.parse(localStorage.getItem('localCart') || '[]');
       this.shopService.cartData.emit(localCart);
     });
+
+    
   }
 
   ngAfterViewInit(): void {
@@ -59,15 +60,39 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     this.shopService.cartData.emit([]);
     this.login.logOutUser();
   }
-  searchProduct(query: KeyboardEvent) {
-    if (query) {
-      const element = query.target as HTMLInputElement;
-      this.shopService.searchProduct(element.value).subscribe((result: any) => {
-        console.warn(result);
-        this.searchResult = result.products;
-      });
+  // searchProduct(query: KeyboardEvent) {
+  //   if (query) {
+  //     const element = query.target as HTMLInputElement;
+  //     this.shopService.searchProduct(element.value).subscribe((result) => {
+  //       console.warn(result);
+  //       if(result.length < 5){
+  //         result.length = 5
+  //       }
+  //       this.searchResult = result;
+  //     });
+  //   }
+  // }
+
+  searchProduct(event: KeyboardEvent) {
+    const input = event.target as HTMLInputElement;
+    const query = input.value.trim();
+
+    // If search box empty → close results
+    if (!query) {
+      this.searchResult = [];
+      return;
     }
+
+    // Fetch search results
+    this.shopService.searchProduct(query).subscribe((res: any) => {
+      const products = res?.products || [];
+
+      // Take maximum 5 items
+      this.searchResult = products.slice(0, 5);
+    });
   }
+
+
   gotoCartPage() {
     this.route.navigate(['/cart-page']);
   }
@@ -75,4 +100,20 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   toggleSearch() {
     this.showSearchInput = !this.showSearchInput; //toggle visibility
   }
+  hideSearch() {
+    this.searchResult = undefined; 
+  }
+
+  // ye wala mene likha tha but jab bhi jab kisi product mai hote tab ye link same kaam nhi karti hai tho mereko force fully chnage krna pda issko
+  // redirectToDetail(id: number) {
+  //   this.route.navigate(['/detail/' + id])
+  // }
+  redirectToDetail(id: number) {
+  this.route.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+    this.route.navigate(['/detail', id]);
+  });
 }
+}
+
+
+
