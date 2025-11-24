@@ -15,116 +15,114 @@
     <div class="container">
         <div class="row pt-3">
             <div class="col-md-7 shadow-sm">
-                <div class="col-md-12">
-                    <div class="shipping-address my-3">
-                        <h5>Select Delivery Address</h5>
+                <div class="col-md-12 left">
+                    <div class="shipping-address my-3 mb-3 d-flex align-items-center justify-content-between">
+                        <h5 class="">Select Delivery Address</h5>
                         <button class="btn border border-gray-700 fw-semibold"
                             style="background-color: #336353; color: #fff; display: flex; align-items: center;"
                             (click)="openLoginForm()">
                             <span class="me-2 fs-5">+</span>Add New
                         </button>
                     </div>
-                    <!-- ADD NEW ADDRESS POPUP -->
                     <div *ngIf="showAddressPopup">
                         <div class="popup-overlay" (click)="closeAddressForm()"></div>
-
                         <div class="popup">
                             <div class="popup-close" (click)="closeAddressForm()">&times;</div>
-
+                            <div class="header fw-bold fs-5 mb-3">Add New Address</div>
                             <div class="form">
-                                <div class="header">Add New Address</div>
 
-                                <div class="element">
-                                    <label>Full Name</label>
-                                    <input type="text">
+                                <div class="form-grid">
+                                    <div class="element">
+                                        <label>Full Name</label>
+                                        <input type="text">
+                                    </div>
+
+                                    <div class="element">
+                                        <label>Mobile</label>
+                                        <input type="text">
+                                    </div>
+
+                                    <div class="element">
+                                        <label>House/Flat/Building</label>
+                                        <input type="text">
+                                    </div>
+
+                                    <div class="element">
+                                        <label>Area/Street</label>
+                                        <input type="text">
+                                    </div>
+
+                                    <div class="element">
+                                        <label>Landmark(Optional)</label>
+                                        <input type="text">
+                                    </div>
+
+                                    <div class="element">
+                                        <label>City</label>
+                                        <input type="text">
+                                    </div>
+
+                                    <div class="element">
+                                        <label>State</label>
+                                        <input type="text">
+                                    </div>
+
+                                    <div class="element">
+                                        <label>Pincode</label>
+                                        <input type="text">
+                                    </div>
                                 </div>
-
-                                <div class="element">
-                                    <label>Mobile</label>
-                                    <input type="text">
+                                <div class="">
+                                    <label class="d-block mb-2 fw-semibold">Address Type</label>
+                                    <label class="me-3 mb-3">
+                                        <input type="radio" name="address" value="home" [(ngModel)]="addressType" />
+                                        Home
+                                    </label>
+                                    <label class="me-3 mb-3">
+                                        <input type="radio" name="address" value="work" [(ngModel)]="addressType" />
+                                        Work
+                                    </label>
+                                    <label class="me-3 mb-3">
+                                        <input type="radio" name="address" value="other" [(ngModel)]="addressType" />
+                                        Other
+                                    </label>
                                 </div>
-
-                                <div class="element">
-                                    <label>Address</label>
-                                    <input type="text">
-                                </div>
-
-                                <div class="element">
-                                    <button (click)="saveAddress()">Save Address</button>
+                                <div class=" d-flex justify-content-end gap-2">
+                                    <button class="btn btn-outline-secondary px-3 py-1 fw-semibold text-dark"
+                                        (click)="closeAddressForm()">Cancel</button>
+                                    <button class="btn px-3 py-1 fw-semibold text-light"
+                                        style="background-color: #336353;">Save</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="border rounded-4 p-4 d-flex justify-content-between align-items-start mb-3"
-                        style="background:#ffffff;">
-                        <div class="d-flex">
-                            <div class="me-3">
-                                <input type="radio" name="address" checked style="margin-top: 5px;">
+                    <div class="">
+                        <div class="p-3 border rounded-4 d-flex justify-content-between align-items-start"
+                            style="background:#ffffff;">
+                            <div class="d-flex">
+                                <div class="me-3">
+                                    <input type="radio" name="address" checked style="margin-top: 5px;">
+                                </div>
+                                <div>
+                                    <span
+                                        class="text-dark bg-secondary-subtle py-1 px-2 rounded-3 fw-semibold">Home</span>
+                                    <span class="mx-2">(Primary)</span>
+                                    <h6 class="fw-bold mt-2 mb-1">First address</h6>
+                                    <p class="mb-1">
+                                        ItPark Dehradun, Uttarakhand - 248001
+                                    </p>
+                                    <p class="fw-bold">8171954889</p>
+                                </div>
                             </div>
-                            <div>
-                                <span class="text-dark bg-secondary-subtle py-1 px-2 rounded-3 fw-semibold">Home</span>
-                                <span class="mx-2">(Primary)</span>
-                                <h6 class="fw-bold mt-2 mb-1">First address</h6>
-                                <p class="mb-1">
-                                    ItPark Dehradun, Uttarakhand - 248001
-                                </p>
-                                <p class="fw-bold">8171954889</p>
-                            </div>
+                            <button class="btn d-flex align-items-center gap-1 border shadow-sm rounded-3 px-3 py-2"
+                                style="background:#fff;">
+                                <i class="bi bi-pencil-square"></i>
+                                Edit
+                            </button>
                         </div>
-                        <button class="btn d-flex align-items-center gap-1 border shadow-sm rounded-3 px-3 py-2"
-                            style="background:#fff;">
-                            <i class="bi bi-pencil-square"></i>
-                            Edit
-                        </button>
-                    </div>
-                    <div class="border rounded-4 p-4 d-flex justify-content-between align-items-start mb-3"
-                        style="background:#ffffff;">
-                        <div class="d-flex">
-                            <div class="me-3">
-                                <input type="radio" name="address" checked style="margin-top: 5px;">
-                            </div>
-                            <div>
-                                <span class="text-dark bg-secondary-subtle py-1 px-2 rounded-3 fw-semibold">Home</span>
-                                <span class="mx-2">(Primary)</span>
-                                <h6 class="fw-bold mt-2 mb-1">First address</h6>
-                                <p class="mb-1">
-                                    ItPark Dehradun, Uttarakhand - 248001
-                                </p>
-                                <p class="fw-bold">8171954889</p>
-                            </div>
-                        </div>
-                        <button class="btn d-flex align-items-center gap-1 border shadow-sm rounded-3 px-3 py-2"
-                            style="background:#fff;">
-                            <i class="bi bi-pencil-square"></i>
-                            Edit
-                        </button>
-                    </div>
-                    <div class="border rounded-4 p-4 d-flex justify-content-between align-items-start mb-3"
-                        style="background:#ffffff;">
-                        <div class="d-flex">
-                            <div class="me-3">
-                                <input type="radio" name="address" checked style="margin-top: 5px;">
-                            </div>
-                            <div>
-                                <span class="text-dark bg-secondary-subtle py-1 px-2 rounded-3 fw-semibold">Home</span>
-                                <span class="mx-2">(Primary)</span>
-                                <h6 class="fw-bold mt-2 mb-1">First address</h6>
-                                <p class="mb-1">
-                                    ItPark Dehradun, Uttarakhand - 248001
-                                </p>
-                                <p class="fw-bold">8171954889</p>
-                            </div>
-                        </div>
-                        <button class="btn d-flex align-items-center gap-1 border shadow-sm rounded-3 px-3 py-2"
-                            style="background:#fff;">
-                            <i class="bi bi-pencil-square"></i>
-                            Edit
-                        </button>
                     </div>
                 </div>
             </div>
-
             <!-- RIGHT SIDE -->
             <div class="col-lg-5">
                 <div class="position-sticky" style="top: 30px;">

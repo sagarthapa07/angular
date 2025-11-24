@@ -161,8 +161,6 @@ export class HomeComponent {
     }
   }
 
-
-
   AddToCart(item: Items) {
     let productData: Product = {
       ...item,
