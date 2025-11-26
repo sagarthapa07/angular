@@ -67,3 +67,15 @@ export interface cart {
     quantity: number,
     availabilityStatus: string,
 }
+export interface address {
+    id: number
+    fullname: string,
+    mobile: string,
+    house: string,
+    area: string,
+    landmark: string,
+    city: string,
+    State: string,
+    Pincode: string,
+    addressType: string
+}

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
-import { cart, Product } from '../../../dataType';
+import { address, cart, Product } from '../../../dataType';
 import { Observable } from 'rxjs';
 import { CommonService } from '../common/common.service';
 
@@ -30,8 +30,8 @@ export class ShopService {
     return this.http.post(this.apiUrl, product);
   }
 
-  updateCart(productId:string, product: any) {
-    return this.http.patch(this.apiUrl+ '/' +productId, product);
+  updateCart(productId: string, product: any) {
+    return this.http.patch(this.apiUrl + '/' + productId, product);
   }
 
 
@@ -44,37 +44,37 @@ export class ShopService {
   // }
 
   LocalAddToCart(data: Product) {
-  let cartData: Product[] = [];
-  let localCart = localStorage.getItem('localCart');
+    let cartData: Product[] = [];
+    let localCart = localStorage.getItem('localCart');
 
-  if (!localCart) {
-    // first item
-    localStorage.setItem('localCart', JSON.stringify([data]));
-    this.cartData.emit([data]);
-  } else {
-    cartData = JSON.parse(localCart);
-
-    // ✅ check if product already exists
-    const existing = cartData.find((item) => item.productId === data.productId);
-    if (existing) {
-      existing.quantity += 1;
+    if (!localCart) {
+      // first item
+      localStorage.setItem('localCart', JSON.stringify([data]));
+      this.cartData.emit([data]);
     } else {
-      cartData.push(data);
+      cartData = JSON.parse(localCart);
+
+      // ✅ check if product already exists
+      const existing = cartData.find((item) => item.productId === data.productId);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cartData.push(data);
+      }
+
+      // ✅ save updated cart
+      localStorage.setItem('localCart', JSON.stringify(cartData));
+
+      // ✅ emit updated data for header
+      this.cartData.emit(cartData);
     }
-
-    // ✅ save updated cart
-    localStorage.setItem('localCart', JSON.stringify(cartData));
-
-    // ✅ emit updated data for header
-    this.cartData.emit(cartData);
   }
-}
 
 
   loadLocalCart() {
-  const localCart = JSON.parse(localStorage.getItem('localCart') || '[]');
-  this.cartData.emit(localCart);
-}
+    const localCart = JSON.parse(localStorage.getItem('localCart') || '[]');
+    this.cartData.emit(localCart);
+  }
 
   localAddToCart(data: Product) {
 
@@ -107,10 +107,6 @@ export class ShopService {
     return this.http.post('http://localhost:3000/cart', cartData)
   }
 
-  // addTocart(id: number, quantity: number) {
-  //   return this.http.post('http://localhost:3000/cart', { id, quantity });
-  // }
-
   getCartList(userId: number) {
 
     this.http.get<Product[]>('http://localhost:3000/cart?userId=' + userId, { observe: 'response' }).subscribe((result) => {
@@ -128,10 +124,13 @@ export class ShopService {
     let userData = userStore && JSON.parse(userStore);
     return this.http.get<cart[]>('http://localhost:3000/cart?userId=' + userData.id);
   }
-  // searchProduct(query:string){
-  //   return this.http.get<Product[]>(`https://dummyjson.com/products?q=${query}`);
-  // }
   searchProduct(query: string) {
-  return this.http.get<Product[]>(`https://dummyjson.com/products/search?q=${encodeURIComponent(query)}`);
-}
+    return this.http.get<Product[]>(`https://dummyjson.com/products/search?q=${encodeURIComponent(query)}`);
+  }
+  addAddress(data: address) {
+    return this.http.post('http://localhost:3000/address', data);
+  }
+  addressList() {
+    return this.http.get<address[]>('http://localhost:3000/address');
+  }
 }

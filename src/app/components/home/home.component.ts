@@ -235,7 +235,7 @@ export class HomeComponent {
     this.showPopup = true;
     setTimeout(() => {
       this.showPopup = false;   
-    }, 2000); 
+    }, 5000); 
   }
 
   isProductInCart(id: number) {
@@ -243,9 +243,6 @@ export class HomeComponent {
   }
 
 }
-
-
-
 
 
   // AddToCart(item: Items) {
