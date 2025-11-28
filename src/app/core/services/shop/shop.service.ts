@@ -34,15 +34,6 @@ export class ShopService {
     return this.http.patch(this.apiUrl + '/' + productId, product);
   }
 
-
-  // LocalAddToCart(data: Product) {
-  //   let cartData = [];
-  //   let localCart = localStorage.getItem('cartProducts');
-  //   if (!localCart) {
-  //     localStorage.setItem('localCart', JSON.stringify([data]));
-  //   }
-  // }
-
   LocalAddToCart(data: Product) {
     let cartData: Product[] = [];
     let localCart = localStorage.getItem('localCart');
@@ -132,5 +123,8 @@ export class ShopService {
   }
   addressList() {
     return this.http.get<address[]>('http://localhost:3000/address');
+  }
+  updateAddress(address:address){
+    return this.http.put<address>(`http://localhost:3000/address/${address.id}`, address);
   }
 }

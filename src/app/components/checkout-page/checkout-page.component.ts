@@ -3,6 +3,7 @@ import { ShopService } from "../../core/services/shop/shop.service";
 import { FormsModule, NgForm } from "@angular/forms";
 import { Component } from "@angular/core";
 import { address } from "../../dataType";
+import { CommonService } from "../../core/services/common/common.service";
 
 @Component({
   selector: 'app-checkout-page',
@@ -15,11 +16,13 @@ export class CheckoutPageComponent {
   showAddressPopup = false;
   showPopup = false;
   alertMessage = '';
-
+  isEditMode = false;
+  editAddressData: any = null;
+  cartData: any[] | undefined
   addressType: string = 'home';
   addressList: address[] | undefined;
 
-  constructor(private shopservice: ShopService) { }
+  constructor(private shopservice: ShopService, private common: CommonService) { }
 
   ngOnInit(): void {
     this.shopservice.addressList().subscribe({
@@ -32,15 +35,20 @@ export class CheckoutPageComponent {
       }
     });
   }
-
-  openLoginForm() {
-    this.showAddressPopup = true;
-  }
-
   closeAddressForm() {
     this.showAddressPopup = false;
   }
-
+  openAddForm() {
+    this.isEditMode = false;
+    this.editAddressData = null;
+    this.showAddressPopup = true;
+  }
+  openEditForm(item: address) {
+    this.isEditMode = true;
+    this.editAddressData = item;
+    this.addressType = item.addressType;
+    this.showAddressPopup = true;
+  }
   showA(message: string) {
     this.alertMessage = message;
     this.showPopup = true;
@@ -71,5 +79,17 @@ export class CheckoutPageComponent {
         this.showA("Failed to save address!");
       }
     });
+  }
+
+  getCartList() {
+    const userCookie = this.common.getCookie('sagar');
+    const isLoggedIn = !!userCookie;
+    const userId = JSON.parse(userCookie).id;
+    this.shopservice.currentCart(userId).subscribe((res) => {
+      this.cartData = res
+    })
+  }
+  updateAdd(data:address){
+    console.warn(data); 
   }
 }

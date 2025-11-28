@@ -104,10 +104,10 @@
 
 .alert-popup {
   position: fixed;
-  bottom: 20px;
+  top : 50px;
   right: 20px;
   background-color: #063c28cc;
-  color: #000000;
+  color: #ffffff;
   padding: 10px 20px;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.3);

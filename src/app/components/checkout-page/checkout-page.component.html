@@ -20,7 +20,7 @@
                         <h5 class="">Select Delivery Address</h5>
                         <button class="btn border border-gray-700 fw-semibold"
                             style="background-color: #336353; color: #fff; display: flex; align-items: center;"
-                            (click)="openLoginForm()">
+                            (click)="openAddForm()">
                             <span class="me-2 fs-5">+</span>Add New
                         </button>
                     </div>
@@ -28,47 +28,47 @@
                         <div class="popup-overlay" (click)="closeAddressForm()"></div>
                         <div class="popup">
                             <div class="popup-close" (click)="closeAddressForm()">&times;</div>
-                            <div class="header fw-bold fs-5 mb-3">Add New Address</div>
+                            <div class="header fw-bold fs-5 mb-3">{{ isEditMode ? 'Edit Address' : 'Add New Address' }}</div>
                             <form #addProduct="ngForm" (submit)="submit(addProduct)" class="form">
                                 <div class="form-grid">
                                     <div class="element">
                                         <label>Full Name</label>
-                                        <input type="text" name="fullName" required ngModel>
+                                        <input type="text" name="fullName" required [ngModel]="editAddressData?.fullName">
                                     </div>
 
                                     <div class="element">
                                         <label>Mobile</label>
-                                        <input type="text" name="mobile" required ngModel>
+                                        <input type="text" name="mobile" required [ngModel]="editAddressData?.mobile">
                                     </div>
 
                                     <div class="element">
                                         <label>House/Flat/Building</label>
-                                        <input type="text" name="addressLine1" required ngModel>
+                                        <input type="text" name="addressLine1" required [ngModel]="editAddressData?.addressLine1">
                                     </div>
 
                                     <div class="element">
                                         <label>Area/Street</label>
-                                        <input type="text" name="area" required ngModel>
+                                        <input type="text" name="area" required [ngModel]="editAddressData?.area">
                                     </div>
 
                                     <div class="element">
                                         <label>Landmark(Optional)</label>
-                                        <input type="text" name="landmark" required ngModel>
+                                        <input type="text" name="landmark" [ngModel]="editAddressData?.landmark">
                                     </div>
 
                                     <div class="element">
                                         <label>City</label>
-                                        <input type="text" name="city" required ngModel>
+                                        <input type="text" name="city" required [ngModel]="editAddressData?.city">
                                     </div>
 
                                     <div class="element">
                                         <label>State</label>
-                                        <input type="text" name="state" required ngModel>
+                                        <input type="text" name="state" required  [ngModel]="editAddressData?.state">
                                     </div>
 
                                     <div class="element">
                                         <label>Pincode</label>
-                                        <input type="text" name="pincode" required ngModel>
+                                        <input type="text" name="pincode" required [ngModel]="editAddressData?.pincode">
                                     </div>
                                 </div>
                                 <div class="">
@@ -92,9 +92,9 @@
                                 <div class=" d-flex justify-content-end gap-2">
                                     <button type="button"
                                         class="btn btn-outline-secondary px-3 py-1 fw-semibold text-dark"
-                                        (click)="closeAddressForm()">Cancel</button>
+                                        (click)="closeAddressForm()">{{ isEditMode ? 'Delete Address' : 'Cancel' }}</button>
                                     <button type="submit" class="btn px-3 py-1 fw-semibold text-light"
-                                        style="background-color: #336353;">Save</button>
+                                        style="background-color: #336353;" >{{ isEditMode ? 'Update Address' : 'Save New Address' }}</button>
                                 </div>
                             </form>
                         </div>
@@ -109,7 +109,7 @@
                                 <div>
                                     <span
                                         class="text-dark bg-secondary-subtle py-1 px-2 rounded-3 fw-semibold">{{item.addressType}}</span>
-                                    <span class="mx-2">(Primary)</span>
+                                    <!-- <span class="mx-2">(Primary)</span> -->
                                     <h6 class="fw-bold mt-2 mb-1">{{item.fullname}}</h6>
                                     <p class="mb-1">
                                         {{item.area}},{{item.landmark}},{{item.city}}, {{item.State}} - {{item.Pincode}}
@@ -118,7 +118,7 @@
                                 </div>
                             </div>
                             <button class="btn d-flex align-items-center gap-1 border shadow-sm rounded-3 px-3 py-2"
-                                style="background:#fff;">
+                                style="background:#fff;" (click)="openEditForm(item)">
                                 <i class="bi bi-pencil-square"></i>
                                 Edit
                             </button>
@@ -129,7 +129,6 @@
             <!-- RIGHT SIDE -->
             <div class="col-lg-5">
                 <div class="position-sticky" style="top: 30px;">
-
                     <!-- ORDER and PRODUCT SUMMARY -->
                     <div class="shadow-sm rounded-3 p-3 mb-3">
                         <div class="">
@@ -141,109 +140,18 @@
                             <span class="fw-bold">Subtotal</span>
                         </div>
                         <hr>
-                        <div class="products" style="height: 250px;">
+                        <div class="products" style="height: 250px;" *ngFor="let item of cartData">
                             <div class="d-flex flex-row align-items-center gap-3 mb-3">
                                 <a href="">
                                     <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                                         alt="" style="width:45px; height:50px;">
                                 </a>
                                 <div class="d-flex flex-column">
-                                    <span>Product Title</span>
-                                    <span>Qty: 1</span>
+                                    <span>{{item}}</span>
+                                    <span>Qty: {{item.quantity}}</span>
                                 </div>
                                 <div class="ms-auto">
-                                    <span>₹9,490</span>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-row align-items-center gap-3 mb-3">
-                                <a href="">
-                                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                                        alt="" style="width:45px; height:50px;">
-                                </a>
-                                <div class="d-flex flex-column">
-                                    <span>Product Title</span>
-                                    <span>Qty: 1</span>
-                                </div>
-                                <div class="ms-auto">
-                                    <span>₹9,490</span>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-row align-items-center gap-3 mb-3">
-                                <a href="">
-                                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                                        alt="" style="width:45px; height:50px;">
-                                </a>
-                                <div class="d-flex flex-column">
-                                    <span>Product Title</span>
-                                    <span>Qty: 1</span>
-                                </div>
-                                <div class="ms-auto">
-                                    <span>₹9,490</span>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-row align-items-center gap-3 mb-3">
-                                <a href="">
-                                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                                        alt="" style="width:45px; height:50px;">
-                                </a>
-                                <div class="d-flex flex-column">
-                                    <span>Product Title</span>
-                                    <span>Qty: 1</span>
-                                </div>
-                                <div class="ms-auto">
-                                    <span>₹9,490</span>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-row align-items-center gap-3 mb-3">
-                                <a href="">
-                                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                                        alt="" style="width:45px; height:50px;">
-                                </a>
-                                <div class="d-flex flex-column">
-                                    <span>Product Title</span>
-                                    <span>Qty: 1</span>
-                                </div>
-                                <div class="ms-auto">
-                                    <span>₹9,490</span>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-row align-items-center gap-3 mb-3">
-                                <a href="">
-                                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                                        alt="" style="width:45px; height:50px;">
-                                </a>
-                                <div class="d-flex flex-column">
-                                    <span>Product Title</span>
-                                    <span>Qty: 1</span>
-                                </div>
-                                <div class="ms-auto">
-                                    <span>₹9,490</span>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-row align-items-center gap-3 mb-3">
-                                <a href="">
-                                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                                        alt="" style="width:45px; height:50px;">
-                                </a>
-                                <div class="d-flex flex-column">
-                                    <span>Product Title</span>
-                                    <span>Qty: 1</span>
-                                </div>
-                                <div class="ms-auto">
-                                    <span>₹9,490</span>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-row align-items-center gap-3 mb-3">
-                                <a href="">
-                                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                                        alt="" style="width:45px; height:50px;">
-                                </a>
-                                <div class="d-flex flex-column">
-                                    <span>Product Title</span>
-                                    <span>Qty: 1</span>
-                                </div>
-                                <div class="ms-auto">
-                                    <span>₹9,490</span>
+                                    <span>₹{{item.price}}</span>
                                 </div>
                             </div>
                         </div>
