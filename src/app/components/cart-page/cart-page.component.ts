@@ -18,7 +18,8 @@ export class CartPageComponent implements OnInit {
   totalDiscount: number = 0;
   grandTotal: number = 0;
   totalItems: number = 0;
-
+  discount: number = 0;
+  gst: number = 0;
   constructor(
     private cartService: CartService,
     private http: HttpClient,
@@ -127,22 +128,33 @@ export class CartPageComponent implements OnInit {
 
   calculateTotals() {
     this.subTotal = 0;
-    this.totalDiscount = 0;
+    this.discount = 0;
+    this.gst = 0;
     this.grandTotal = 0;
     this.totalItems = 0;
+
     if (!this.cartData.length) return;
+
     this.cartData.forEach((item) => {
       const price = item.price || 0;
       const discount = item.discountPercentage || 0;
       const qty = item.quantity || 1;
-      const discountedPrice = price - (price * discount) / 100;
+
+      const discountedAmount = (price * discount) / 100;
+      const discountedPrice = price - discountedAmount;
+
       this.subTotal += price * qty;
-      this.totalDiscount += (price * discount * qty) / 100;
-      this.grandTotal += discountedPrice * qty;
+      this.discount += discountedAmount * qty;
       this.totalItems += qty;
     });
+
+    this.gst = (this.subTotal - this.discount) * 0.18;
+
+    this.grandTotal = (this.subTotal - this.discount) + this.gst;
+
     console.log('Subtotal:', this.subTotal);
-    console.log('Discount:', this.totalDiscount);
+    console.log('Discount:', this.discount);
+    console.log('GST:', this.gst);
     console.log('GrandTotal:', this.grandTotal);
   }
 
@@ -171,14 +183,14 @@ export class CartPageComponent implements OnInit {
   }
 
 
-  procedTOCheckOut(){
+  procedTOCheckOut() {
     const userCookie = this.common.getCookie('sagar');
     const isLoggedIn = !!userCookie;
 
-    if(userCookie){
+    if (userCookie) {
       this.route.navigate(['/checkout'])
-    }else{
-this.route.navigate(['/Login'])
+    } else {
+      this.route.navigate(['/Login'])
     }
   }
 }

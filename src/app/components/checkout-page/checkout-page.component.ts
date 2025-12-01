@@ -1,26 +1,32 @@
-import { NgIf, NgForOf } from "@angular/common";
+import { NgIf, NgForOf, DecimalPipe } from "@angular/common";
 import { ShopService } from "../../core/services/shop/shop.service";
 import { FormsModule, NgForm } from "@angular/forms";
 import { Component } from "@angular/core";
-import { address } from "../../dataType";
+import { address, cart } from "../../dataType";
 import { CommonService } from "../../core/services/common/common.service";
 
 @Component({
   selector: 'app-checkout-page',
-  imports: [NgIf, FormsModule, NgForOf],
+  imports: [NgIf, FormsModule, NgForOf, DecimalPipe],
   templateUrl: './checkout-page.component.html',
   styleUrls: ['./checkout-page.component.css']
 })
 export class CheckoutPageComponent {
 
-  showAddressPopup = false;
+  showAddPopup = false;
+  showEditPopup = false;
+  cartData: any[] = [];
   showPopup = false;
   alertMessage = '';
   isEditMode = false;
   editAddressData: any = null;
-  cartData: any[] | undefined
   addressType: string = 'home';
   addressList: address[] | undefined;
+  subTotal: number = 0;
+  discount: number = 0;
+  gst: number = 0;
+  grandTotal: number = 0;
+  totalItems: number = 0;
 
   constructor(private shopservice: ShopService, private common: CommonService) { }
 
@@ -34,21 +40,51 @@ export class CheckoutPageComponent {
         console.error(err);
       }
     });
+    this.loadCartData();
   }
-  closeAddressForm() {
-    this.showAddressPopup = false;
+  loadCartData() {
+    const userCookie = this.common.getCookie('sagar');
+    if (!userCookie) return;
+
+    const userId = JSON.parse(userCookie).id;
+
+    this.shopservice.currentCart(userId).subscribe((result) => {
+      this.cartData = result || [];
+
+      this.calculateTotals();
+
+      if (!this.cartData.length) {
+        this.showA("Your cart is empty.");
+      }
+    });
+  }
+
+  loadAddressList() {
+    this.shopservice.addressList().subscribe(res => {
+      this.addressList = res;
+    });
   }
   openAddForm() {
     this.isEditMode = false;
     this.editAddressData = null;
-    this.showAddressPopup = true;
+    this.showAddPopup = true;
+    this.showEditPopup = false;
   }
+
   openEditForm(item: address) {
     this.isEditMode = true;
-    this.editAddressData = item;
+    this.editAddressData = { ...item };
+    console.log("Edited item:", this.editAddressData);
     this.addressType = item.addressType;
-    this.showAddressPopup = true;
+    this.showEditPopup = true;
+    this.showAddPopup = false;
   }
+
+  closeAddressForm() {
+    this.showAddPopup = false;
+    this.showEditPopup = false;
+  }
+
   showA(message: string) {
     this.alertMessage = message;
     this.showPopup = true;
@@ -59,37 +95,79 @@ export class CheckoutPageComponent {
   }
 
   submit(form: NgForm) {
-    // Basic Validation
     if (!form.valid || !this.addressType) {
       this.showA("Please fill all required fields.");
       return;
     }
     const formData = {
       ...form.value,
-      addressType: this.addressType
+      addressType: this.addressType,
+      id: this.editAddressData?.id
     };
-    this.shopservice.addAddress(formData).subscribe({
-      next: () => {
+    if (!this.isEditMode) {
+      this.shopservice.addAddress(formData).subscribe(() => {
         this.showA("Address Saved Successfully!");
+        this.loadAddressList();
         this.closeAddressForm();
-        form.resetForm();
-        this.addressType = 'home';
-      },
-      error: () => {
-        this.showA("Failed to save address!");
-      }
+      });
+      return;
+    }
+    this.shopservice.updateAddress(formData).subscribe(() => {
+      this.showA("Address Updated Successfully!");
+      this.loadAddressList();
+      this.closeAddressForm();
     });
   }
 
-  getCartList() {
-    const userCookie = this.common.getCookie('sagar');
-    const isLoggedIn = !!userCookie;
-    const userId = JSON.parse(userCookie).id;
-    this.shopservice.currentCart(userId).subscribe((res) => {
-      this.cartData = res
-    })
+  deleteAddress(item: address) {
+    debugger
+    console.log("DELETE PRESS:", item);
+    console.log("ID FOUND:", item.id);
+    if (!item.id) {
+      this.showA("Delete failed: ID not found!");
+      return;
+    }
+    this.shopservice.deleteAddress(item).subscribe({
+      next: () => {
+        this.showA("Address Deleted Successfully!");
+        this.closeAddressForm()
+        this.loadAddressList();
+      },
+      error: () => this.showA("Failed to delete address!")
+    });
   }
-  updateAdd(data:address){
-    console.warn(data); 
+  calculateTotals() {
+    this.subTotal = 0;
+    this.discount = 0;
+    this.gst = 0;
+    this.grandTotal = 0;
+    this.totalItems = 0;
+
+    if (!this.cartData.length) return;
+
+    this.cartData.forEach((item) => {
+      const price = item.price || 0;
+      const discount = item.discountPercentage || 0;
+      const qty = item.quantity || 1;
+
+      const discountedAmount = (price * discount) / 100;
+      const discountedPrice = price - discountedAmount;
+
+      this.subTotal += price * qty;
+      this.discount += discountedAmount * qty;
+      this.totalItems += qty;
+    });
+
+    this.gst = (this.subTotal - this.discount) * 0.18;
+
+    this.grandTotal = (this.subTotal - this.discount) + this.gst;
+
+    console.log('Subtotal:', this.subTotal);
+    console.log('Discount:', this.discount);
+    console.log('GST:', this.gst);
+    console.log('GrandTotal:', this.grandTotal);
   }
+
+
+
 }

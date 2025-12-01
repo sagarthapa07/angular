@@ -113,6 +113,9 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     this.route.navigate(['/detail', id]);
   });
 }
+profile(){
+  this.route.navigate(['/dashboard']);
+}
 }
 
 

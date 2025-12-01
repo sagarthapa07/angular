@@ -71,7 +71,7 @@ export class ShopService {
 
     let cartData: Product[] = [];
     let localCart = localStorage.getItem('localCart');
-    if (!localCart) {
+    if (!localCart) { 
       localStorage.setItem('localCart', JSON.stringify([data]));
       this.cartData.emit([data])
     } else {
@@ -124,7 +124,10 @@ export class ShopService {
   addressList() {
     return this.http.get<address[]>('http://localhost:3000/address');
   }
-  updateAddress(address:address){
+  updateAddress(address: address) {
     return this.http.put<address>(`http://localhost:3000/address/${address.id}`, address);
+  }
+  deleteAddress(address: address) {
+    return this.http.delete(`http://localhost:3000/address/${address.id}`)
   }
 }
