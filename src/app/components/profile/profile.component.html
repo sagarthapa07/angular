@@ -1,43 +1,121 @@
 <div class="container mt-5">
-    <div class="dashboard-wrapper">
-        <aside class="sidebar">
-            <div class="profile">
-                <div class="avatar">L</div>
-                <h3>Name</h3>
-                <p>Gmail</p>
+  <div class="dashboard-wrapper">
+    <aside class="sidebar">
+      <div class="profile">
+        <div class="avatar">L</div>
+        <h3>Name</h3>
+        <p>Gmail</p>
+      </div>
+
+      <nav class="sidebar-menu">
+        <a
+          *ngFor="let item of menuItems"
+          [class.active]="activeItem === item.name"
+          (click)="activeItem = item.name"
+        >
+          <i [class]="item.icon"></i> {{ item.name }}
+        </a>
+
+        <a class="logout"> <i class="bi bi-box-arrow-right"></i> Logout </a>
+      </nav>
+    </aside>
+    <section class="content">
+      <div *ngIf="activeItem === 'Dashboard'">
+        <h2>Welcome to your Dashboard</h2>
+        <p>Here you can see your recent activity and account summary.</p>
+        <h2>Dashboard</h2>
+        <div class="grid">
+          <div class="card">
+            <i class="bi bi-box-seam"></i> <span>Orders</span>
+          </div>
+          <div class="card">
+            <i class="bi bi-heart"></i> <span>Wishlist</span>
+          </div>
+          <div class="card">
+            <i class="bi bi-geo-alt"></i> <span>Addresses</span>
+          </div>
+          <div class="card">
+            <i class="bi bi-person-fill"></i> <span>Personal Info</span>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="activeItem === 'Orders'">
+        <h2>Your Orders</h2>
+
+        <div class="filter-section">
+          <div class="row">
+            <div class="col-md-3">
+              <h6>Filter by Status</h6>
+              <div ngbDropdown class="dropdown-wrapper">
+                <button class="dropdown-btn" ngbDropdownToggle>
+                  {{ selectedStatus }}
+                </button>
+                <div ngbDropdownMenu>
+                  <button
+                    ngbDropdownItem
+                    *ngFor="let s of statusOptions"
+                    (click)="select('status', s)"
+                  >
+                    <span>{{ s }}</span>
+                    <i *ngIf="selectedStatus === s" class="bi bi-check"></i>
+                  </button>
+                </div>
+              </div>
             </div>
-            <nav class="sidebar-menu">
 
-                <a *ngFor="let item of menuItems"><i [class]="item.icon"></i> {{ item.name }}</a>
-                <a class="logout"><i class="bi bi-box-arrow-right"></i> Logout</a>
-            </nav>
+            <!-- Sort By Time -->
+            <div class="col-md-3">
+              <h6>Sort by Time</h6>
 
-        </aside>
-        <section class="content">
-            <h2>Welcome to your Dashboard</h2>
-            <p>Here you can see your recent activity and account summary.</p>
+              <div ngbDropdown class="dropdown-wrapper">
+                <button class="dropdown-btn" ngbDropdownToggle>
+                  {{ selectedTime }}
+                  <!-- <i class="bi bi-chevron-down"></i> -->
+                </button>
 
-            <div class="grid">
-                <div class="card">
-                    <i class="fa fa-box icon mx-2"></i>
-                    <span>Orders</span>
+                <div ngbDropdownMenu>
+                  <button
+                    ngbDropdownItem
+                    *ngFor="let t of timeOptions"
+                    (click)="select('time', t)"
+                  >
+                    <span>{{ t }}</span>
+                    <i *ngIf="selectedTime === t" class="bi bi-check"></i>
+                  </button>
                 </div>
-
-                <div class="card">
-                    <i class="fa fa-heart icon "></i>
-                    <span>Wishlist</span>
-                </div>
-
-                <div class="card">
-                    <i class="fa fa-map-marker-alt icon "></i>
-                    <span>Addresses</span>
-                </div>
-
-                <div class="card">
-                    <i class="fa fa-user icon "></i>
-                    <span>Personal Info</span>
-                </div>
+              </div>
             </div>
-        </section>
-    </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="activeItem === 'Wishlist'">
+        <h2>My List</h2>
+        <p>You have {{ 0 }} products in your Wish List.</p>
+      </div>
+
+      <div *ngIf="activeItem === 'Addresses'">
+        <h2>Addresses</h2>
+        <p>Your address book...</p>
+      </div>
+
+      <div *ngIf="activeItem === 'Personal Info'">
+        <div class="pInfo">
+          <h5>Basic Info</h5>
+        </div>
+        <div class="personalInfo">
+          <div class="Fname">
+            <h6>First Name</h6>
+            <span>SAgar</span>
+            <h6>Last Name</h6>
+            <span>Thapa</span>
+          </div>
+          <div>
+            <button class="btn btn-danger">Edit</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
 </div>

@@ -30,7 +30,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: auto;
+  margin: auto; 
   font-weight: bold;
 }
 
@@ -54,7 +54,7 @@
   color: red;
 }
 
-/* Content */
+
 .content {
   flex: 1;
   border: 1px solid #eee;
@@ -77,10 +77,15 @@
   cursor: pointer;
   transition: 0.3s;
 }
+.card i{
+ color: #008957;
+ font-size: 1.25rem;
+ margin-bottom: 5px;
+ font-weight: 900;
+}
 
 .card:hover {
   background: #f7f7f7;
-  transform: translateY(-3px);
 }
 
 .icon {
@@ -101,7 +106,7 @@
 }
 /* Sidebar Links */
 .sidebar-menu a {
-  display: block;
+  display: flex;
   padding: 12px 15px;
   margin-bottom: 8px;
   border-radius: 6px;
@@ -110,15 +115,78 @@
   font-weight: 500;
   cursor: pointer;
   transition: 0.2s;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
 }
 
-/* Hover – Gray */
+
 .sidebar-menu a:hover {
-  background: #f0f0f0;
+  background: #f7f7f7;
 }
 
-/* Active – Black */
+
 .sidebar-menu a.active {
   background: #000;
   color: #fff;
+}
+
+
+
+.filter-section {
+  margin: 20px 0;
+}
+
+.filter-section h6 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.dropdown-wrapper {
+  width: 200px;
+}
+.dropdown-btn {
+  width: 100%;
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 10px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dropdown-btn:hover {
+  border-color: #f7f7f7;
+}
+.dropdown-menu button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 200px;
+}
+
+.check-icon {
+  font-size: 16px;
+  color: #000;
+  margin-left: 12px;
+}
+.pInfo{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+.personalInfo {
+  display: flex;
+  justify-content: space-between;  
+  gap: 20px;                        
+}
+
+.personalInfo > div {
+  flex: 1;                          
+}
+.personalInfo .Fname h6,
+.personalInfo .Lname h6  {
+  color: #9a9a9a;
 }

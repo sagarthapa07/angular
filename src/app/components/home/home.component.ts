@@ -3,14 +3,14 @@ import { HomeServicesService } from '../../core/services/home/home-services.serv
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { cart, Categories, Items, Product } from '../../dataType';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { CommonModule, NgForOf, NgIf } from '@angular/common';
+import { CommonModule, NgForOf, NgIf, NgClass } from '@angular/common';
 import { ShopService } from '../../core/services/shop/shop.service';
 import { CommonService } from '../../core/services/common/common.service';
 
 
 @Component({
   selector: "app-home",
-  imports: [NgbNavModule, RouterLink, NgForOf, NgIf],
+  imports: [NgbNavModule, RouterLink, NgForOf, NgIf, NgClass],
   templateUrl: "./home.component.html",
   styleUrls: ["./home.component.css"], 
 })
@@ -36,6 +36,7 @@ export class HomeComponent {
   cartItem: any[] = []
   alertMessage: string = '';
   showPopup: boolean = false;
+  
 
   constructor(private homeService: HomeServicesService,
     private home: HomeServicesService,
