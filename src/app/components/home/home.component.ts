@@ -123,20 +123,16 @@ export class HomeComponent {
     return parseFloat(discounted.toFixed(2));     // parseFloat => turns that string back into a number: 477.8
   }
   loadCartState() {
-
     // Guest user (no cookie)
     if (!this.common.getCookie('sagar')) {
       const localCart = localStorage.getItem('localCart');
       if (localCart) {
         const items = JSON.parse(localCart);
-
         //this.cartItemsIds = items.map((item: Product) => item.id);
-
         this.cartItem = items.map((item: Product) => {
           return {
             productId: item.productId,
             id: item.id
-
           }
         })
       }
@@ -155,7 +151,6 @@ export class HomeComponent {
           return {
             productId: item.productId,
             id: item.id
-
           }
         })
       });
@@ -242,5 +237,4 @@ export class HomeComponent {
   isProductInCart(id: number) {
     return this.cartItem.some((val: any) => val.productId === id)
   }
-
 }

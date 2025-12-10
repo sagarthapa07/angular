@@ -1,10 +1,11 @@
 import { NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-profile',
-  imports: [NgFor, NgIf, NgbDropdownModule],
+  imports: [NgFor, NgIf, NgbDropdownModule,FormsModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css',
 })
@@ -14,6 +15,23 @@ export class ProfileComponent {
 
   selectedStatus = 'All';
   selectedTime = 'Newest First';
+  
+  editName = false;
+  firstName = "Sagar";
+  lastName = "Thapa";
+    // Password Fields
+  editPass = false;
+  newPassword = "";
+  confirmPassword = "";
+
+    // Contact Fields
+  editContact = false;
+  email = "sagar@gmail.com";
+  phone = "9876543210";
+
+
+
+
 
   select(optionType: string, value: string) {
     if (optionType === 'status') this.selectedStatus = value;
@@ -32,4 +50,16 @@ export class ProfileComponent {
     },
   ];
   activeItem = 'Dashboard';
+
+
+  toggleNameEdit() {
+    this.editName = !this.editName;
+  }
+    toggleContactEdit() {
+    this.editContact = !this.editContact;
+  }
+    togglePasswordEdit() {
+    this.editPass = !this.editPass;
+  }
+
 }

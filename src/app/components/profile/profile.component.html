@@ -25,16 +25,16 @@
         <p>Here you can see your recent activity and account summary.</p>
         <h2>Dashboard</h2>
         <div class="grid">
-          <div class="card">
+          <div class="card" (click)="activeItem = 'Orders'">
             <i class="bi bi-box-seam"></i> <span>Orders</span>
           </div>
-          <div class="card">
+          <div class="card" (click)="activeItem = 'Wishlist'">
             <i class="bi bi-heart"></i> <span>Wishlist</span>
           </div>
-          <div class="card">
+          <div class="card" (click)="activeItem = 'Addresses'">
             <i class="bi bi-geo-alt"></i> <span>Addresses</span>
           </div>
-          <div class="card">
+          <div class="card" (click)="activeItem = 'Personal Info'">
             <i class="bi bi-person-fill"></i> <span>Personal Info</span>
           </div>
         </div>
@@ -102,17 +102,131 @@
 
       <div *ngIf="activeItem === 'Personal Info'">
         <div class="pInfo">
-          <h5>Basic Info</h5>
+          <h4>Basic Info</h4>
         </div>
-        <div class="personalInfo">
-          <div class="Fname">
-            <h6>First Name</h6>
-            <span>SAgar</span>
-            <h6>Last Name</h6>
-            <span>Thapa</span>
+        <!-- ========== BASIC INFO ========== -->
+        <div class="row align-items-center mb-4">
+          <div class="col-md-6">
+            <label class="text-muted small fw-semibold">First name</label>
+            <p *ngIf="!editName" class="fw-semibold fs-5 mb-0">
+              {{ firstName }}
+            </p>
+            <input
+              *ngIf="editName"
+              type="text"
+              [(ngModel)]="firstName"
+              class="form-control form-control-sm"
+            />
           </div>
-          <div>
-            <button class="btn btn-danger">Edit</button>
+
+          <div class="col-md-6 d-flex justify-content-between">
+            <div>
+              <label class="text-muted small fw-semibold">Last name</label>
+              <p *ngIf="!editName" class="fw-semibold fs-5 mb-0">
+                {{ lastName }}
+              </p>
+              <input
+                *ngIf="editName"
+                type="text"
+                [(ngModel)]="lastName"
+                class="form-control form-control-sm"
+              />
+            </div>
+            <div class="col-md-2 text-md-end mt-2 mt-md-0">
+              <button
+                (click)="toggleNameEdit()"
+                class="btn btn-outline-success btn-sm"
+              >
+                <i class="bi bi-pencil-square" *ngIf="!editName"></i>
+                <i class="bi bi-check-lg" *ngIf="editName"></i>
+                {{ editName ? "Save" : "Edit" }}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <hr />
+
+        <!-- ========== CONTACT SECTION ========== -->
+        <h6 class="fw-semibold mt-4">Contact</h6>
+        <div class="row align-items-center mb-4">
+          <div class="col-md-6">
+            <label class="text-muted small fw-semibold">Email</label>
+            <p *ngIf="!editContact" class="fw-semibold fs-5 mb-0">
+              {{ email }}
+            </p>
+            <input
+              *ngIf="editContact"
+              type="email"
+              [(ngModel)]="email"
+              class="form-control form-control-sm"
+            />
+          </div>
+
+          <div class="col-md-6 d-flex justify-content-between">
+            <div>
+              <label class="text-muted small fw-semibold">Phone</label>
+              <p *ngIf="!editContact" class="fw-semibold fs-5 mb-0 text-success">
+                {{ phone }} <span class="small">Verified</span>
+              </p>
+              <input
+                *ngIf="editContact"
+                type="text"
+                [(ngModel)]="phone"
+                class="form-control form-control-sm"
+              />
+            </div>
+            <div class="col-md-2 text-md-end mt-2 mt-md-0">
+              <button
+                (click)="toggleContactEdit()"
+                class="btn btn-outline-success btn-sm"
+              >
+                <i class="bi bi-pencil-square" *ngIf="!editContact"></i>
+                <i class="bi bi-check-lg" *ngIf="editContact"></i>
+                {{ editContact ? "Save" : "Edit" }}
+              </button>
+            </div>
+          </div>
+        </div>
+        <hr />
+
+        <!-- ========== PASSWORD SECTION ========== -->
+        <h6 class="fw-semibold mt-4">Password</h6>
+        <div class="row align-items-center">
+          <div class="col-md-10">
+            <p *ngIf="!editPass" class="fw-semibold">**************</p>
+
+            <!-- PASSWORD UPDATE FIELDS -->
+            <div *ngIf="editPass">
+              <input
+                type="password"
+                class="form-control form-control-sm my-2"
+                placeholder="Current Password"
+              />
+              <input
+                [(ngModel)]="newPassword"
+                type="password"
+                class="form-control form-control-sm my-2"
+                placeholder="New Password"
+              />
+              <input
+                [(ngModel)]="confirmPassword"
+                type="password"
+                class="form-control form-control-sm my-2"
+                placeholder="Confirm New Password"
+              />
+            </div>
+          </div>
+
+          <div class="col-md-2 text-md-end mt-2 mt-md-0">
+            <button
+              (click)="togglePasswordEdit()"
+              class="btn btn-outline-success btn-sm"
+            >
+              <i class="bi bi-pencil-square" *ngIf="!editPass"></i>
+              <i class="bi bi-check-lg" *ngIf="editPass"></i>
+              {{ editPass ? "Save" : "Edit" }}
+            </button>
           </div>
         </div>
       </div>
