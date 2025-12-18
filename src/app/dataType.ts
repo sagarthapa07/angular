@@ -69,7 +69,7 @@ export interface cart {
 }
 export interface address {
     id: number
-    fullname: string,
+    fullName: string,
     mobile: string,
     house: string,
     area: string,
@@ -78,4 +78,9 @@ export interface address {
     State: string,
     Pincode: string,
     addressType: string
+}
+export interface wishlist{
+  id?: number;
+  productId: number;
+  userId?: number;
 }

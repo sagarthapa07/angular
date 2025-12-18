@@ -80,7 +80,7 @@
   transition: 0.3s;
 }
 .card i{
- color: #008957;
+ /* color: #008957; */
  font-size: 1.25rem;
  margin-bottom: 5px;
  font-weight: 900;
@@ -197,4 +197,164 @@
 .personalInfo .Fname h6,
 .personalInfo .Lname h6  {
   color: #9a9a9a;
+}
+
+
+
+
+
+
+
+
+
+/* ADDRESS SECTION */
+.address-section {
+  background: #fff;
+}
+
+/* CARD */
+.address-card {
+  border: 1px dashed #dcdcdc;
+  border-radius: 8px;
+  padding: 16px 18px;
+  transition: background 0.2s ease;
+}
+
+.address-card:hover {
+  background: #fafafa;
+}
+
+/* LEFT CONTENT */
+.address-left p {
+  font-size: 14px;
+  color: #333;
+}
+
+/* BADGE */
+.address-badge {
+  background: #f1f1f1;
+  color: #000;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+/* THREE DOT BUTTON */
+.btn-light {
+  background: #fff;
+  border: 1px solid #ddd;
+}
+
+.btn-light:hover {
+  background: #f5f5f5;
+}
+
+/* DROPDOWN */
+.dropdown-item {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+
+/* ADD BUTTON */
+.btn-success {
+  background-color: #1f7a4f;
+  border-color: #1f7a4f;
+}
+
+.btn-success:hover {
+  background-color: #17613f;
+  border-color: #17613f;
+}
+.address-section button[ngbDropdownToggle]::after {
+  display: none !important;
+}
+
+
+
+/* Popup Form  */
+
+
+
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 650px;
+    max-width: 90%;
+    background: #fff;
+    border-radius: 14px;
+    padding: 24px;
+    z-index: 101;
+    box-shadow: 0px 8px 35px rgba(0, 0, 0, 0.25);
+    animation: fadeIn 0.25s ease;
+}
+.popup .form{
+    border: 2px solid #e6e6e6;
+    padding: 20px;
+    border-radius: 10px;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -48%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.popup-close {
+    position: absolute;
+    right: 14px;
+    top: 10px;
+    cursor: pointer;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    transition: 0.2s;
+}
+.popup-close:hover {
+    color: #000;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-bottom: 12px;
+}
+
+.element label {
+    font-size: 14px;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.element input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.element button {
+    width: 100%;
+    padding: 12px;
+    background: #336353;
+    border-radius: 6px;
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
 }

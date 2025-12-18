@@ -54,28 +54,10 @@
 }
 /* component CSS file (e.g., popular-categories.component.css) */
 .img-hover-zoom:hover {
-  transform: scale(1.1);
+  transform: scale(1.5);
 }
 .icons{
   border-bottom: 1px solid #dfe2e6;
-}
-
-.alert-box {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background-color: #4caf50; /* Green */
-  color: white;
-  padding: 12px 16px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  font-size: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-width: 250px;
-  z-index: 9999;
-  animation: slideIn 0.3s ease-out;
 }
 
 .close-btn {
@@ -126,4 +108,86 @@
   10% { opacity: 1; transform: translateY(0); }
   90% { opacity: 1; }
   100% { opacity: 0; transform: translateY(10px); }
+}
+.wishlist-icon {
+  width: 40px;
+  height: 38px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-left: 25px;
+  margin-top: 7px;
+}
+
+.wishlist-icon i {
+  font-size: 20px;
+}
+
+.wishlist-icon:hover {
+  background-color: #f8f9fa;
+}
+
+
+
+
+
+
+
+/* Remove default caret */
+.address-menu button[ngbDropdownToggle]::after {
+  display: none !important;
+}
+
+/* Three-dot button */
+.address-menu-btn {
+  border: 1px solid #ddd;
+  background: #fff;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+}
+
+.address-menu-btn i {
+  font-size: 16px;
+  color: #333;
+}
+
+/* Dropdown container */
+.address-dropdown {
+  border-radius: 10px;
+  padding: 6px 0;
+  min-width: 180px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  border: 1px solid #e5e5e5;
+}
+
+/* Dropdown items */
+.address-dropdown .dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  padding: 10px 14px;
+  color: #333;
+}
+
+/* Hover effect */
+.address-dropdown .dropdown-item:hover {
+  background-color: #f5f5f5;
+}
+
+/* Icons */
+.address-dropdown i {
+  font-size: 15px;
+  color: #6c757d;
+}
+
+/* Delete item */
+.address-dropdown .text-danger {
+  color: #dc3545 !important;
+}
+
+.address-dropdown .text-danger i {
+  color: #dc3545;
 }

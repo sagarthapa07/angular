@@ -104,10 +104,6 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     this.searchResult = undefined; 
   }
 
-  // ye wala mene likha tha but jab bhi jab kisi product mai hote tab ye link same kaam nhi karti hai tho mereko force fully chnage krna pda issko
-  // redirectToDetail(id: number) {
-  //   this.route.navigate(['/detail/' + id])
-  // }
   redirectToDetail(id: number) {
   this.route.navigateByUrl('/', { skipLocationChange: true }).then(() => {
     this.route.navigate(['/detail', id]);

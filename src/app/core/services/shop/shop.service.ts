@@ -1,29 +1,26 @@
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
-import { address, cart, Product } from '../../../dataType';
+import { address, cart, Product, wishlist } from '../../../dataType';
 import { Observable } from 'rxjs';
 import { CommonService } from '../common/common.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ShopService {
-
   cartData = new EventEmitter<Product[]>();
 
-
-  constructor(private http: HttpClient, private common: CommonService) { }
-
+  constructor(private http: HttpClient, private common: CommonService) {}
 
   Product(): Observable<{ products: Product[] }> {
-    return this.http.get<{ products: Product[] }>('https://dummyjson.com/products');
+    return this.http.get<{ products: Product[] }>(
+      'https://dummyjson.com/products'
+    );
   }
 
-
   getProduct(id: string) {
-    return this.http.get<Product>(`https://dummyjson.com/products/${id}`)
-  };
-
+    return this.http.get<Product>(`https://dummyjson.com/products/${id}`);
+  }
 
   private apiUrl = 'http://localhost:3000/cart';
   addToCartAPI(product: any) {
@@ -46,7 +43,9 @@ export class ShopService {
       cartData = JSON.parse(localCart);
 
       // ✅ check if product already exists
-      const existing = cartData.find((item) => item.productId === data.productId);
+      const existing = cartData.find(
+        (item) => item.productId === data.productId
+      );
       if (existing) {
         existing.quantity += 1;
       } else {
@@ -61,19 +60,17 @@ export class ShopService {
     }
   }
 
-
   loadLocalCart() {
     const localCart = JSON.parse(localStorage.getItem('localCart') || '[]');
     this.cartData.emit(localCart);
   }
 
   localAddToCart(data: Product) {
-
     let cartData: Product[] = [];
     let localCart = localStorage.getItem('localCart');
-    if (!localCart) { 
+    if (!localCart) {
       localStorage.setItem('localCart', JSON.stringify([data]));
-      this.cartData.emit([data])
+      this.cartData.emit([data]);
     } else {
       cartData = JSON.parse(localCart);
       cartData.push(data);
@@ -88,35 +85,41 @@ export class ShopService {
     if (cartData) {
       console.warn(cartData);
       let items: Product[] = JSON.parse(cartData);
-      items = items.filter((item: Product) => productId !== item.id)
+      items = items.filter((item: Product) => productId !== item.id);
       localStorage.setItem('localCart', JSON.stringify(items));
       this.cartData.emit(items);
     }
   }
 
   addTocart(cartData: any) {
-    return this.http.post('http://localhost:3000/cart', cartData)
+    return this.http.post('http://localhost:3000/cart', cartData);
   }
 
   getCartList(userId: number) {
-
-    this.http.get<Product[]>('http://localhost:3000/cart?userId=' + userId, { observe: 'response' }).subscribe((result) => {
-      if (result && result.body) {
-        this.cartData.emit(result.body);
-      }
-    })
+    this.http
+      .get<Product[]>('http://localhost:3000/cart?userId=' + userId, {
+        observe: 'response',
+      })
+      .subscribe((result) => {
+        if (result && result.body) {
+          this.cartData.emit(result.body);
+        }
+      });
   }
   removeToCart(cartId: number) {
-
     return this.http.delete('http://localhost:3000/cart/' + cartId);
   }
   currentCart(userId: any) {
-    let userStore = this.common.getCookie('sagar')
+    let userStore = this.common.getCookie('sagar');
     let userData = userStore && JSON.parse(userStore);
-    return this.http.get<cart[]>('http://localhost:3000/cart?userId=' + userData.id);
+    return this.http.get<cart[]>(
+      'http://localhost:3000/cart?userId=' + userData.id
+    );
   }
   searchProduct(query: string) {
-    return this.http.get<Product[]>(`https://dummyjson.com/products/search?q=${encodeURIComponent(query)}`);
+    return this.http.get<Product[]>(
+      `https://dummyjson.com/products/search?q=${encodeURIComponent(query)}`
+    );
   }
   addAddress(data: address) {
     return this.http.post('http://localhost:3000/address', data);
@@ -125,9 +128,25 @@ export class ShopService {
     return this.http.get<address[]>('http://localhost:3000/address');
   }
   updateAddress(address: address) {
-    return this.http.put<address>(`http://localhost:3000/address/${address.id}`, address);
+    return this.http.put<address>(
+      `http://localhost:3000/address/${address.id}`,
+      address
+    );
   }
   deleteAddress(address: address) {
-    return this.http.delete(`http://localhost:3000/address/${address.id}`)
+    return this.http.delete(`http://localhost:3000/address/${address.id}`);
+  }
+
+
+  
+  addWishlist(data: wishlist) {
+    return this.http.post('http://localhost:3000/wishlist', data);
+  }
+
+  getWishlist() {
+    return this.http.get<wishlist[]>('http://localhost:3000/wishlist');
+  }
+  removeWishlist(id: number) {
+    return this.http.delete(`http://localhost:3000/wishlist/${id}`);
   }
 }

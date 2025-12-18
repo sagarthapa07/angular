@@ -1,27 +1,24 @@
 import { Component } from '@angular/core';
 import { HomeServicesService } from '../../core/services/home/home-services.service';
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
-import { cart, Categories, Items, Product } from '../../dataType';
+import { cart, Categories, Items, Product, wishlist } from '../../dataType';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CommonModule, NgForOf, NgIf, NgClass } from '@angular/common';
 import { ShopService } from '../../core/services/shop/shop.service';
 import { CommonService } from '../../core/services/common/common.service';
 
-
 @Component({
-  selector: "app-home",
+  selector: 'app-home',
   imports: [NgbNavModule, RouterLink, NgForOf, NgIf, NgClass],
-  templateUrl: "./home.component.html",
-  styleUrls: ["./home.component.css"], 
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css'],
 })
-
-
 export class HomeComponent {
   total: number = 0;
   active = 1;
 
-  productList: undefined | Items[]
-  beatyItem: undefined | Items[]
+  productList: undefined | Items[];
+  beatyItem: undefined | Items[];
   furnitureItem: Items[] | undefined;
   othersItem: Items[] | undefined;
   allCategories: Categories[] = [];
@@ -29,23 +26,28 @@ export class HomeComponent {
   product!: Product;
   isInCart = true;
   userLogedIn = false;
-  cartData: Product | undefined
+  cartData: Product | undefined;
   productQuantity: number = 1;
   productId: string | null = null;
   // cartItemsIds: number[] = [];
-  cartItem: any[] = []
+  cartItem: any[] = [];
   alertMessage: string = '';
   showPopup: boolean = false;
-  
 
-  constructor(private homeService: HomeServicesService,
+  // Wishlist
+  wishlistIds: number[] = [];
+  wishlistData: wishlist[] = [];
+
+  constructor(
+    private homeService: HomeServicesService,
     private home: HomeServicesService,
     private shopService: ShopService,
     private common: CommonService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.productId = this.route.snapshot.paramMap.get("id");
+    this.productId = this.route.snapshot.paramMap.get('id');
 
     if (this.productId) {
       this.shopService.getProduct(this.productId).subscribe((result) => {
@@ -54,7 +56,9 @@ export class HomeComponent {
         let cartData = localStorage.getItem('localCart');
         if (cartData) {
           let items = JSON.parse(cartData);
-          items = items.filter((item: Product) => this.productId == item.id.toString());
+          items = items.filter(
+            (item: Product) => this.productId == item.id.toString()
+          );
           this.isInCart = items.length > 0;
         }
 
@@ -63,7 +67,10 @@ export class HomeComponent {
           let userId = JSON.parse(user).id;
           this.shopService.getCartList(userId);
           this.shopService.cartData.subscribe((result) => {
-            let item = result.filter((item: Product) => this.productId?.toString() === item.productId?.toString());
+            let item = result.filter(
+              (item: Product) =>
+                this.productId?.toString() === item.productId?.toString()
+            );
             if (item.length) {
               this.cartData = item[0];
               this.isInCart = true;
@@ -76,6 +83,7 @@ export class HomeComponent {
     this.loadCategoryData(this.active);
     this.fetchAllCategories();
     this.loadCartState();
+    this.loadWishlist();
   }
   onTabChange(tabId: number): void {
     this.active = tabId;
@@ -119,8 +127,8 @@ export class HomeComponent {
   }
 
   getDiscountedPrice(price: number, discount: number): number {
-    const discounted = price - (price * discount) / 100;   //Formula of discount
-    return parseFloat(discounted.toFixed(2));     // parseFloat => turns that string back into a number: 477.8
+    const discounted = price - (price * discount) / 100; //Formula of discount
+    return parseFloat(discounted.toFixed(2)); // parseFloat => turns that string back into a number: 477.8
   }
   loadCartState() {
     // Guest user (no cookie)
@@ -132,9 +140,9 @@ export class HomeComponent {
         this.cartItem = items.map((item: Product) => {
           return {
             productId: item.productId,
-            id: item.id
-          }
-        })
+            id: item.id,
+          };
+        });
       }
     }
 
@@ -150,9 +158,9 @@ export class HomeComponent {
         this.cartItem = cartList.map((item: Product) => {
           return {
             productId: item.productId,
-            id: item.id
-          }
-        })
+            id: item.id,
+          };
+        });
       });
     }
   }
@@ -162,7 +170,7 @@ export class HomeComponent {
       ...item,
       productId: item.id,
       quantity: 1,
-      availabilityStatus: "In stock"
+      availabilityStatus: 'In stock',
     };
 
     // Guest user (not logged in)
@@ -171,7 +179,7 @@ export class HomeComponent {
 
       // update your local cart array (if used in component)
       this.cartItem = JSON.parse(localStorage.getItem('localCart') || '[]');
-      this.showA("Added to cart!");
+      this.showA('Added to cart!');
       return;
     }
 
@@ -181,48 +189,45 @@ export class HomeComponent {
 
     let cartData: cart = {
       ...productData,
-      userId
+      userId,
     };
 
     delete (cartData as any).id;
-    this.shopService.addToCartAPI(cartData).subscribe(result => {
+    this.shopService.addToCartAPI(cartData).subscribe((result) => {
       if (result) {
         this.shopService.getCartList(userId);
       }
     });
-    this.showA("Added to cart!");
+    this.showA('Added to cart!');
   }
 
   removeToCart(productId: number) {
-
     let cartProduct = this.cartItem.filter((val) => val.productId == productId);
     const user = this.common.getCookie('sagar');
 
     if (user) {
-
       const userId = JSON.parse(user).id;
 
       this.shopService.removeToCart(cartProduct[0]?.id).subscribe((res) => {
         if (res) {
-
-          this.cartItem = this.cartItem.filter((val) => val.productId !== cartProduct[0]?.productId);
+          this.cartItem = this.cartItem.filter(
+            (val) => val.productId !== cartProduct[0]?.productId
+          );
 
           this.shopService.getCartList(userId);
-          this.showA("Removed from cart!");
+          this.showA('Removed from cart!');
         }
       });
-
     } else {
-
       this.shopService.removeItemFromCart(cartProduct[0]?.productId);
 
-
-      this.cartItem = this.cartItem.filter((val) => val.productId !== cartProduct[0]?.productId);
-
+      this.cartItem = this.cartItem.filter(
+        (val) => val.productId !== cartProduct[0]?.productId
+      );
 
       const localCart = JSON.parse(localStorage.getItem('localCart') || '[]');
       this.shopService.cartData.emit(localCart);
-      this.showA("Removed from cart!");
+      this.showA('Removed from cart!');
     }
   }
 
@@ -230,11 +235,54 @@ export class HomeComponent {
     this.alertMessage = message;
     this.showPopup = true;
     setTimeout(() => {
-      this.showPopup = false;   
-    }, 5000); 
+      this.showPopup = false;
+    }, 5000);
   }
 
   isProductInCart(id: number) {
-    return this.cartItem.some((val: any) => val.productId === id)
+    return this.cartItem.some((val: any) => val.productId === id);
+  }
+
+
+
+
+
+
+
+
+  loadWishlist() {
+    this.shopService.getWishlist().subscribe((res) => {
+      this.wishlistData = res;
+      this.wishlistIds = res.map((w) => w.productId);
+    });
+  }
+
+  isWishlisted(productId: number): boolean {
+    return this.wishlistIds.includes(productId);
+  }
+  toggleWishlist(item: Items): void {
+    if (this.isWishlisted(item.id)) {
+      this.removeFromWishlist(item.id);
+    } else {
+      this.addToWishlist(item.id);
+    }
+  }
+  addToWishlist(productId: number): void {
+    if (this.isWishlisted(productId)) {
+      return;
+    }
+
+    this.shopService.addWishlist({ productId }).subscribe(() => {
+      this.loadWishlist();
+      this.showA('Added to wishlist!');
+    });
+  }
+  removeFromWishlist(productId: number): void {
+    const wishItem = this.wishlistData.find((w) => w.productId === productId);
+    if (!wishItem?.id) return;
+    this.shopService.removeWishlist(wishItem.id).subscribe(() => {
+      this.loadWishlist();
+      this.showA('Removed from wishlist!');
+    });
   }
 }
