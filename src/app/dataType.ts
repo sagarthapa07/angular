@@ -75,12 +75,20 @@ export interface address {
     area: string,
     landmark: string,
     city: string,
-    State: string,
-    Pincode: string,
+    state: string,
+    pincode: string,
     addressType: string
 }
 export interface wishlist{
   id?: number;
   productId: number;
   userId?: number;
+}
+export interface orders {
+  id?: number;
+  userId: number;
+  addressId: number;
+  productId:number;        
+  orderDate: string;        
+  status: 'PLACED' | 'SHIPPED' | 'DELIVERED' | 'CANCELLED';
 }

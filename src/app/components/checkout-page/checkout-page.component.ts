@@ -2,7 +2,7 @@ import { NgIf, NgForOf, DecimalPipe } from "@angular/common";
 import { ShopService } from "../../core/services/shop/shop.service";
 import { FormsModule, NgForm } from "@angular/forms";
 import { Component } from "@angular/core";
-import { address, cart } from "../../dataType";
+import { address, cart, orders } from "../../dataType";
 import { CommonService } from "../../core/services/common/common.service";
 
 @Component({
@@ -27,6 +27,9 @@ export class CheckoutPageComponent {
   gst: number = 0;
   grandTotal: number = 0;
   totalItems: number = 0;
+  selectedAddressId: number | null = null;
+  isPlacingOrder = false;
+
 
   constructor(private shopservice: ShopService, private common: CommonService) { }
 
@@ -169,5 +172,85 @@ export class CheckoutPageComponent {
   }
 
 
+placeOrder() {
+
+  // 🔒 prevent multiple clicks
+  if (this.isPlacingOrder) return;
+
+  if (!this.cartData.length) {
+    this.showA('Cart is empty!');
+    return;
+  }
+
+  if (!this.selectedAddressId) {
+    this.showA('Please select address!');
+    return;
+  }
+
+  const userCookie = this.common.getCookie('sagar');
+  if (!userCookie) {
+    this.showA('User not logged in!');
+    return;
+  }
+
+  this.isPlacingOrder = true; 
+
+  const userId = JSON.parse(userCookie).id;
+  const cartItem = this.cartData[0];
+
+  const orderData: orders = {
+    userId,
+    addressId: this.selectedAddressId,
+    productId: cartItem.productId,
+    orderDate: new Date().toISOString(),
+    status: 'PLACED',
+  };
+
+  this.shopservice.placeOrder(orderData).subscribe({
+    next: () => {
+      this.showA('Order placed successfully!');
+      this.resetCart();
+
+      setTimeout(() => {
+        window.location.href = '/';
+      }, 800);
+    },
+    error: () => {
+      this.showA('Order failed!');
+      this.isPlacingOrder = false; 
+    }
+  });
+}
+
+
+
+
+
+resetCart() {
+  const userCookie = this.common.getCookie('sagar');
+  const isLoggedIn = !!userCookie;
+
+  if (isLoggedIn) {
+    const userId = JSON.parse(userCookie).id;
+
+    this.shopservice.currentCart(userId).subscribe((result) => {
+      if (result && result.length > 0) {
+        result.forEach((item: any) => {
+          this.shopservice.removeToCart(item.id).subscribe();
+        });
+      }
+      this.cartData = [];
+      this.calculateTotals();
+      this.shopservice.getCartList(userId);
+    });
+  } else {
+    localStorage.removeItem('localCart');
+    this.cartData = [];
+    this.calculateTotals();
+    this.shopservice.cartData.emit([]);
+  }
+
+  console.log('All cart items removed!');
+}
 
 }

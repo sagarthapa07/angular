@@ -1,292 +1,469 @@
 <section class="container my-5">
-    <div class="row">
-        <div class="col-md-12 mt-3 d-sm-flex justify-content-sm-center">
-            <div class="d-flex flex-wrap align-items-center gap-3 mx-auto mb-3">
-                <div class="img">
-                    <img src="https://img.icons8.com/?size=30&id=3686&format=png&color=000000" alt="cart-icon"
-                        class="img-fluid">
-                </div>
-                <div class="headline fw-semibold fs-4">
-                    Checkout Page
-                </div>
-            </div>
+  <div class="row">
+    <div class="col-md-12 mt-3 d-sm-flex justify-content-sm-center">
+      <div class="d-flex flex-wrap align-items-center gap-3 mx-auto mb-3">
+        <div class="img">
+          <img
+            src="https://img.icons8.com/?size=30&id=3686&format=png&color=000000"
+            alt="cart-icon"
+            class="img-fluid"
+          />
         </div>
+        <div class="headline fw-semibold fs-4">Checkout Page</div>
+      </div>
     </div>
-    <div class="container">
-        <div class="row pt-3">
-            <div class="col-md-7 shadow-sm">
-                <div class="col-md-12 left">
-                    <div class="shipping-address my-3 mb-3 d-flex align-items-center justify-content-between">
-                        <h5 class="">Select Delivery Address</h5>
-                        <button class="btn border border-gray-700 fw-semibold"
-                            style="background-color: #336353; color: #fff; display: flex; align-items: center;"
-                            (click)="openAddForm()">
-                            <span class="me-2 fs-5">+</span>Add New
-                        </button>
-                    </div>
-                    <div *ngIf="showAddPopup">
-                        <div class="popup-overlay" (click)="closeAddressForm()"></div>
-                        <div class="popup">
-                            <div class="popup-close" (click)="closeAddressForm()">&times;</div>
-                            <div class="header fw-bold fs-5 mb-3">{{ isEditMode ? 'Edit Address' : 'Add New Address' }}
-                            </div>
-                            <form #addProduct="ngForm" (submit)="submit(addProduct)" class="form">
-                                <div class="form-grid">
-                                    <div class="element">
-                                        <label>Full Name</label>
-                                        <input type="text" name="fullName" required
-                                            [ngModel]="editAddressData?.fullName">
-                                    </div>
+  </div>
+  <div class="container">
+    <div class="row pt-3">
+      <div class="col-md-7 shadow-sm">
+        <div class="col-md-12 left">
+          <div
+            class="shipping-address my-3 mb-3 d-flex align-items-center justify-content-between"
+          >
+            <h5 class="">Select Delivery Address</h5>
+            <button
+              class="btn border border-gray-700 fw-semibold"
+              style="
+                background-color: #336353;
+                color: #fff;
+                display: flex;
+                align-items: center;
+              "
+              (click)="openAddForm()"
+            >
+              <span class="me-2 fs-5">+</span>Add New
+            </button>
+          </div>
+          <div *ngIf="showAddPopup">
+            <div class="popup-overlay" (click)="closeAddressForm()"></div>
+            <div class="popup">
+              <div class="popup-close" (click)="closeAddressForm()">
+                &times;
+              </div>
+              <div class="header fw-bold fs-5 mb-3">
+                {{ isEditMode ? "Edit Address" : "Add New Address" }}
+              </div>
+              <form
+                #addProduct="ngForm"
+                (submit)="submit(addProduct)"
+                class="form"
+              >
+                <div class="form-grid">
+                  <div class="element">
+                    <label>Full Name</label>
+                    <input
+                      type="text"
+                      name="fullName"
+                      required
+                      [ngModel]="editAddressData?.fullName"
+                    />
+                  </div>
 
-                                    <div class="element">
-                                        <label>Mobile</label>
-                                        <input type="text" name="mobile" required [ngModel]="editAddressData?.mobile">
-                                    </div>
+                  <div class="element">
+                    <label>Mobile</label>
+                    <input
+                      type="text"
+                      name="mobile"
+                      required
+                      [ngModel]="editAddressData?.mobile"
+                    />
+                  </div>
 
-                                    <div class="element">
-                                        <label>House/Flat/Building</label>
-                                        <input type="text" name="addressLine1" required
-                                            [ngModel]="editAddressData?.addressLine1">
-                                    </div>
+                  <div class="element">
+                    <label>House/Flat/Building</label>
+                    <input
+                      type="text"
+                      name="addressLine1"
+                      required
+                      [ngModel]="editAddressData?.addressLine1"
+                    />
+                  </div>
 
-                                    <div class="element">
-                                        <label>Area/Street</label>
-                                        <input type="text" name="area" required [ngModel]="editAddressData?.area">
-                                    </div>
+                  <div class="element">
+                    <label>Area/Street</label>
+                    <input
+                      type="text"
+                      name="area"
+                      required
+                      [ngModel]="editAddressData?.area"
+                    />
+                  </div>
 
-                                    <div class="element">
-                                        <label>Landmark(Optional)</label>
-                                        <input type="text" name="landmark" [ngModel]="editAddressData?.landmark">
-                                    </div>
+                  <div class="element">
+                    <label>Landmark(Optional)</label>
+                    <input
+                      type="text"
+                      name="landmark"
+                      [ngModel]="editAddressData?.landmark"
+                    />
+                  </div>
 
-                                    <div class="element">
-                                        <label>City</label>
-                                        <input type="text" name="city" required [ngModel]="editAddressData?.city">
-                                    </div>
+                  <div class="element">
+                    <label>City</label>
+                    <input
+                      type="text"
+                      name="city"
+                      required
+                      [ngModel]="editAddressData?.city"
+                    />
+                  </div>
 
-                                    <div class="element">
-                                        <label>State</label>
-                                        <input type="text" name="state" required [ngModel]="editAddressData?.state">
-                                    </div>
+                  <div class="element">
+                    <label>State</label>
+                    <input
+                      type="text"
+                      name="state"
+                      required
+                      [ngModel]="editAddressData?.state"
+                    />
+                  </div>
 
-                                    <div class="element">
-                                        <label>Pincode</label>
-                                        <input type="text" name="pincode" required [ngModel]="editAddressData?.pincode">
-                                    </div>
-                                </div>
-                                <div class="">
-                                    <label class="d-block mb-2 fw-semibold">Address Type</label>
-                                    <label class="me-3 mb-3">
-                                        <input type="radio" name="addressType" value="home" [(ngModel)]="addressType">
-                                        Home
-                                    </label>
-                                    <label class="me-3 mb-3">
-                                        <input type="radio" name="addressType" value="work" [(ngModel)]="addressType">
-                                        Work
-                                    </label>
-                                    <label class="me-3 mb-3">
-                                        <input type="radio" name="addressType" value="other" [(ngModel)]="addressType">
-                                        Other
-                                    </label>
-                                </div>
-                                <div *ngIf="addProduct.submitted && !addressType" class="text-danger mt-2">
-                                    ⚠️ Please select an address type.
-                                </div>
-                                <div class=" d-flex justify-content-end gap-2">
-                                    <button type="button"
-                                        class="btn btn-outline-secondary px-3 py-1 fw-semibold text-dark"
-                                        (click)="closeAddressForm()">{{ isEditMode ? 'Delete Address' : 'Cancel'
-                                        }}</button>
-                                    <button type="submit" class="btn px-3 py-1 fw-semibold text-light"
-                                        style="background-color: #336353;">{{ isEditMode ? 'Update Address' : 'Save New
-                                        Address' }}</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="mb-3" *ngFor="let item of addressList">
-                        <div class="p-3 border rounded-2 d-flex justify-content-between align-items-start"
-                            style="background:#ffffff;">
-                            <div class="d-flex">
-                                <div class="me-3">
-                                    <input type="radio" name="address" checked style="margin-top: 5px;">
-                                </div>
-                                <div>
-                                    <span
-                                        class="text-dark bg-secondary-subtle py-1 px-2 rounded-3 fw-semibold">{{item.addressType}}</span>
-                                    <!-- <span class="mx-2">(Primary)</span> -->
-                                    <h6 class="fw-bold mt-2 mb-1">{{item.fullName}}</h6>
-                                    <p class="mb-1">
-                                        {{item.area}},{{item.landmark}},{{item.city}}, {{item.State}} - {{item.Pincode}}
-                                    </p>
-                                    <p class="fw-bold">{{item.mobile}}</p>
-                                </div>
-                            </div>
-                            <button class="btn d-flex align-items-center gap-1 border shadow-sm rounded-3 px-3 py-2"
-                                style="background:#fff;" (click)="openEditForm(item)">
-                                <i class="bi bi-pencil-square"></i>
-                                Edit
-                            </button>
-                            <div *ngIf="showEditPopup">
-                                <div class="popup-overlay" (click)="closeAddressForm()"></div>
-                                <div class="popup">
-                                    <div class="popup-close" (click)="closeAddressForm()">&times;</div>
-                                    <div class="header fw-bold fs-5 mb-3">
-                                        {{ isEditMode ? 'Edit Address' : 'Add New Address' }}
-                                    </div>
-                                    <form #addProduct="ngForm" (submit)="submit(addProduct)" class="form">
-                                        <div class="form-grid">
-                                            <div class="element">
-                                                <label>Full Name</label>
-                                                <input type="text" name="fullName" required
-                                                    [ngModel]="editAddressData?.fullName">
-                                            </div>
-
-                                            <div class="element">
-                                                <label>Mobile</label>
-                                                <input type="text" name="mobile" required
-                                                    [ngModel]="editAddressData?.mobile">
-                                            </div>
-
-                                            <div class="element">
-                                                <label>House/Flat/Building</label>
-                                                <input type="text" name="addressLine1" required
-                                                    [ngModel]="editAddressData?.addressLine1">
-                                            </div>
-
-                                            <div class="element">
-                                                <label>Area/Street</label>
-                                                <input type="text" name="area" required
-                                                    [ngModel]="editAddressData?.area">
-                                            </div>
-
-                                            <div class="element">
-                                                <label>Landmark(Optional)</label>
-                                                <input type="text" name="landmark"
-                                                    [ngModel]="editAddressData?.landmark">
-                                            </div>
-
-                                            <div class="element">
-                                                <label>City</label>
-                                                <input type="text" name="city" required
-                                                    [ngModel]="editAddressData?.city">
-                                            </div>
-
-                                            <div class="element">
-                                                <label>State</label>
-                                                <input type="text" name="state" required
-                                                    [ngModel]="editAddressData?.state">
-                                            </div>
-
-                                            <div class="element">
-                                                <label>Pincode</label>
-                                                <input type="text" name="pincode" required
-                                                    [ngModel]="editAddressData?.pincode">
-                                            </div>
-                                        </div>
-                                        <div class="">
-                                            <label class="d-block mb-2 fw-semibold">Address Type</label>
-                                            <label class="me-3 mb-3">
-                                                <input type="radio" name="addressType" value="home"
-                                                    [(ngModel)]="addressType">
-                                                Home
-                                            </label>
-                                            <label class="me-3 mb-3">
-                                                <input type="radio" name="addressType" value="work"
-                                                    [(ngModel)]="addressType">
-                                                Work
-                                            </label>
-                                            <label class="me-3 mb-3">
-                                                <input type="radio" name="addressType" value="other"
-                                                    [(ngModel)]="addressType">
-                                                Other
-                                            </label>
-                                        </div>
-                                        <div *ngIf="addProduct.submitted && !addressType" class="text-danger mt-2">
-                                            ⚠️ Please select an address type.
-                                        </div>
-                                        <div class=" d-flex justify-content-end gap-2">
-                                            <button type="button"
-                                                class="btn btn-outline-secondary px-3 py-1 fw-semibold text-dark"
-                                                (click)="isEditMode ? deleteAddress(editAddressData) : closeAddressForm()">
-                                                {{ isEditMode ? 'Delete Address' : 'Cancel' }}
-                                            </button>
-                                            <button type="submit" class="btn px-3 py-1 fw-semibold text-light"
-                                                style="background-color: #336353;">
-                                                {{ isEditMode ? 'Update Address' : 'Save New Address' }}
-                                            </button>
-                                        </div>
-
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                  <div class="element">
+                    <label>Pincode</label>
+                    <input
+                      type="text"
+                      name="pincode"
+                      required
+                      [ngModel]="editAddressData?.pincode"
+                    />
+                  </div>
                 </div>
-            </div>
-            <!-- RIGHT SIDE -->
-            <div class="col-lg-5">
-                <div class="position-sticky" style="top: 30px;">
-                    <!-- ORDER and PRODUCT SUMMARY -->
-                    <div class="shadow-sm rounded-3 p-3 mb-3">
-                        <div class="">
-                            <span class="fs-5">Your Order</span>
-                        </div>
-                        <hr>
-                        <div class="d-flex justify-content-between">
-                            <span class="fw-bold">Product</span>
-                            <span class="fw-bold">Subtotal</span>
-                        </div>
-                        <hr>
-                        <div class="products" style="height: 250px">
-                            <div *ngFor="let item of cartData">
-                                <div class="d-flex flex-row align-items-center gap-3 mb-3">
-                                    <a href="">
-                                        <img src="{{item.thumbnail}}" alt="" style="width:45px; height:50px;">
-                                    </a>
-                                    <div class="d-flex flex-column">
-                                        <span>{{item.title}}</span>
-                                        <span>Qty: {{item.quantity}}</span>
-                                    </div>
-                                    <div class="ms-auto">
-                                        <span>${{item.price}}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="py-1 d-flex justify-content-between mt-3">
-                            <span class="fw-semibold">Subtotal (MRP)</span>
-                            <span class="fw-bold fs-6">${{ subTotal | number:'1.2-2' }}</span>
-                        </div>
-                        <div class="py-1 d-flex justify-content-between">
-                            <span class="fw-semibold text-danger">Discount</span>
-                            <span class="fw-bold fs-6 text-danger">- ${{ discount | number:'1.2-2' }}</span>
-                        </div>
-                        <div class="py-1 d-flex justify-content-between">
-                            <span class="fw-semibold">GST (18%)</span>
-                            <span class="fw-bold fs-6">+ ${{ gst | number:'1.2-2' }}</span>
-                        </div>
-                        <hr>
-                        <div class="pb-4 d-flex justify-content-between">
-                            <span class="fw-semibold">Grand Total</span>
-                            <span class="fw-bold fs-6">${{ grandTotal | number:'1.2-2' }}</span>
-                        </div>
-                        <div class="d-flex justify-content-center flex-column gap-3">
-                            <button class="btn btn-success rounded-2 fw-bold" style="background-color:#336454">
-                                <i class="bi bi-bag mx-2"></i>
-                                Place Order
-                            </button>
-                            <button class="btn btn-dark rounded-2 fw-bold">
-                                Continue Shopping
-                            </button>
-                        </div>
-                    </div>
+                <div class="">
+                  <label class="d-block mb-2 fw-semibold">Address Type</label>
+                  <label class="me-3 mb-3">
+                    <input
+                      type="radio"
+                      name="addressType"
+                      value="home"
+                      [(ngModel)]="addressType"
+                    />
+                    Home
+                  </label>
+                  <label class="me-3 mb-3">
+                    <input
+                      type="radio"
+                      name="addressType"
+                      value="work"
+                      [(ngModel)]="addressType"
+                    />
+                    Work
+                  </label>
+                  <label class="me-3 mb-3">
+                    <input
+                      type="radio"
+                      name="addressType"
+                      value="other"
+                      [(ngModel)]="addressType"
+                    />
+                    Other
+                  </label>
                 </div>
+                <div
+                  *ngIf="addProduct.submitted && !addressType"
+                  class="text-danger mt-2"
+                >
+                  ⚠️ Please select an address type.
+                </div>
+                <div class="d-flex justify-content-end gap-2">
+                  <button
+                    type="button"
+                    class="btn btn-outline-secondary px-3 py-1 fw-semibold text-dark"
+                    (click)="closeAddressForm()"
+                  >
+                    {{ isEditMode ? "Delete Address" : "Cancel" }}
+                  </button>
+                  <button
+                    type="submit"
+                    class="btn px-3 py-1 fw-semibold text-light"
+                    style="background-color: #336353"
+                  >
+                    {{
+                      isEditMode
+                        ? "Update Address"
+                        : "Save New
+                                        Address"
+                    }}
+                  </button>
+                </div>
+              </form>
             </div>
+          </div>
+          <div class="mb-3" *ngFor="let item of addressList">
+            <div
+              class="p-3 border rounded-2 d-flex justify-content-between align-items-start"
+              style="background: #ffffff"
+            >
+              <div class="d-flex">
+                <div class="me-3">
+                  <input
+                    type="radio"
+                    name="address"
+                    [value]="item.id"
+                    [(ngModel)]="selectedAddressId"
+                    style="margin-top: 5px"
+                  />
+                </div>
+                <div>
+                  <span
+                    class="text-dark bg-secondary-subtle py-1 px-2 rounded-3 fw-semibold"
+                    >{{ item.addressType }}</span
+                  >
+                  <!-- <span class="mx-2">(Primary)</span> -->
+                  <h6 class="fw-bold mt-2 mb-1">{{ item.fullName }}</h6>
+                  <p class="mb-1">
+                    {{ item.area }},{{ item.landmark }},{{ item.city }},
+                    {{ item.state }} - {{ item.pincode }}
+                  </p>
+                  <p class="fw-bold">{{ item.mobile }}</p>
+                </div>
+              </div>
+              <button
+                class="btn d-flex align-items-center gap-1 border shadow-sm rounded-3 px-3 py-2"
+                style="background: #fff"
+                (click)="openEditForm(item)"
+              >
+                <i class="bi bi-pencil-square"></i>
+                Edit
+              </button>
+
+              <div *ngIf="showEditPopup">
+                <div class="popup-overlay" (click)="closeAddressForm()"></div>
+                <div class="popup">
+                  <div class="popup-close" (click)="closeAddressForm()">
+                    &times;
+                  </div>
+                  <div class="header fw-bold fs-5 mb-3">
+                    {{ isEditMode ? "Edit Address" : "Add New Address" }}
+                  </div>
+                  <form
+                    #addProduct="ngForm"
+                    (submit)="submit(addProduct)"
+                    class="form"
+                  >
+                    <div class="form-grid">
+                      <div class="element">
+                        <label>Full Name</label>
+                        <input
+                          type="text"
+                          name="fullName"
+                          required
+                          [ngModel]="editAddressData?.fullName"
+                        />
+                      </div>
+
+                      <div class="element">
+                        <label>Mobile</label>
+                        <input
+                          type="text"
+                          name="mobile"
+                          required
+                          [ngModel]="editAddressData?.mobile"
+                        />
+                      </div>
+
+                      <div class="element">
+                        <label>House/Flat/Building</label>
+                        <input
+                          type="text"
+                          name="addressLine1"
+                          required
+                          [ngModel]="editAddressData?.addressLine1"
+                        />
+                      </div>
+
+                      <div class="element">
+                        <label>Area/Street</label>
+                        <input
+                          type="text"
+                          name="area"
+                          required
+                          [ngModel]="editAddressData?.area"
+                        />
+                      </div>
+
+                      <div class="element">
+                        <label>Landmark(Optional)</label>
+                        <input
+                          type="text"
+                          name="landmark"
+                          [ngModel]="editAddressData?.landmark"
+                        />
+                      </div>
+
+                      <div class="element">
+                        <label>City</label>
+                        <input
+                          type="text"
+                          name="city"
+                          required
+                          [ngModel]="editAddressData?.city"
+                        />
+                      </div>
+
+                      <div class="element">
+                        <label>State</label>
+                        <input
+                          type="text"
+                          name="state"
+                          required
+                          [ngModel]="editAddressData?.state"
+                        />
+                      </div>
+
+                      <div class="element">
+                        <label>Pincode</label>
+                        <input
+                          type="text"
+                          name="pincode"
+                          required
+                          [ngModel]="editAddressData?.pincode"
+                        />
+                      </div>
+                    </div>
+                    <div class="">
+                      <label class="d-block mb-2 fw-semibold"
+                        >Address Type</label
+                      >
+                      <label class="me-3 mb-3">
+                        <input
+                          type="radio"
+                          name="addressType"
+                          value="home"
+                          [(ngModel)]="addressType"
+                        />
+                        Home
+                      </label>
+                      <label class="me-3 mb-3">
+                        <input
+                          type="radio"
+                          name="addressType"
+                          value="work"
+                          [(ngModel)]="addressType"
+                        />
+                        Work
+                      </label>
+                      <label class="me-3 mb-3">
+                        <input
+                          type="radio"
+                          name="addressType"
+                          value="other"
+                          [(ngModel)]="addressType"
+                        />
+                        Other
+                      </label>
+                    </div>
+                    <div
+                      *ngIf="addProduct.submitted && !addressType"
+                      class="text-danger mt-2"
+                    >
+                      ⚠️ Please select an address type.
+                    </div>
+                    <div class="d-flex justify-content-end gap-2">
+                      <button
+                        type="button"
+                        class="btn btn-outline-secondary px-3 py-1 fw-semibold text-dark"
+                        (click)="
+                          isEditMode
+                            ? deleteAddress(editAddressData)
+                            : closeAddressForm()
+                        "
+                      >
+                        {{ isEditMode ? "Delete Address" : "Cancel" }}
+                      </button>
+                      <button
+                        type="submit"
+                        class="btn px-3 py-1 fw-semibold text-light"
+                        style="background-color: #336353"
+                      >
+                        {{ isEditMode ? "Update Address" : "Save New Address" }}
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+      <!-- RIGHT SIDE -->
+      <div class="col-lg-5">
+        <div class="position-sticky" style="top: 30px">
+          <!-- ORDER and PRODUCT SUMMARY -->
+          <div class="shadow-sm rounded-3 p-3 mb-3">
+            <div class="">
+              <span class="fs-5">Your Order</span>
+            </div>
+            <hr />
+            <div class="d-flex justify-content-between">
+              <span class="fw-bold">Product</span>
+              <span class="fw-bold">Subtotal</span>
+            </div>
+            <hr />
+            <div class="products" style="height: 250px">
+              <div *ngFor="let item of cartData">
+                <div class="d-flex flex-row align-items-center gap-3 mb-3">
+                  <a href="">
+                    <img
+                      src="{{ item.thumbnail }}"
+                      alt=""
+                      style="width: 45px; height: 50px"
+                    />
+                  </a>
+                  <div class="d-flex flex-column">
+                    <span>{{ item.title }}</span>
+                    <span>Qty: {{ item.quantity }}</span>
+                  </div>
+                  <div class="ms-auto">
+                    <span>${{ item.price }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="py-1 d-flex justify-content-between mt-3">
+              <span class="fw-semibold">Subtotal (MRP)</span>
+              <span class="fw-bold fs-6"
+                >${{ subTotal | number : "1.2-2" }}</span
+              >
+            </div>
+            <div class="py-1 d-flex justify-content-between">
+              <span class="fw-semibold text-danger">Discount</span>
+              <span class="fw-bold fs-6 text-danger"
+                >- ${{ discount | number : "1.2-2" }}</span
+              >
+            </div>
+            <div class="py-1 d-flex justify-content-between">
+              <span class="fw-semibold">GST (18%)</span>
+              <span class="fw-bold fs-6">+ ${{ gst | number : "1.2-2" }}</span>
+            </div>
+            <hr />
+            <div class="pb-4 d-flex justify-content-between">
+              <span class="fw-semibold">Grand Total</span>
+              <span class="fw-bold fs-6"
+                >${{ grandTotal | number : "1.2-2" }}</span
+              >
+            </div>
+            <div class="d-flex justify-content-center flex-column gap-3">
+              <button
+                class="btn btn-success rounded-2 fw-bold"
+                style="background-color: #336454"
+                (click)="placeOrder()"
+                [disabled]="isPlacingOrder"
+              >
+                <i class="bi bi-bag mx-2"></i>
+                {{ isPlacingOrder ? "Placing Order..." : "Place Order" }}
+              </button>
+
+              <button class="btn btn-dark rounded-2 fw-bold">
+                Continue Shopping
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </section>
 <div *ngIf="showPopup" class="alert-popup">
-    {{ alertMessage }}
-    <span class="close-btn" (click)="showPopup = false">&times;</span>
-</div>  
+  {{ alertMessage }}
+  <span class="close-btn" (click)="showPopup = false">&times;</span>
+</div>

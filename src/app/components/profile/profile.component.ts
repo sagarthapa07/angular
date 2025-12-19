@@ -1,13 +1,16 @@
-import { JsonPipe, NgFor, NgIf } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
-import { address, Product, wishlist } from '../../dataType';
+import { address, cart, Items, Product, wishlist } from '../../dataType';
 import { ShopService } from '../../core/services/shop/shop.service';
+import { CommonService } from '../../core/services/common/common.service';
+import { RouterLink } from "@angular/router";
+import { LoginService } from '../../core/services/login/login.service';
 
 @Component({
   selector: 'app-profile',
-  imports: [NgFor, NgIf, NgbDropdownModule, FormsModule,JsonPipe],
+  imports: [NgFor, NgIf, NgbDropdownModule, FormsModule, RouterLink,RouterLink],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css',
 })
@@ -34,16 +37,15 @@ export class ProfileComponent {
   //Wishlist
   wishlistData: wishlist[] = [];
   wishlistProducts: Product[] = [];
+  cartItem: any[] = [];
 
   // Address
   addressListData: address[] = [];
   editAddressId: number | null = null;
 
-
-
   // Addess From
   showAddPopup = false;
-  showEditPopup = false;
+  // showEditPopup = false;
   cartData: any[] = [];
   showPopup = false;
   alertMessage = '';
@@ -57,7 +59,12 @@ export class ProfileComponent {
   grandTotal: number = 0;
   totalItems: number = 0;
 
-  constructor(private shopService: ShopService) {}
+
+
+  // Logout
+  cartItems = 0;
+
+  constructor(private shopService: ShopService,private common: CommonService,private login: LoginService,) {}
 
   select(optionType: string, value: string) {
     if (optionType === 'status') this.selectedStatus = value;
@@ -78,8 +85,18 @@ export class ProfileComponent {
   activeItem = 'Dashboard';
 
   ngOnInit() {
+    this.shopService.addressList().subscribe({
+      next: (res) => {
+        this.addressList = res;
+      },
+      error: (err) => {
+        this.showA('Failed to load address list.');
+        console.error(err);
+      },
+    });
+    this.loadCartState();
     this.loadWishlistItems();
-    this.loadAddresses();
+    this.loadAddressList();
   }
 
   toggleNameEdit() {
@@ -107,11 +124,10 @@ export class ProfileComponent {
       });
     });
   }
-  removeWishlistItem(productId: number) {
-    const wishItem = this.wishlistData.find((w) => w.productId === productId);
-    if (!wishItem?.id) return;
-
-    this.shopService.removeWishlist(wishItem.id).subscribe(() => {
+  removeWishlistItem(productId: number): void {
+    const item = this.wishlistData.find((w) => w.productId === productId);
+    if (!item?.id) return;
+    this.shopService.removeWishlist(item.id).subscribe(() => {
       this.wishlistProducts = this.wishlistProducts.filter(
         (p) => p.id !== productId
       );
@@ -121,10 +137,137 @@ export class ProfileComponent {
     });
   }
 
+  isProductInCart(id: number) {
+    return this.cartItem.some((val: any) => val.productId === id);
+  }
+
+  loadCartState() {
+    // Guest user (no cookie)
+    if (!this.common.getCookie('sagar')) {
+      const localCart = localStorage.getItem('localCart');
+      if (localCart) {
+        const items = JSON.parse(localCart);
+        //this.cartItemsIds = items.map((item: Product) => item.id);
+        this.cartItem = items.map((item: Product) => {
+          return {
+            productId: item.productId,
+            id: item.id,
+          };
+        });
+      }
+    }
+
+    // Logged-in user
+    else {
+      const user = this.common.getCookie('sagar');
+      const userId = JSON.parse(user).id;
+
+      this.shopService.getCartList(userId);
+
+      this.shopService.cartData.subscribe((cartList) => {
+        //  this.cartItemsIds = cartList.map((item: Product) => + item.productId);
+        this.cartItem = cartList.map((item: Product) => {
+          return {
+            productId: item.productId,
+            id: item.id,
+          };
+        });
+      });
+    }
+  }
+  
+
+AddToCart(item: any) {
+
+  const productId = item.productId ?? item.id;
+
+  // 🔴 ALREADY IN CART CHECK
+  if (this.isProductInCart(productId)) {
+    this.showA('Product already in cart!');
+    return;
+  }
+
+  const productData: Product = {
+    ...item,
+    productId: productId,
+    quantity: 1,
+    availabilityStatus: 'In stock',
+  };
+
+  // 🟡 GUEST USER
+  if (!this.common.getCookie('sagar')) {
+    this.shopService.localAddToCart(productData);
+
+    // refresh cart state
+    this.loadCartState();
+
+    this.showA('Added to cart successfully!');
+    return;
+  }
+
+  // 🟢 LOGGED-IN USER
+  const user = this.common.getCookie('sagar');
+  const userId = JSON.parse(user).id;
+
+  const cartData: cart = {
+    ...productData,
+    userId,
+  };
+
+  delete (cartData as any).id;
+
+  this.shopService.addToCartAPI(cartData).subscribe({
+    next: () => {
+      this.shopService.getCartList(userId);
+      this.showA('Added to cart successfully!');
+    },
+    error: () => {
+      this.showA('Failed to add product to cart!');
+    },
+  });
+}
+
+  removeToCart(productId: number) {
+    let cartProduct = this.cartItem.filter((val) => val.productId == productId);
+    const user = this.common.getCookie('sagar');
+
+    if (user) {
+      const userId = JSON.parse(user).id;
+
+      this.shopService.removeToCart(cartProduct[0]?.id).subscribe((res) => {
+        if (res) {
+          this.cartItem = this.cartItem.filter(
+            (val) => val.productId !== cartProduct[0]?.productId
+          );
+
+          this.shopService.getCartList(userId);
+          this.showA('Removed from cart!');
+        }
+      });
+    } else {
+      this.shopService.removeItemFromCart(cartProduct[0]?.productId);
+
+      this.cartItem = this.cartItem.filter(
+        (val) => val.productId !== cartProduct[0]?.productId
+      );
+
+      const localCart = JSON.parse(localStorage.getItem('localCart') || '[]');
+      this.shopService.cartData.emit(localCart);
+      this.showA('Removed from cart!');
+    }
+  }
 
 
-  // Address 
-  loadAddresses() {
+
+
+
+
+
+
+
+
+  // Address
+  loadAddressList() {
     this.shopService.addressList().subscribe((res) => {
       this.addressListData = res;
     });
@@ -134,6 +277,8 @@ export class ProfileComponent {
       this.addressListData = this.addressListData.filter(
         (addr) => addr.id !== item.id
       );
+      this.closeAddressForm();
+      this.showA('Address Deleted Successfully!');
     });
   }
 
@@ -146,27 +291,25 @@ export class ProfileComponent {
       this.editAddressId = null;
     });
   }
-
-
-    openAddForm() {
+  openAddForm() {
     this.isEditMode = false;
     this.editAddressData = null;
+    this.addressType = 'home';
     this.showAddPopup = true;
-    this.showEditPopup = false;
   }
   openEditForm(item: address) {
     this.isEditMode = true;
     this.editAddressData = { ...item };
-    console.log("Edited item:", this.editAddressData);
     this.addressType = item.addressType;
-    this.showEditPopup = true;
-    this.showAddPopup = false;
+    this.showAddPopup = true;
   }
 
   closeAddressForm() {
     this.showAddPopup = false;
-    this.showEditPopup = false;
+    this.isEditMode = false;
+    this.editAddressData = null;
   }
+
   showA(message: string) {
     this.alertMessage = message;
     this.showPopup = true;
@@ -178,29 +321,34 @@ export class ProfileComponent {
 
   submit(form: NgForm) {
     if (!form.valid || !this.addressType) {
-      this.showA("Please fill all required fields.");
+      this.showA('Please fill all required fields.');
       return;
     }
     const formData = {
       ...form.value,
       addressType: this.addressType,
-      id: this.editAddressData?.id
+      id: this.editAddressData?.id,
     };
     if (!this.isEditMode) {
       this.shopService.addAddress(formData).subscribe(() => {
-        this.showA("Address Saved Successfully!");
-        this.loadAddresses();
+        this.showA('Address Saved Successfully!');
+        this.loadAddressList();
         this.closeAddressForm();
       });
       return;
     }
     this.shopService.updateAddress(formData).subscribe(() => {
-      this.showA("Address Updated Successfully!");
-      this.loadAddresses();
+      this.showA('Address Updated Successfully!');
+      this.loadAddressList();
       this.closeAddressForm();
     });
   }
 
 
 
+    logout() {
+    this.cartItems = 0;
+    this.shopService.cartData.emit([]);
+    this.login.logOutUser();
+  }
 }

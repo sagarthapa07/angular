@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
-import { address, cart, Product, wishlist } from '../../../dataType';
+import { address, cart, orders, Product, wishlist } from '../../../dataType';
 import { Observable } from 'rxjs';
 import { CommonService } from '../common/common.service';
 
@@ -149,4 +149,18 @@ export class ShopService {
   removeWishlist(id: number) {
     return this.http.delete(`http://localhost:3000/wishlist/${id}`);
   }
+  placeOrder(orderData: orders) {
+  return this.http.post<orders>('http://localhost:3000/orders', orderData);
+}
+getOrdersByUser(userId: number) {
+  return this.http.get<orders[]>(
+    `${'http://localhost:3000/orders'}?userId=${userId}`
+  );
+}
+updateOrderStatus(orderId: number, status: orders['status']) {
+  return this.http.patch(
+    `${'http://localhost:3000/orders'}/${orderId}`,
+    { status }
+  );  
+}
 }

@@ -269,12 +269,25 @@
 .address-section button[ngbDropdownToggle]::after {
   display: none !important;
 }
+.remove-wishlist {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  /* background: #fff; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); */
+}
 
+.remove-wishlist i {
+  font-size: 18px;
+  color: #000;
+}
 
 
 /* Popup Form  */
-
-
 
 .popup {
     position: fixed;

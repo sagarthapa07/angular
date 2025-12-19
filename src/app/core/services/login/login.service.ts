@@ -26,8 +26,6 @@ export class LoginService {
 
   //loginUser: method jo login API ko POST request bhejta hai user credentials (data) ke saath. API call ka observable return karta hai.
 
-
-
   setAuth(valstring: any) {
  
     this.isUserLogin.set(true);
@@ -35,7 +33,6 @@ export class LoginService {
   }
 
   //Jab user login ya signup successful ho, to ye function: isUserLogin signal ko true set karta hai (user logged in state)  ,User data ko cookie me "sagar" naam se 1 din ke liye store karta hai (via common service).
-
 
   isLogin() {
     let userLogin = this.common.getCookie('sagar');
@@ -53,9 +50,6 @@ export class LoginService {
 // Nahi to false.
 // isUserLogin signal return karta hai, taaki component me subscribe ya react kar sake.
 
-
-
-
   isLoginUser(): boolean {
     this.userLogin = this.common.getCookie('sagar');
     if (this.userLogin) {
@@ -67,7 +61,6 @@ export class LoginService {
 // isLoginUser: sync method jo sirf boolean return karta hai ki user login hai ya nahi.
 // Cookie "sagar" ka existence check karta hai.
 
-
   logOutUser() {
     this.common.deleteCookie('sagar');
     this.isUserLogin.set(false);
@@ -77,17 +70,12 @@ export class LoginService {
 // "sagar" cookie delete karta hai.
 // isUserLogin signal ko false kar deta hai.
 
-
-
-
   getUserData() {
     let userData = JSON.parse(this.common.getCookie('sagar'));
     return userData ? userData : null;
   }
 // getUserData: cookie me stored user data ko parse karke return karta hai.
 // Agar cookie nahi mile to null return karta hai.
-
-
 
   userSignup(data: Signup) {
     return this.http.post('https://dummyjson.com/users/add', data, { observe: 'response' }).pipe(
