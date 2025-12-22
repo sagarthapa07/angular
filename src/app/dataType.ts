@@ -1,94 +1,106 @@
 export interface Product {
-    title: string,
-    price: number,
-    category: string,
-    color: string,
-    description: string,
-    image: string,
-    id: number,
-    thumbnail: string,
-    brand: string,
-    stock: number,
-    expanded?: boolean;
-    discountPercentage: number,
-    rating: number,
-    productId: number,
-    quantity: number,
-    availabilityStatus: string,
+  title: string;
+  price: number;
+  category: string;
+  color: string;
+  description: string;
+  image: string;
+  id: number;
+  thumbnail: string;
+  brand: string;
+  stock: number;
+  expanded?: boolean;
+  discountPercentage: number;
+  rating: number;
+  productId: number;
+  quantity: number;
+  availabilityStatus: string;
 }
 export interface Signup {
-    firstName: string
-    lastName: string;
-    email: string;
-    password: string;
-    age: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  age: number;
 }
 export interface Login {
-    email: string,
-    password: string
+  email: string;
+  password: string;
 }
 export interface Blogs {
-    name: string,
-    type: string,
-    img: string,
-    about: string
+  name: string;
+  type: string;
+  img: string;
+  about: string;
 }
 export interface Items {
-    id: number;
-    title: string;
-    price: number;
-    description: string;
-    category: string;
-    image: string;
-    thumbnail: string;
-    brand: string;
-    stock: number;
-    color: string;
-    rating: number;
-    discountPercentage: number;
-
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+  category: string;
+  image: string;
+  thumbnail: string;
+  brand: string;
+  stock: number;
+  color: string;
+  rating: number;
+  discountPercentage: number;
 }
 export interface Categories {
-    name: string,
-    slug: string,
-    url: string,
+  name: string;
+  slug: string;
+  url: string;
 }
 export interface cart {
-    title: string,
-    price: number,
-    category: string,
-    color: string,
-    description: string,
-    thumbnail: string,
-    id?: number,
-    stock: undefined | number,
-    userId: number,
-    productId: number,
-    quantity: number,
-    availabilityStatus: string,
+  title: string;
+  price: number;
+  category: string;
+  color: string;
+  description: string;
+  thumbnail: string;
+  id?: number;
+  stock: undefined | number;
+  userId: number;
+  productId: number;
+  quantity: number;
+  availabilityStatus: string;
 }
 export interface address {
-    id: number
-    fullName: string,
-    mobile: string,
-    house: string,
-    area: string,
-    landmark: string,
-    city: string,
-    state: string,
-    pincode: string,
-    addressType: string
+  id: number;
+  fullName: string;
+  mobile: string;
+  house: string;
+  area: string;
+  landmark: string;
+  city: string;
+  state: string;
+  pincode: string;
+  addressType: string;
 }
-export interface wishlist{
+export interface wishlist {
   id?: number;
   productId: number;
   userId?: number;
 }
+export interface OrderItem {
+  productId: number;
+  name: string;
+  image: string;
+  quantity: number;
+  finalPrice: number;
+}
 export interface orders {
   id?: number;
+
   userId: number;
   addressId: number;
-  productId:number;        
-  orderDate: string;        
+
+  orderDate: string;
   status: 'PLACED' | 'SHIPPED' | 'DELIVERED' | 'CANCELLED';
+
+  totalAmount: number;
+  paymentMode:string;
+
+  orderItems: OrderItem[];
 }

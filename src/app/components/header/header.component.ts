@@ -5,10 +5,11 @@ import { CommonModule } from '@angular/common';
 import { ShopService } from '../../core/services/shop/shop.service';
 import { CommonService } from '../../core/services/common/common.service';
 import { Product } from '../../dataType';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink, CommonModule,NgbDropdownModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
@@ -114,7 +115,11 @@ profile(){
 }
 
 
+goProfile(section: string) {
+  this.route.navigate(['/profile'], {
+    queryParams: { tab: section }
+  });
+
 }
 
-
-
+}

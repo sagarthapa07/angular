@@ -1,16 +1,31 @@
-import { NgFor, NgIf } from '@angular/common';
+import { DatePipe, DecimalPipe, NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
-import { address, cart, Items, Product, wishlist } from '../../dataType';
+import {
+  address,
+  cart,
+  Items,
+  orders,
+  Product,
+  wishlist,
+} from '../../dataType';
 import { ShopService } from '../../core/services/shop/shop.service';
 import { CommonService } from '../../core/services/common/common.service';
-import { RouterLink } from "@angular/router";
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { LoginService } from '../../core/services/login/login.service';
 
 @Component({
   selector: 'app-profile',
-  imports: [NgFor, NgIf, NgbDropdownModule, FormsModule, RouterLink,RouterLink],
+  imports: [
+    NgFor,
+    NgIf,
+    NgbDropdownModule,
+    FormsModule,
+    RouterLink,
+    DecimalPipe,
+    DatePipe,
+  ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css',
 })
@@ -59,16 +74,33 @@ export class ProfileComponent {
   grandTotal: number = 0;
   totalItems: number = 0;
 
-
+  // Orders
+  orders: orders[] = [];
 
   // Logout
   cartItems = 0;
 
-  constructor(private shopService: ShopService,private common: CommonService,private login: LoginService,) {}
+  //Filter
+  filteredOrders: orders[] = [];
+
+  showInvoice = false;
+  selectedOrder: orders | null = null;
+
+  constructor(
+    private shopService: ShopService,
+    private common: CommonService,
+    private login: LoginService,
+    private route:ActivatedRoute,
+  ) {}
 
   select(optionType: string, value: string) {
-    if (optionType === 'status') this.selectedStatus = value;
-    if (optionType === 'time') this.selectedTime = value;
+    if (optionType === 'status') {
+      this.selectedStatus = value;
+    }
+    if (optionType === 'time') {
+      this.selectedTime = value;
+    }
+    this.applyFilters();
   }
 
   menuItems = [
@@ -94,9 +126,16 @@ export class ProfileComponent {
         console.error(err);
       },
     });
+
+    this.route.queryParams.subscribe(params => {
+    this.activeItem = params['tab'] || 'Dashboard';
+  });
+
+    
     this.loadCartState();
     this.loadWishlistItems();
     this.loadAddressList();
+    this.loadOrders();
   }
 
   toggleNameEdit() {
@@ -175,57 +214,52 @@ export class ProfileComponent {
       });
     }
   }
-  
 
-AddToCart(item: any) {
+  AddToCart(item: any) {
+    const productId = item.productId ?? item.id;
 
-  const productId = item.productId ?? item.id;
+    if (this.isProductInCart(productId)) {
+      this.showA('Product already in cart!');
+      return;
+    }
 
-  // 🔴 ALREADY IN CART CHECK
-  if (this.isProductInCart(productId)) {
-    this.showA('Product already in cart!');
-    return;
-  }
+    const productData: Product = {
+      ...item,
+      productId: productId,
+      quantity: 1,
+      availabilityStatus: 'In stock',
+    };
 
-  const productData: Product = {
-    ...item,
-    productId: productId,
-    quantity: 1,
-    availabilityStatus: 'In stock',
-  };
+    if (!this.common.getCookie('sagar')) {
+      this.shopService.localAddToCart(productData);
 
-  // 🟡 GUEST USER
-  if (!this.common.getCookie('sagar')) {
-    this.shopService.localAddToCart(productData);
+      // refresh cart state
+      this.loadCartState();
 
-    // refresh cart state
-    this.loadCartState();
-
-    this.showA('Added to cart successfully!');
-    return;
-  }
-
-  // 🟢 LOGGED-IN USER
-  const user = this.common.getCookie('sagar');
-  const userId = JSON.parse(user).id;
-
-  const cartData: cart = {
-    ...productData,
-    userId,
-  };
-
-  delete (cartData as any).id;
-
-  this.shopService.addToCartAPI(cartData).subscribe({
-    next: () => {
-      this.shopService.getCartList(userId);
       this.showA('Added to cart successfully!');
-    },
-    error: () => {
-      this.showA('Failed to add product to cart!');
-    },
-  });
-}
+      return;
+    }
+
+    const user = this.common.getCookie('sagar');
+    const userId = JSON.parse(user).id;
+
+    const cartData: cart = {
+      ...productData,
+      userId,
+    };
+
+    delete (cartData as any).id;
+
+    this.shopService.addToCartAPI(cartData).subscribe({
+      next: () => {
+        this.shopService.getCartList(userId);
+        this.showA('Added to cart successfully!');
+      },
+      error: () => {
+        this.showA('Failed to add product to cart!');
+      },
+    });
+  }
 
   removeToCart(productId: number) {
     let cartProduct = this.cartItem.filter((val) => val.productId == productId);
@@ -256,15 +290,6 @@ AddToCart(item: any) {
       this.showA('Removed from cart!');
     }
   }
-
-
-
-
-
-
-
-
-
 
   // Address
   loadAddressList() {
@@ -344,9 +369,62 @@ AddToCart(item: any) {
     });
   }
 
+  applyFilters() {
+    let result = [...this.orders];
 
+    if (this.selectedStatus !== 'All') {
+      result = result.filter((order) => order.status === this.selectedStatus);
+    }
 
-    logout() {
+    if (this.selectedTime === 'Newest First') {
+      result.sort((a, b) => {
+        return (
+          new Date(b.orderDate).getTime() - new Date(a.orderDate).getTime()
+        );
+      });
+    }
+
+    if (this.selectedTime === 'Oldest First') {
+      result.sort((a, b) => {
+        return (
+          new Date(a.orderDate).getTime() - new Date(b.orderDate).getTime()
+        );
+      });
+    }
+
+    this.filteredOrders = result;
+  }
+
+  loadOrders() {
+    const userCookie = this.common.getCookie('sagar');
+    if (!userCookie) return;
+
+    const userId = JSON.parse(userCookie).id;
+
+    this.shopService.getOrdersByUser(userId).subscribe({
+      next: (res) => {
+        this.orders = res;
+        this.applyFilters();
+      },
+      error: () => {
+        this.showA('Failed to load orders!');
+      },
+    });
+  }
+
+  viewInvoice(orderId?: number) {
+    if (!orderId) {
+      this.showA('Invalid order id');
+      return;
+    }
+
+    this.shopService.getOrderById(orderId).subscribe((res) => {
+      this.selectedOrder = res;
+      this.showInvoice = true;
+    });
+  }
+
+  logout() {
     this.cartItems = 0;
     this.shopService.cartData.emit([]);
     this.login.logOutUser();

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule, NgForOf } from '@angular/common';
 import { ShopService } from '../../core/services/shop/shop.service';
-import { cart, Categories, Items, Product } from '../../dataType';
+import { cart, Categories, Items, Product, wishlist } from '../../dataType';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CommonService } from '../../core/services/common/common.service';
 
@@ -30,6 +30,8 @@ export class GrantComponent {
     productId: string | null = null;
   alertMessage: string = '';
   showPopup: boolean = false;
+    wishlistIds: number[] = [];
+    wishlistData: wishlist[] = [];
  
   constructor (private shopService: ShopService,
     private common: CommonService,
@@ -205,5 +207,44 @@ this.productId = this.route.snapshot.paramMap.get("id");
       this.showPopup = false;   
     }, 2000); 
   }
+
+  
+
+  loadWishlist() {
+    this.shopService.getWishlist().subscribe((res) => {
+      this.wishlistData = res;
+      this.wishlistIds = res.map((w) => w.productId);
+    });
+  }
+
+  isWishlisted(productId: number): boolean {
+    return this.wishlistIds.includes(productId);
+  }
+  toggleWishlist(item: Items): void {
+    if (this.isWishlisted(item.id)) {
+      this.removeFromWishlist(item.id);
+    } else {
+      this.addToWishlist(item.id);
+    }
+  }
+  addToWishlist(productId: number): void {
+    if (this.isWishlisted(productId)) {
+      return;
+    }
+
+    this.shopService.addWishlist({ productId }).subscribe(() => {
+      this.loadWishlist();
+      this.showA('Added to wishlist!');
+    });
+  }
+  removeFromWishlist(productId: number): void {
+    const wishItem = this.wishlistData.find((w) => w.productId === productId);
+    if (!wishItem?.id) return;
+    this.shopService.removeWishlist(wishItem.id).subscribe(() => {
+      this.loadWishlist();
+      this.showA('Removed from wishlist!');
+    });
+  }
+
 
 }

@@ -29,3 +29,67 @@
     color: #008957;
     display: block;
 }
+button[ngbDropdownToggle]::after {
+  display: none !important;
+}
+
+/* Dropdown container */
+.profile-dropdown {
+  min-width: 220px;
+  padding: 8px;
+  border-radius: 14px;
+  border: none;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  background-color: #fff;
+}
+
+/* Dropdown items */
+.profile-dropdown {
+  transform: translateX(-170px); /* adjust value */
+}
+.profile-dropdown .dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 5px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1f2937;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+/* Icons */
+.profile-dropdown .dropdown-item i {
+  font-size: 18px;
+  color: #6b7280;
+  min-width: 20px;
+}
+
+/* Hover effect */
+.profile-dropdown .dropdown-item:hover {
+  background-color: #f3f4f6;
+  color: #111827;
+}
+
+.profile-dropdown .dropdown-item:hover i {
+  color: #111827;
+}
+
+/* Divider */
+.profile-dropdown .dropdown-divider {
+  margin: 6px 0;
+}
+
+/* Logout special style */
+.profile-dropdown .dropdown-item.logout {
+  color: #dc2626;
+}
+
+.profile-dropdown .dropdown-item.logout i {
+  color: #dc2626;
+}
+
+.profile-dropdown .dropdown-item.logout:hover {
+  background-color: #fee2e2;
+}

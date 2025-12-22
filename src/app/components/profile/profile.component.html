@@ -16,7 +16,9 @@
           <i [class]="item.icon"></i> {{ item.name }}
         </a>
 
-        <a class="logout" (click)="logout()"> <i class="bi bi-box-arrow-right"></i> Logout </a>
+        <a class="logout" (click)="logout()">
+          <i class="bi bi-box-arrow-right"></i> Logout
+        </a>
       </nav>
     </aside>
     <section class="content">
@@ -40,7 +42,7 @@
         </div>
       </div>
 
-      <div *ngIf="activeItem === 'Orders'">
+      <div *ngIf="activeItem === 'Orders' && !showInvoice">
         <h2>Your Orders</h2>
         <div class="filter-section">
           <div class="row">
@@ -87,7 +89,112 @@
             </div>
           </div>
         </div>
+        <table class="table align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>ORDER #</th>
+              <th>DATE</th>
+              <th>STATUS</th>
+              <th class="text-end">TOTAL</th>
+              <th class="text-center">INVOICE</th>
+            </tr>
+          </thead>
+
+          <tbody *ngIf="filteredOrders.length > 0; else noOrders">
+            <tr *ngFor="let order of filteredOrders">
+              <td>INV-{{ order.id }}</td>
+              <td>{{ order.orderDate | date : "dd/MM/yyyy" }}</td>
+              <td>
+                <span class="badge rounded-pill bg-primary-subtle text-primary">
+                  {{ order.status }}
+                </span>
+              </td>
+              <td class="text-end fw-semibold">
+                $ {{ order.totalAmount | number : "1.2-2" }}
+              </td>
+              <td class="text-center">
+                <button
+                  class="btn btn-sm btn-outline-primary"
+                  (click)="viewInvoice(order.id)"
+                >
+                  View
+                </button>
+              </td>
+            </tr>
+          </tbody>
+
+          <ng-template #noOrders>
+            <tbody>
+              <tr>
+                <td colspan="5" class="text-center text-muted py-4">
+                  No orders found
+                </td>
+              </tr>
+            </tbody>
+          </ng-template>
+        </table>
+
+        <ng-template #noOrders>
+          <tr>
+            <td colspan="5" class="text-center text-muted py-4">
+              No orders found
+            </td>
+          </tr>
+        </ng-template>
+
+        <div class=""></div>
       </div>
+      <!-- INVOICE SECTION -->
+<div *ngIf="activeItem === 'Orders' && showInvoice">
+
+  <button
+    class="btn btn-sm btn-light mb-3"
+    (click)="showInvoice = false"
+  >
+    ← Back to Orders
+  </button>
+
+  <h3 class="fw-bold mb-4">
+    Invoice #INV-{{ selectedOrder?.id }}
+  </h3>
+
+  <!-- ORDER INFO -->
+  <div class="mb-3">
+    <p><b>Order Date:</b> {{ selectedOrder?.orderDate | date:'dd/MM/yyyy' }}</p>
+    <p><b>Status:</b> {{ selectedOrder?.status }}</p>
+    <p><b>Payment Mode:</b> {{ selectedOrder?.paymentMode }}</p>
+  </div>
+
+  <!-- PRODUCTS -->
+  <table class="table">
+    <thead class="table-light">
+      <tr>
+        <th>IMAGE</th>
+        <th>NAME</th>
+        <th>QTY</th>
+        <th>PRICE</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let item of selectedOrder?.orderItems">
+        <td>
+          <img [src]="item.image" width="40" />
+        </td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>${{ (item.finalPrice * item.quantity) | number:'1.2-2' }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- TOTAL -->
+  <div class="text-end mt-3">
+    <h5>Total Payable: $ {{ selectedOrder?.totalAmount | number:'1.2-2' }}</h5>
+  </div>
+
+</div>
+
 
       <div *ngIf="activeItem === 'Wishlist'">
         <h2>My List</h2>
@@ -97,11 +204,10 @@
 
         <div class="wishlistItems row g-3 mt-3">
           <div *ngIf="wishlistProducts.length === 0" class="text-muted">
-            Your wishlist is empty 
-<br>
+            Your wishlist is empty
+            <br />
 
-<a href="#" routerLink="/shop">Shop more..</a>
-
+            <a href="#" routerLink="/shop">Shop more..</a>
           </div>
 
           <div class="col-md-4" *ngFor="let item of wishlistProducts">
@@ -564,8 +670,7 @@
         </div>
       </div>
 
-      <div *ngIf="activeItem === 'Wishlist'">
-        </div>
+      <div *ngIf="activeItem === 'Wishlist'"></div>
     </section>
   </div>
 </div>

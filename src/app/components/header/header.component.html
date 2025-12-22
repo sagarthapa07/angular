@@ -1,12 +1,19 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
   <div class="container">
     <a class="navbar-brand" href="#" routerLink="">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse " id="navbarSupportedContent">
-      <ul class="navbar-nav mx-auto mb-2 mb-lg-0  ">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" routerLink="">Home</a>
         </li>
@@ -21,35 +28,106 @@
         </li>
       </ul>
       <div *ngIf="!isLoggedIn" class="d-flex align-items-center">
-        <input *ngIf="showSearchInput" type="text" (keyup)="searchProduct($event)" (blur)="hideSearch()" placeholder="Search Product"
-          class="form-control w-auto me-2">
-        <button class="btn btn-outline-success bi bi-search me-2" (click)="toggleSearch()"></button>
+        <input
+          *ngIf="showSearchInput"
+          type="text"
+          (keyup)="searchProduct($event)"
+          (blur)="hideSearch()"
+          placeholder="Search Product"
+          class="form-control w-auto me-2"
+        />
+        <button
+          class="btn btn-outline-success bi bi-search me-2"
+          (click)="toggleSearch()"
+        ></button>
         <ul class="suggested-result" *ngIf="searchResult">
           <li *ngFor="let item of searchResult!">
-            <a (mousedown)="redirectToDetail(item.id)" >{{ item.title }}</a>
+            <a (mousedown)="redirectToDetail(item.id)">{{ item.title }}</a>
           </li>
         </ul>
-        <button class="btn cart btn-outline-success bi bi-cart3 me-2" (click)="gotoCartPage()">
-          <span>({{cartItems}})</span>
+        <button
+          class="btn cart btn-outline-success bi bi-cart3 me-2"
+          (click)="gotoCartPage()"
+        >
+          <span>({{ cartItems }})</span>
         </button>
-        <button class="btn btn-outline-success" [routerLink]="['/Login']" [queryParams]="{ mode: 'login' }"
-          type="button">
+        <button
+          class="btn btn-outline-success"
+          [routerLink]="['/Login']"
+          [queryParams]="{ mode: 'login' }"
+          type="button"
+        >
           Login
         </button>
       </div>
-      <div *ngIf="isLoggedIn" class="d-flex align-items-center ">
-        <input *ngIf="showSearchInput" type="text" (keyup)="searchProduct($event)" (blur)="hideSearch()" placeholder="Search Product"
-          class="form-control w-auto me-2">
-        <button class="btn btn-outline-success bi bi-search me-2" (click)="toggleSearch()"></button>
+      <div *ngIf="isLoggedIn" class="d-flex align-items-center">
+        <input
+          *ngIf="showSearchInput"
+          type="text"
+          (keyup)="searchProduct($event)"
+          (blur)="hideSearch()"
+          placeholder="Search Product"
+          class="form-control w-auto me-2"
+        />
+        <button
+          class="btn btn-outline-success bi bi-search me-2"
+          (click)="toggleSearch()"
+        ></button>
         <ul class="suggested-result" *ngIf="searchResult">
           <li *ngFor="let item of searchResult!">
-            <a (mousedown)="redirectToDetail(item.id)" >{{ item.title }}</a>
+            <a (mousedown)="redirectToDetail(item.id)">{{ item.title }}</a>
           </li>
         </ul>
-        <button class="btn cart btn-outline-success bi bi-cart3"
-          routerLink="/cart-page"><span>({{cartItems}})</span></button>
-        <button class="btn btn-outline-success mx-2" type="submit" (click)="logout()">Logout</button>
-        <button class="btn btn-success mx-2 rounded-circle d-flex justify-content-center align-items-center" type="submit" style="width: 45px; height: 45px;"(click)="profile()"><i class="bi bi-person"></i></button>
+        <button
+          class="btn cart btn-outline-success bi bi-cart3"
+          routerLink="/cart-page"
+        >
+          <span>({{ cartItems }})</span>
+        </button>
+        <div ngbDropdown placement="start" class="address-menu">
+          <button
+            class="btn btn-success mx-2 rounded-circle d-flex justify-content-center align-items-center"
+            type="submit"
+            style="width: 45px; height: 45px"
+            ngbDropdownToggle
+          >
+            <i class="bi bi-person"></i>
+          </button>
+
+          <div ngbDropdownMenu class="profile-dropdown">
+            <button class="dropdown-item" (click)="profile()">
+              <i class="bi bi-columns-gap"></i>
+              <span>Dashboard</span>
+            </button>
+
+            <button class="dropdown-item" (click)="goProfile('Orders')">
+              <i class="bi bi-box-seam"></i>
+              <span>Orders</span>
+            </button>
+
+            <button class="dropdown-item" (click)="goProfile('Wishlist')">
+              <i class="bi bi-heart"></i>
+              <span>Wishlist</span>
+            </button>
+
+            <button class="dropdown-item" (click)="goProfile('Addresses')">
+              <i class="bi bi-geo-alt"></i>
+              <span>Addresses</span>
+            </button>
+            <button class="dropdown-item" (click)="goProfile('Personal Info')">
+              <i class="bi bi-person-fill"></i>
+              <span>Person Info</span>
+            </button>
+
+            <div class="dropdown-divider"></div>
+
+            <button class="dropdown-item logout" (click)="logout()">
+              <i class="bi bi-box-arrow-right"></i>
+              <span>Logout</span>
+            </button>
+          </div>
+        </div>
+        <!-- <button class="btn btn-success mx-2 rounded-circle d-flex justify-content-center align-items-center" type="submit" style="width: 45px; height: 45px;"(click)="profile()"></button> -->
       </div>
     </div>
   </div>

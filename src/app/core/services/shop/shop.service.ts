@@ -137,8 +137,6 @@ export class ShopService {
     return this.http.delete(`http://localhost:3000/address/${address.id}`);
   }
 
-
-  
   addWishlist(data: wishlist) {
     return this.http.post('http://localhost:3000/wishlist', data);
   }
@@ -150,17 +148,21 @@ export class ShopService {
     return this.http.delete(`http://localhost:3000/wishlist/${id}`);
   }
   placeOrder(orderData: orders) {
-  return this.http.post<orders>('http://localhost:3000/orders', orderData);
-}
-getOrdersByUser(userId: number) {
-  return this.http.get<orders[]>(
-    `${'http://localhost:3000/orders'}?userId=${userId}`
+    return this.http.post<orders>('http://localhost:3000/orders', orderData);
+  }
+  getOrdersByUser(userId: number) {
+    return this.http.get<orders[]>(
+      `${'http://localhost:3000/orders'}?userId=${userId}`
+    );
+  }
+  updateOrderStatus(orderId: number, status: orders['status']) {
+    return this.http.patch(`${'http://localhost:3000/orders'}/${orderId}`, {
+      status,
+    });
+  }
+  getOrderById(orderId: number) {
+  return this.http.get<orders>(
+    `http://localhost:3000/orders/${orderId}`
   );
-}
-updateOrderStatus(orderId: number, status: orders['status']) {
-  return this.http.patch(
-    `${'http://localhost:3000/orders'}/${orderId}`,
-    { status }
-  );  
 }
 }

@@ -1,18 +1,18 @@
-import { NgIf, NgForOf, DecimalPipe } from "@angular/common";
-import { ShopService } from "../../core/services/shop/shop.service";
-import { FormsModule, NgForm } from "@angular/forms";
-import { Component } from "@angular/core";
-import { address, cart, orders } from "../../dataType";
-import { CommonService } from "../../core/services/common/common.service";
+import { NgIf, NgForOf, DecimalPipe } from '@angular/common';
+import { ShopService } from '../../core/services/shop/shop.service';
+import { FormsModule, NgForm } from '@angular/forms';
+import { Component } from '@angular/core';
+import { address, cart, orders } from '../../dataType';
+import { CommonService } from '../../core/services/common/common.service';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-checkout-page',
-  imports: [NgIf, FormsModule, NgForOf, DecimalPipe],
+  imports: [NgIf, FormsModule, NgForOf, DecimalPipe, RouterLink],
   templateUrl: './checkout-page.component.html',
-  styleUrls: ['./checkout-page.component.css']
+  styleUrls: ['./checkout-page.component.css'],
 })
 export class CheckoutPageComponent {
-
   showAddPopup = false;
   showEditPopup = false;
   cartData: any[] = [];
@@ -30,8 +30,10 @@ export class CheckoutPageComponent {
   selectedAddressId: number | null = null;
   isPlacingOrder = false;
 
-
-  constructor(private shopservice: ShopService, private common: CommonService) { }
+  constructor(
+    private shopservice: ShopService,
+    private common: CommonService
+  ) {}
 
   ngOnInit(): void {
     this.shopservice.addressList().subscribe({
@@ -39,9 +41,9 @@ export class CheckoutPageComponent {
         this.addressList = res;
       },
       error: (err) => {
-        this.showA("Failed to load address list.");
+        this.showA('Failed to load address list.');
         console.error(err);
-      }
+      },
     });
     this.loadCartData();
   }
@@ -57,13 +59,13 @@ export class CheckoutPageComponent {
       this.calculateTotals();
 
       if (!this.cartData.length) {
-        this.showA("Your cart is empty.");
+        this.showA('Your cart is empty.');
       }
     });
   }
 
   loadAddressList() {
-    this.shopservice.addressList().subscribe(res => {
+    this.shopservice.addressList().subscribe((res) => {
       this.addressList = res;
     });
   }
@@ -77,7 +79,7 @@ export class CheckoutPageComponent {
   openEditForm(item: address) {
     this.isEditMode = true;
     this.editAddressData = { ...item };
-    console.log("Edited item:", this.editAddressData);
+    console.log('Edited item:', this.editAddressData);
     this.addressType = item.addressType;
     this.showEditPopup = true;
     this.showAddPopup = false;
@@ -99,51 +101,54 @@ export class CheckoutPageComponent {
 
   submit(form: NgForm) {
     if (!form.valid || !this.addressType) {
-      this.showA("Please fill all required fields.");
+      this.showA('Please fill all required fields.');
       return;
     }
     const formData = {
       ...form.value,
       addressType: this.addressType,
-      id: this.editAddressData?.id
+      id: this.editAddressData?.id,
     };
     if (!this.isEditMode) {
       this.shopservice.addAddress(formData).subscribe(() => {
-        this.showA("Address Saved Successfully!");
+        this.showA('Address Saved Successfully!');
         this.loadAddressList();
         this.closeAddressForm();
       });
       return;
     }
     this.shopservice.updateAddress(formData).subscribe(() => {
-      this.showA("Address Updated Successfully!");
+      this.showA('Address Updated Successfully!');
       this.loadAddressList();
       this.closeAddressForm();
     });
   }
 
   deleteAddress(item: address) {
-    debugger
-    console.log("DELETE PRESS:", item);
-    console.log("ID FOUND:", item.id);
+    debugger;
+    console.log('DELETE PRESS:', item);
+    console.log('ID FOUND:', item.id);
     if (!item.id) {
-      this.showA("Delete failed: ID not found!");
+      this.showA('Delete failed: ID not found!');
       return;
     }
     this.shopservice.deleteAddress(item).subscribe({
       next: () => {
-        this.showA("Address Deleted Successfully!");
-        this.closeAddressForm()
+        this.showA('Address Deleted Successfully!');
+        this.closeAddressForm();
         this.loadAddressList();
       },
-      error: () => this.showA("Failed to delete address!")
+      error: () => this.showA('Failed to delete address!'),
     });
   }
   calculateTotals() {
     this.subTotal = 0;
     this.discount = 0;
     this.gst = 0;
-    this.grandTotal = 0;
+    this.grandTotal = Number(
+      (this.subTotal - this.discount + this.gst).toFixed(2)
+    );
+
     this.totalItems = 0;
 
     if (!this.cartData.length) return;
@@ -163,7 +168,7 @@ export class CheckoutPageComponent {
 
     this.gst = (this.subTotal - this.discount) * 0.18;
 
-    this.grandTotal = (this.subTotal - this.discount) + this.gst;
+    this.grandTotal = this.subTotal - this.discount + this.gst;
 
     console.log('Subtotal:', this.subTotal);
     console.log('Discount:', this.discount);
@@ -171,86 +176,89 @@ export class CheckoutPageComponent {
     console.log('GrandTotal:', this.grandTotal);
   }
 
+  placeOrder() {
+    // 🔒 prevent multiple clicks
+    if (this.isPlacingOrder) return;
 
-placeOrder() {
-
-  // 🔒 prevent multiple clicks
-  if (this.isPlacingOrder) return;
-
-  if (!this.cartData.length) {
-    this.showA('Cart is empty!');
-    return;
-  }
-
-  if (!this.selectedAddressId) {
-    this.showA('Please select address!');
-    return;
-  }
-
-  const userCookie = this.common.getCookie('sagar');
-  if (!userCookie) {
-    this.showA('User not logged in!');
-    return;
-  }
-
-  this.isPlacingOrder = true; 
-
-  const userId = JSON.parse(userCookie).id;
-  const cartItem = this.cartData[0];
-
-  const orderData: orders = {
-    userId,
-    addressId: this.selectedAddressId,
-    productId: cartItem.productId,
-    orderDate: new Date().toISOString(),
-    status: 'PLACED',
-  };
-
-  this.shopservice.placeOrder(orderData).subscribe({
-    next: () => {
-      this.showA('Order placed successfully!');
-      this.resetCart();
-
-      setTimeout(() => {
-        window.location.href = '/';
-      }, 800);
-    },
-    error: () => {
-      this.showA('Order failed!');
-      this.isPlacingOrder = false; 
+    if (!this.cartData.length) {
+      this.showA('Cart is empty!');
+      return;
     }
-  });
-}
 
+    if (!this.selectedAddressId) {
+      this.showA('Please select address!');
+      return;
+    }
 
+    const userCookie = this.common.getCookie('sagar');
+    if (!userCookie) {
+      this.showA('User not logged in!');
+      return;
+    }
 
+    this.isPlacingOrder = true;
 
-
-resetCart() {
-  const userCookie = this.common.getCookie('sagar');
-  const isLoggedIn = !!userCookie;
-
-  if (isLoggedIn) {
     const userId = JSON.parse(userCookie).id;
+    const cartItem = this.cartData[0];
 
-    this.shopservice.currentCart(userId).subscribe((result) => {
-      if (result && result.length > 0) {
-        result.forEach((item: any) => {
-          this.shopservice.removeToCart(item.id).subscribe();
-        });
-      }
+    const orderData: orders = {
+      userId,
+      addressId: this.selectedAddressId,
+
+      orderDate: new Date().toISOString(),
+      status: 'PLACED', 
+      paymentMode: 'Online',
+      totalAmount: this.grandTotal,
+      orderItems: this.cartData.map((item) => ({
+        productId: item.productId,
+        name: item.title,
+        image: item.thumbnail,
+        quantity: item.quantity,
+        finalPrice: item.price * item.quantity,
+      })),
+    };
+
+    this.shopservice.placeOrder(orderData).subscribe({
+      next: () => {
+        this.showA('Order placed successfully!');
+        this.resetCart();
+
+        setTimeout(() => {
+          window.location.href = '/';
+        }, 800);
+      },
+      error: () => {
+        this.showA('Order failed!');
+        this.isPlacingOrder = false;
+      },
+    });
+  }
+
+  resetCart() {
+    const userCookie = this.common.getCookie('sagar');
+    const isLoggedIn = !!userCookie;
+
+    if (isLoggedIn) {
+      const userId = JSON.parse(userCookie).id;
+
+      this.shopservice.currentCart(userId).subscribe((result) => {
+        if (result && result.length > 0) {
+          result.forEach((item: any) => {
+            this.shopservice.removeToCart(item.id).subscribe();
+          });
+        }
+        this.cartData = [];
+        this.calculateTotals();
+        this.shopservice.getCartList(userId);
+      });
+    } else {
+      localStorage.removeItem('localCart');
       this.cartData = [];
       this.calculateTotals();
-      this.shopservice.getCartList(userId);
-    });
-  } else {
-    localStorage.removeItem('localCart');
-    this.cartData = [];
-    this.calculateTotals();
-    this.shopservice.cartData.emit([]);
+      this.shopservice.cartData.emit([]);
+    }
+
+    
+    console.log('All cart items removed!');
   }
-
-  console.log('All cart items removed!');
-}
-
 }
