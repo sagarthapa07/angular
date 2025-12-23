@@ -90,7 +90,7 @@ export class ProfileComponent {
     private shopService: ShopService,
     private common: CommonService,
     private login: LoginService,
-    private route:ActivatedRoute,
+    private route: ActivatedRoute
   ) {}
 
   select(optionType: string, value: string) {
@@ -117,6 +117,12 @@ export class ProfileComponent {
   activeItem = 'Dashboard';
 
   ngOnInit() {
+    this.route.queryParams.subscribe((params) => {
+      if (params['tab']) {
+        this.activeItem = params['tab'];
+      }
+    });
+
     this.shopService.addressList().subscribe({
       next: (res) => {
         this.addressList = res;
@@ -126,16 +132,16 @@ export class ProfileComponent {
         console.error(err);
       },
     });
-
-    this.route.queryParams.subscribe(params => {
-    this.activeItem = params['tab'] || 'Dashboard';
-  });
-
-    
     this.loadCartState();
     this.loadWishlistItems();
     this.loadAddressList();
     this.loadOrders();
+  }
+
+  setActive(name: string) {
+    debugger
+    this.activeItem = name;
+    history.replaceState(null, '', `/profile?tab=${name}`);
   }
 
   toggleNameEdit() {
@@ -151,7 +157,6 @@ export class ProfileComponent {
     this.shopService.getWishlist().subscribe((wishlist) => {
       this.wishlistData = wishlist;
 
-      // product details load (dummyjson)
       this.wishlistProducts = [];
 
       wishlist.forEach((w) => {
@@ -186,7 +191,6 @@ export class ProfileComponent {
       const localCart = localStorage.getItem('localCart');
       if (localCart) {
         const items = JSON.parse(localCart);
-        //this.cartItemsIds = items.map((item: Product) => item.id);
         this.cartItem = items.map((item: Product) => {
           return {
             productId: item.productId,

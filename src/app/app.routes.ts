@@ -30,7 +30,5 @@ export const routes: Routes = [
 {path:"checkout", component:CheckoutPageComponent, },
 {path:"dashboard", component:ProfileComponent,canActivate:[loginGuard] },
 
-
-
 {path:"", component: HomeComponent},
 ];

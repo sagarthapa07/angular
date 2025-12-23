@@ -9,7 +9,7 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, CommonModule,NgbDropdownModule],
+  imports: [RouterLink, CommonModule, NgbDropdownModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
@@ -39,8 +39,6 @@ export class HeaderComponent implements OnInit, AfterViewInit {
       const localCart = JSON.parse(localStorage.getItem('localCart') || '[]');
       this.shopService.cartData.emit(localCart);
     });
-
-    
   }
 
   ngAfterViewInit(): void {
@@ -61,65 +59,45 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     this.shopService.cartData.emit([]);
     this.login.logOutUser();
   }
-  // searchProduct(query: KeyboardEvent) {
-  //   if (query) {
-  //     const element = query.target as HTMLInputElement;
-  //     this.shopService.searchProduct(element.value).subscribe((result) => {
-  //       console.warn(result);
-  //       if(result.length < 5){
-  //         result.length = 5
-  //       }
-  //       this.searchResult = result;
-  //     });
-  //   }
-  // }
-
   searchProduct(event: KeyboardEvent) {
     const input = event.target as HTMLInputElement;
     const query = input.value.trim();
 
-    // If search box empty → close results
     if (!query) {
       this.searchResult = [];
       return;
     }
 
-    // Fetch search results
     this.shopService.searchProduct(query).subscribe((res: any) => {
       const products = res?.products || [];
-
-      // Take maximum 5 items
       this.searchResult = products.slice(0, 5);
     });
   }
 
-
   gotoCartPage() {
     this.route.navigate(['/cart-page']);
   }
-  showSearchInput = false; //initially hidden
+  showSearchInput = false; 
   toggleSearch() {
-    this.showSearchInput = !this.showSearchInput; //toggle visibility
+    this.showSearchInput = !this.showSearchInput;
   }
   hideSearch() {
-    this.searchResult = undefined; 
+    this.searchResult = undefined;
   }
 
   redirectToDetail(id: number) {
-  this.route.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-    this.route.navigate(['/detail', id]);
-  });
-}
-profile(){
-  this.route.navigate(['/dashboard']);
-}
+    this.route.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.route.navigate(['/detail', id]);
+    });
+  }
+  profile() {
+    this.route.navigate(['/dashboard']);
+  }
 
-
-goProfile(section: string) {
-  this.route.navigate(['/profile'], {
-    queryParams: { tab: section }
-  });
-
-}
-
+  goProfile(section: string) {
+    debugger;
+    this.route.navigate(['/dashboard'], {
+      queryParams: { tab: section },
+    });
+  }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { CartService } from '../../core/services/cart/cart.service';
 import { HttpClient } from '@angular/common/http';
-import { DecimalPipe, NgIf, NgFor } from "@angular/common";
+import { DecimalPipe, NgIf, NgFor } from '@angular/common';
 import { ShopService } from '../../core/services/shop/shop.service';
 import { CommonService } from '../../core/services/common/common.service';
 
@@ -26,7 +26,7 @@ export class CartPageComponent implements OnInit {
     private shopservice: ShopService,
     private route: Router,
     private common: CommonService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.loadDetails();
@@ -41,7 +41,6 @@ export class CartPageComponent implements OnInit {
       const userId = JSON.parse(userCookie).id;
 
       this.shopservice.currentCart(userId).subscribe((result) => {
-
         this.cartData = result || [];
         console.log('Cart Data (API):', this.cartData);
 
@@ -67,7 +66,7 @@ export class CartPageComponent implements OnInit {
   }
 
   handleCounter(type: string, id: number, quantity: number) {
-    const newQty = type === "plus" ? quantity + 1 : quantity - 1;
+    const newQty = type === 'plus' ? quantity + 1 : quantity - 1;
     // Remove if quantity becomes
     if (newQty < 1) {
       this.removeToCart(id);
@@ -81,7 +80,7 @@ export class CartPageComponent implements OnInit {
       if (item) {
         item.quantity = newQty;
 
-        this.shopservice.updateCart(id + "", item).subscribe((res: any) => {
+        this.shopservice.updateCart(id + '', item).subscribe((res: any) => {
           if (res) {
             this.cartData = this.cartData.map((val) =>
               id === val.id ? { ...val, quantity: res.quantity } : val
@@ -106,7 +105,6 @@ export class CartPageComponent implements OnInit {
       this.calculateTotals();
     }
   }
-
 
   removeToCart(productId: number) {
     if (!this.common.getCookie('sagar')) {
@@ -150,7 +148,7 @@ export class CartPageComponent implements OnInit {
 
     this.gst = (this.subTotal - this.discount) * 0.18;
 
-    this.grandTotal = (this.subTotal - this.discount) + this.gst;
+    this.grandTotal = this.subTotal - this.discount + this.gst;
 
     console.log('Subtotal:', this.subTotal);
     console.log('Discount:', this.discount);
@@ -167,6 +165,7 @@ export class CartPageComponent implements OnInit {
         if (result && result.length > 0) {
           result.forEach((item: any) => {
             this.shopservice.removeToCart(item.id).subscribe();
+            this.route.navigate(['/']);
           });
         }
         this.cartData = [];
@@ -179,18 +178,17 @@ export class CartPageComponent implements OnInit {
       this.calculateTotals();
       this.shopservice.cartData.emit([]);
     }
-    console.log("All cart items removed!");
+    console.log('All cart items removed!');
   }
-
 
   procedTOCheckOut() {
     const userCookie = this.common.getCookie('sagar');
     const isLoggedIn = !!userCookie;
 
     if (userCookie) {
-      this.route.navigate(['/checkout'])
+      this.route.navigate(['/checkout']);
     } else {
-      this.route.navigate(['/Login'])
+      this.route.navigate(['/Login']);
     }
   }
 }

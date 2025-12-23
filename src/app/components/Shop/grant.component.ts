@@ -41,7 +41,7 @@ export class GrantComponent {
 
   ngOnInit(): void {
     this.shopService.Product().subscribe((data) => {
-      console.warn('Products loaded',data);
+      // console.warn('Products loaded',data);
       this.productList = data.products;
     });
 this.productId = this.route.snapshot.paramMap.get("id");

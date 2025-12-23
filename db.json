@@ -1,556 +1,116 @@
 {
   "cart": [
     {
-      "id": "782b",
-      "title": "Eggs",
-      "description": "Fresh eggs, a versatile ingredient for baking, cooking, or breakfast.",
-      "category": "groceries",
-      "price": 2.99,
-      "discountPercentage": 11.05,
-      "rating": 2.53,
-      "stock": 9,
-      "tags": [
-        "dairy"
-      ],
-      "sku": "GRO-BRD-EGG-023",
-      "weight": 2,
-      "dimensions": {
-        "width": 11.42,
-        "height": 7.44,
-        "depth": 16.95
-      },
-      "warrantyInformation": "1 week warranty",
-      "shippingInformation": "Ships in 1 week",
-      "availabilityStatus": "In stock",
-      "reviews": [
-        {
-          "rating": 3,
-          "comment": "Disappointing product!",
-          "date": "2025-04-30T09:41:02.053Z",
-          "reviewerName": "Penelope King",
-          "reviewerEmail": "penelope.king@x.dummyjson.com"
-        },
-        {
-          "rating": 3,
-          "comment": "Poor quality!",
-          "date": "2025-04-30T09:41:02.053Z",
-          "reviewerName": "Eleanor Tyler",
-          "reviewerEmail": "eleanor.tyler@x.dummyjson.com"
-        },
-        {
-          "rating": 4,
-          "comment": "Very pleased!",
-          "date": "2025-04-30T09:41:02.053Z",
-          "reviewerName": "Benjamin Foster",
-          "reviewerEmail": "benjamin.foster@x.dummyjson.com"
-        }
-      ],
-      "returnPolicy": "No return policy",
-      "minimumOrderQuantity": 32,
-      "meta": {
-        "createdAt": "2025-04-30T09:41:02.053Z",
-        "updatedAt": "2025-04-30T09:41:02.053Z",
-        "barcode": "3478638588469",
-        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
-      },
-      "images": [
-        "https://cdn.dummyjson.com/product-images/groceries/eggs/1.webp"
-      ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/eggs/thumbnail.webp",
-      "productId": 23,
-      "quantity": 1,
-      "userId": 1
-    },
-    {
-      "id": "68d6",
-      "title": "Beef Steak",
-      "description": "High-quality beef steak, great for grilling or cooking to your preferred level of doneness.",
-      "category": "groceries",
-      "price": 12.99,
-      "discountPercentage": 9.61,
-      "rating": 4.47,
-      "stock": 86,
-      "tags": [
-        "meat"
-      ],
-      "sku": "GRO-BRD-BEE-017",
-      "weight": 10,
-      "dimensions": {
-        "width": 18.9,
-        "height": 5.77,
-        "depth": 18.57
-      },
-      "warrantyInformation": "3 year warranty",
-      "shippingInformation": "Ships overnight",
-      "availabilityStatus": "In stock",
-      "reviews": [
-        {
-          "rating": 3,
-          "comment": "Would not recommend!",
-          "date": "2025-04-30T09:41:02.053Z",
-          "reviewerName": "Eleanor Tyler",
-          "reviewerEmail": "eleanor.tyler@x.dummyjson.com"
-        },
-        {
-          "rating": 4,
-          "comment": "Fast shipping!",
-          "date": "2025-04-30T09:41:02.053Z",
-          "reviewerName": "Alexander Jones",
-          "reviewerEmail": "alexander.jones@x.dummyjson.com"
-        },
-        {
-          "rating": 5,
-          "comment": "Great value for money!",
-          "date": "2025-04-30T09:41:02.053Z",
-          "reviewerName": "Natalie Harris",
-          "reviewerEmail": "natalie.harris@x.dummyjson.com"
-        }
-      ],
-      "returnPolicy": "60 days return policy",
-      "minimumOrderQuantity": 43,
-      "meta": {
-        "createdAt": "2025-04-30T09:41:02.053Z",
-        "updatedAt": "2025-04-30T09:41:02.053Z",
-        "barcode": "5640063409695",
-        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
-      },
-      "images": [
-        "https://cdn.dummyjson.com/product-images/groceries/beef-steak/1.webp"
-      ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/groceries/beef-steak/thumbnail.webp",
-      "productId": 17,
-      "quantity": 1,
-      "userId": 1
-    },
-    {
-      "id": "a727",
-      "title": "Eyeshadow Palette with Mirror",
-      "description": "The Eyeshadow Palette with Mirror offers a versatile range of eyeshadow shades for creating stunning eye looks. With a built-in mirror, it's convenient for on-the-go makeup application.",
-      "category": "beauty",
-      "price": 19.99,
-      "discountPercentage": 18.19,
-      "rating": 2.86,
-      "stock": 34,
-      "tags": [
-        "beauty",
-        "eyeshadow"
-      ],
-      "brand": "Glamour Beauty",
-      "sku": "BEA-GLA-EYE-002",
-      "weight": 9,
-      "dimensions": {
-        "width": 9.26,
-        "height": 22.47,
-        "depth": 27.67
-      },
-      "warrantyInformation": "1 year warranty",
-      "shippingInformation": "Ships in 2 weeks",
-      "availabilityStatus": "In stock",
-      "reviews": [
-        {
-          "rating": 5,
-          "comment": "Great product!",
-          "date": "2025-04-30T09:41:02.053Z",
-          "reviewerName": "Savannah Gomez",
-          "reviewerEmail": "savannah.gomez@x.dummyjson.com"
-        },
-        {
-          "rating": 4,
-          "comment": "Awesome product!",
-          "date": "2025-04-30T09:41:02.053Z",
-          "reviewerName": "Christian Perez",
-          "reviewerEmail": "christian.perez@x.dummyjson.com"
-        },
-        {
-          "rating": 1,
-          "comment": "Poor quality!",
-          "date": "2025-04-30T09:41:02.053Z",
-          "reviewerName": "Nicholas Bailey",
-          "reviewerEmail": "nicholas.bailey@x.dummyjson.com"
-        }
-      ],
-      "returnPolicy": "7 days return policy",
-      "minimumOrderQuantity": 20,
-      "meta": {
-        "createdAt": "2025-04-30T09:41:02.053Z",
-        "updatedAt": "2025-04-30T09:41:02.053Z",
-        "barcode": "9170275171413",
-        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
-      },
-      "images": [
-        "https://cdn.dummyjson.com/product-images/beauty/eyeshadow-palette-with-mirror/1.webp"
-      ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/beauty/eyeshadow-palette-with-mirror/thumbnail.webp",
-      "productId": 2,
-      "quantity": 1,
-      "userId": 1
-    },
-    {
-      "id": "6eed",
-      "title": "Powder Canister",
-      "description": "The Powder Canister is a finely milled setting powder designed to set makeup and control shine. With a lightweight and translucent formula, it provides a smooth and matte finish.",
-      "category": "beauty",
-      "price": 14.99,
-      "discountPercentage": 9.84,
-      "rating": 4.64,
-      "stock": 89,
-      "tags": [
-        "beauty",
-        "face powder"
-      ],
-      "brand": "Velvet Touch",
-      "sku": "BEA-VEL-POW-003",
-      "weight": 8,
-      "dimensions": {
-        "width": 29.27,
-        "height": 27.93,
-        "depth": 20.59
-      },
-      "warrantyInformation": "3 months warranty",
-      "shippingInformation": "Ships in 1-2 business days",
-      "availabilityStatus": "In stock",
-      "reviews": [
-        {
-          "rating": 4,
-          "comment": "Would buy again!",
-          "date": "2025-04-30T09:41:02.053Z",
-          "reviewerName": "Alexander Jones",
-          "reviewerEmail": "alexander.jones@x.dummyjson.com"
-        },
-        {
-          "rating": 5,
-          "comment": "Highly impressed!",
-          "date": "2025-04-30T09:41:02.053Z",
-          "reviewerName": "Elijah Cruz",
-          "reviewerEmail": "elijah.cruz@x.dummyjson.com"
-        },
-        {
-          "rating": 1,
-          "comment": "Very dissatisfied!",
-          "date": "2025-04-30T09:41:02.053Z",
-          "reviewerName": "Avery Perez",
-          "reviewerEmail": "avery.perez@x.dummyjson.com"
-        }
-      ],
-      "returnPolicy": "No return policy",
-      "minimumOrderQuantity": 22,
-      "meta": {
-        "createdAt": "2025-04-30T09:41:02.053Z",
-        "updatedAt": "2025-04-30T09:41:02.053Z",
-        "barcode": "8418883906837",
-        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
-      },
-      "images": [
-        "https://cdn.dummyjson.com/product-images/beauty/powder-canister/1.webp"
-      ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/beauty/powder-canister/thumbnail.webp",
-      "productId": 3,
-      "quantity": 1,
-      "userId": 1
-    },
-    {
-      "id": "1bef",
-      "title": "Red Lipstick",
-      "description": "The Red Lipstick is a classic and bold choice for adding a pop of color to your lips. With a creamy and pigmented formula, it provides a vibrant and long-lasting finish.",
-      "category": "beauty",
-      "price": 12.99,
-      "discountPercentage": 12.16,
-      "rating": 4.36,
-      "stock": 91,
-      "tags": [
-        "beauty",
-        "lipstick"
-      ],
-      "brand": "Chic Cosmetics",
-      "sku": "BEA-CHI-LIP-004",
-      "weight": 1,
-      "dimensions": {
-        "width": 18.11,
-        "height": 28.38,
-        "depth": 22.17
-      },
-      "warrantyInformation": "3 year warranty",
-      "shippingInformation": "Ships in 1 week",
-      "availabilityStatus": "In stock",
-      "reviews": [
-        {
-          "rating": 4,
-          "comment": "Great product!",
-          "date": "2025-04-30T09:41:02.053Z",
-          "reviewerName": "Liam Garcia",
-          "reviewerEmail": "liam.garcia@x.dummyjson.com"
-        },
-        {
-          "rating": 5,
-          "comment": "Great product!",
-          "date": "2025-04-30T09:41:02.053Z",
-          "reviewerName": "Ruby Andrews",
-          "reviewerEmail": "ruby.andrews@x.dummyjson.com"
-        },
-        {
-          "rating": 5,
-          "comment": "Would buy again!",
-          "date": "2025-04-30T09:41:02.053Z",
-          "reviewerName": "Clara Berry",
-          "reviewerEmail": "clara.berry@x.dummyjson.com"
-        }
-      ],
-      "returnPolicy": "7 days return policy",
-      "minimumOrderQuantity": 40,
-      "meta": {
-        "createdAt": "2025-04-30T09:41:02.053Z",
-        "updatedAt": "2025-04-30T09:41:02.053Z",
-        "barcode": "9467746727219",
-        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
-      },
-      "images": [
-        "https://cdn.dummyjson.com/product-images/beauty/red-lipstick/1.webp"
-      ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/beauty/red-lipstick/thumbnail.webp",
-      "productId": 4,
-      "quantity": 1,
-      "userId": 1
-    },
-    {
-      "id": "5e8b",
-      "title": "iPhone 6",
-      "description": "The iPhone 6 is a stylish and capable smartphone with a larger display and improved performance. It introduced new features and design elements, making it a popular choice in its time.",
+      "id": "de14",
+      "title": "Oppo K1",
+      "description": "The Oppo K1 series offers a range of smartphones with various features and specifications. Known for their stylish design and reliable performance, the Oppo K1 series caters to diverse user preferences.",
       "category": "smartphones",
       "price": 299.99,
-      "discountPercentage": 6.69,
-      "rating": 3.41,
-      "stock": 60,
-      "tags": [
-        "smartphones",
-        "apple"
-      ],
-      "brand": "Apple",
-      "sku": "SMA-APP-IPH-122",
-      "weight": 7,
-      "dimensions": {
-        "width": 11,
-        "height": 9.1,
-        "depth": 9.67
-      },
-      "warrantyInformation": "1 month warranty",
-      "shippingInformation": "Ships overnight",
-      "availabilityStatus": "In stock",
-      "reviews": [
-        {
-          "rating": 3,
-          "comment": "Disappointing product!",
-          "date": "2025-04-30T09:41:02.054Z",
-          "reviewerName": "Stella Morris",
-          "reviewerEmail": "stella.morris@x.dummyjson.com"
-        },
-        {
-          "rating": 4,
-          "comment": "Excellent quality!",
-          "date": "2025-04-30T09:41:02.054Z",
-          "reviewerName": "Nolan Gonzalez",
-          "reviewerEmail": "nolan.gonzalez@x.dummyjson.com"
-        },
-        {
-          "rating": 5,
-          "comment": "Great value for money!",
-          "date": "2025-04-30T09:41:02.054Z",
-          "reviewerName": "Benjamin Foster",
-          "reviewerEmail": "benjamin.foster@x.dummyjson.com"
-        }
-      ],
-      "returnPolicy": "7 days return policy",
-      "minimumOrderQuantity": 5,
-      "meta": {
-        "createdAt": "2025-04-30T09:41:02.054Z",
-        "updatedAt": "2025-04-30T09:41:02.054Z",
-        "barcode": "9922357685013",
-        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
-      },
-      "images": [
-        "https://cdn.dummyjson.com/product-images/smartphones/iphone-6/1.webp",
-        "https://cdn.dummyjson.com/product-images/smartphones/iphone-6/2.webp",
-        "https://cdn.dummyjson.com/product-images/smartphones/iphone-6/3.webp"
-      ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/smartphones/iphone-6/thumbnail.webp",
-      "productId": 122,
-      "quantity": 1,
-      "userId": 1
-    },
-    {
-      "id": "aede",
-      "title": "iPhone 13 Pro",
-      "description": "The iPhone 13 Pro is a cutting-edge smartphone with a powerful camera system, high-performance chip, and stunning display. It offers advanced features for users who demand top-notch technology.",
-      "category": "smartphones",
-      "price": 1099.99,
-      "discountPercentage": 9.37,
-      "rating": 4.12,
-      "stock": 56,
-      "tags": [
-        "smartphones",
-        "apple"
-      ],
-      "brand": "Apple",
-      "sku": "SMA-APP-IPH-123",
-      "weight": 8,
-      "dimensions": {
-        "width": 12.63,
-        "height": 5.28,
-        "depth": 14.29
-      },
-      "warrantyInformation": "3 year warranty",
-      "shippingInformation": "Ships in 2 weeks",
-      "availabilityStatus": "In stock",
-      "reviews": [
-        {
-          "rating": 5,
-          "comment": "Would buy again!",
-          "date": "2025-04-30T09:41:02.054Z",
-          "reviewerName": "Christian Perez",
-          "reviewerEmail": "christian.perez@x.dummyjson.com"
-        },
-        {
-          "rating": 3,
-          "comment": "Not worth the price!",
-          "date": "2025-04-30T09:41:02.054Z",
-          "reviewerName": "Liam Gonzalez",
-          "reviewerEmail": "liam.gonzalez@x.dummyjson.com"
-        },
-        {
-          "rating": 5,
-          "comment": "Very satisfied!",
-          "date": "2025-04-30T09:41:02.054Z",
-          "reviewerName": "Tristan Scott",
-          "reviewerEmail": "tristan.scott@x.dummyjson.com"
-        }
-      ],
-      "returnPolicy": "7 days return policy",
-      "minimumOrderQuantity": 1,
-      "meta": {
-        "createdAt": "2025-04-30T09:41:02.054Z",
-        "updatedAt": "2025-04-30T09:41:02.054Z",
-        "barcode": "4998438802308",
-        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
-      },
-      "images": [
-        "https://cdn.dummyjson.com/product-images/smartphones/iphone-13-pro/1.webp",
-        "https://cdn.dummyjson.com/product-images/smartphones/iphone-13-pro/2.webp",
-        "https://cdn.dummyjson.com/product-images/smartphones/iphone-13-pro/3.webp"
-      ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/smartphones/iphone-13-pro/thumbnail.webp",
-      "productId": 123,
-      "quantity": 1,
-      "userId": 1
-    },
-    {
-      "id": "7892",
-      "title": "iPhone X",
-      "description": "The iPhone X is a flagship smartphone featuring a bezel-less OLED display, facial recognition technology (Face ID), and impressive performance. It represents a milestone in iPhone design and innovation.",
-      "category": "smartphones",
-      "price": 899.99,
-      "discountPercentage": 19.59,
-      "rating": 2.51,
-      "stock": 37,
-      "tags": [
-        "smartphones",
-        "apple"
-      ],
-      "brand": "Apple",
-      "sku": "SMA-APP-IPH-124",
-      "weight": 1,
-      "dimensions": {
-        "width": 21.88,
-        "height": 24.19,
-        "depth": 14.19
-      },
-      "warrantyInformation": "3 months warranty",
-      "shippingInformation": "Ships in 3-5 business days",
-      "availabilityStatus": "In stock",
-      "reviews": [
-        {
-          "rating": 4,
-          "comment": "Highly recommended!",
-          "date": "2025-04-30T09:41:02.054Z",
-          "reviewerName": "Tyler Davis",
-          "reviewerEmail": "tyler.davis@x.dummyjson.com"
-        },
-        {
-          "rating": 5,
-          "comment": "Great product!",
-          "date": "2025-04-30T09:41:02.054Z",
-          "reviewerName": "Aria Parker",
-          "reviewerEmail": "aria.parker@x.dummyjson.com"
-        },
-        {
-          "rating": 2,
-          "comment": "Not as described!",
-          "date": "2025-04-30T09:41:02.054Z",
-          "reviewerName": "Lily Torres",
-          "reviewerEmail": "lily.torres@x.dummyjson.com"
-        }
-      ],
-      "returnPolicy": "7 days return policy",
-      "minimumOrderQuantity": 2,
-      "meta": {
-        "createdAt": "2025-04-30T09:41:02.054Z",
-        "updatedAt": "2025-04-30T09:41:02.054Z",
-        "barcode": "3034949322264",
-        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
-      },
-      "images": [
-        "https://cdn.dummyjson.com/product-images/smartphones/iphone-x/1.webp",
-        "https://cdn.dummyjson.com/product-images/smartphones/iphone-x/2.webp",
-        "https://cdn.dummyjson.com/product-images/smartphones/iphone-x/3.webp"
-      ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/smartphones/iphone-x/thumbnail.webp",
-      "productId": 124,
-      "quantity": 1,
-      "userId": 1
-    },
-    {
-      "id": "9995",
-      "title": "Oppo A57",
-      "description": "The Oppo A57 is a mid-range smartphone known for its sleek design and capable features. It offers a balance of performance and affordability, making it a popular choice.",
-      "category": "smartphones",
-      "price": 249.99,
-      "discountPercentage": 2.43,
-      "rating": 3.94,
-      "stock": 19,
+      "discountPercentage": 18.29,
+      "rating": 4.25,
+      "stock": 55,
       "tags": [
         "smartphones",
         "oppo"
       ],
       "brand": "Oppo",
-      "sku": "SMA-OPP-OPP-125",
+      "sku": "SMA-OPP-OPP-127",
       "weight": 5,
       "dimensions": {
-        "width": 7.2,
-        "height": 10.74,
-        "depth": 23.68
+        "width": 13.89,
+        "height": 10.63,
+        "depth": 16.6
       },
-      "warrantyInformation": "Lifetime warranty",
-      "shippingInformation": "Ships in 3-5 business days",
+      "warrantyInformation": "1 month warranty",
+      "shippingInformation": "Ships in 1-2 business days",
       "availabilityStatus": "In stock",
       "reviews": [
         {
           "rating": 4,
-          "comment": "Excellent quality!",
+          "comment": "Very pleased!",
           "date": "2025-04-30T09:41:02.054Z",
-          "reviewerName": "Scarlett Wright",
-          "reviewerEmail": "scarlett.wright@x.dummyjson.com"
+          "reviewerName": "Christopher West",
+          "reviewerEmail": "christopher.west@x.dummyjson.com"
         },
         {
-          "rating": 5,
-          "comment": "Excellent quality!",
+          "rating": 4,
+          "comment": "Highly recommended!",
           "date": "2025-04-30T09:41:02.054Z",
-          "reviewerName": "Jacob Cooper",
-          "reviewerEmail": "jacob.cooper@x.dummyjson.com"
+          "reviewerName": "Mia Miller",
+          "reviewerEmail": "mia.miller@x.dummyjson.com"
         },
         {
           "rating": 2,
-          "comment": "Poor quality!",
+          "comment": "Very dissatisfied!",
           "date": "2025-04-30T09:41:02.054Z",
-          "reviewerName": "Zoe Nicholson",
-          "reviewerEmail": "zoe.nicholson@x.dummyjson.com"
+          "reviewerName": "Ella Adams",
+          "reviewerEmail": "ella.adams@x.dummyjson.com"
+        }
+      ],
+      "returnPolicy": "30 days return policy",
+      "minimumOrderQuantity": 5,
+      "meta": {
+        "createdAt": "2025-04-30T09:41:02.054Z",
+        "updatedAt": "2025-04-30T09:41:02.054Z",
+        "barcode": "3106827888743",
+        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
+      },
+      "images": [
+        "https://cdn.dummyjson.com/product-images/smartphones/oppo-k1/1.webp",
+        "https://cdn.dummyjson.com/product-images/smartphones/oppo-k1/2.webp",
+        "https://cdn.dummyjson.com/product-images/smartphones/oppo-k1/3.webp",
+        "https://cdn.dummyjson.com/product-images/smartphones/oppo-k1/4.webp"
+      ],
+      "thumbnail": "https://cdn.dummyjson.com/product-images/smartphones/oppo-k1/thumbnail.webp",
+      "productId": 127,
+      "quantity": 1,
+      "userId": 1
+    },
+    {
+      "id": "4c25",
+      "title": "Realme C35",
+      "description": "The Realme C35 is a budget-friendly smartphone with a focus on providing essential features for everyday use. It offers a reliable performance and user-friendly experience.",
+      "category": "smartphones",
+      "price": 149.99,
+      "discountPercentage": 15.3,
+      "rating": 4.2,
+      "stock": 48,
+      "tags": [
+        "smartphones",
+        "realme"
+      ],
+      "brand": "Realme",
+      "sku": "SMA-REA-REA-128",
+      "weight": 2,
+      "dimensions": {
+        "width": 25.28,
+        "height": 8.14,
+        "depth": 29.53
+      },
+      "warrantyInformation": "3 year warranty",
+      "shippingInformation": "Ships overnight",
+      "availabilityStatus": "In stock",
+      "reviews": [
+        {
+          "rating": 4,
+          "comment": "Great product!",
+          "date": "2025-04-30T09:41:02.054Z",
+          "reviewerName": "Penelope King",
+          "reviewerEmail": "penelope.king@x.dummyjson.com"
+        },
+        {
+          "rating": 2,
+          "comment": "Very unhappy with my purchase!",
+          "date": "2025-04-30T09:41:02.054Z",
+          "reviewerName": "Asher Scott",
+          "reviewerEmail": "asher.scott@x.dummyjson.com"
+        },
+        {
+          "rating": 4,
+          "comment": "Highly impressed!",
+          "date": "2025-04-30T09:41:02.054Z",
+          "reviewerName": "Henry Adams",
+          "reviewerEmail": "henry.adams@x.dummyjson.com"
         }
       ],
       "returnPolicy": "90 days return policy",
@@ -558,16 +118,81 @@
       "meta": {
         "createdAt": "2025-04-30T09:41:02.054Z",
         "updatedAt": "2025-04-30T09:41:02.054Z",
-        "barcode": "0651223722522",
+        "barcode": "7825844344364",
         "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
       },
       "images": [
-        "https://cdn.dummyjson.com/product-images/smartphones/oppo-a57/1.webp",
-        "https://cdn.dummyjson.com/product-images/smartphones/oppo-a57/2.webp",
-        "https://cdn.dummyjson.com/product-images/smartphones/oppo-a57/3.webp"
+        "https://cdn.dummyjson.com/product-images/smartphones/realme-c35/1.webp",
+        "https://cdn.dummyjson.com/product-images/smartphones/realme-c35/2.webp",
+        "https://cdn.dummyjson.com/product-images/smartphones/realme-c35/3.webp"
       ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/smartphones/oppo-a57/thumbnail.webp",
-      "productId": 125,
+      "thumbnail": "https://cdn.dummyjson.com/product-images/smartphones/realme-c35/thumbnail.webp",
+      "productId": 128,
+      "quantity": 1,
+      "userId": 1
+    },
+    {
+      "id": "2752",
+      "title": "Realme X",
+      "description": "The Realme X is a mid-range smartphone known for its sleek design and impressive display. It offers a good balance of performance and camera capabilities for users seeking a quality device.",
+      "category": "smartphones",
+      "price": 299.99,
+      "discountPercentage": 6.95,
+      "rating": 3.7,
+      "stock": 12,
+      "tags": [
+        "smartphones",
+        "realme"
+      ],
+      "brand": "Realme",
+      "sku": "SMA-REA-REA-129",
+      "weight": 4,
+      "dimensions": {
+        "width": 25.59,
+        "height": 21.42,
+        "depth": 12.75
+      },
+      "warrantyInformation": "1 month warranty",
+      "shippingInformation": "Ships in 3-5 business days",
+      "availabilityStatus": "In stock",
+      "reviews": [
+        {
+          "rating": 5,
+          "comment": "Would buy again!",
+          "date": "2025-04-30T09:41:02.054Z",
+          "reviewerName": "Hazel Evans",
+          "reviewerEmail": "hazel.evans@x.dummyjson.com"
+        },
+        {
+          "rating": 5,
+          "comment": "Fast shipping!",
+          "date": "2025-04-30T09:41:02.054Z",
+          "reviewerName": "Brayden Fleming",
+          "reviewerEmail": "brayden.fleming@x.dummyjson.com"
+        },
+        {
+          "rating": 5,
+          "comment": "Very satisfied!",
+          "date": "2025-04-30T09:41:02.054Z",
+          "reviewerName": "Madison Stewart",
+          "reviewerEmail": "madison.stewart@x.dummyjson.com"
+        }
+      ],
+      "returnPolicy": "No return policy",
+      "minimumOrderQuantity": 3,
+      "meta": {
+        "createdAt": "2025-04-30T09:41:02.054Z",
+        "updatedAt": "2025-04-30T09:41:02.054Z",
+        "barcode": "4948452391831",
+        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
+      },
+      "images": [
+        "https://cdn.dummyjson.com/product-images/smartphones/realme-x/1.webp",
+        "https://cdn.dummyjson.com/product-images/smartphones/realme-x/2.webp",
+        "https://cdn.dummyjson.com/product-images/smartphones/realme-x/3.webp"
+      ],
+      "thumbnail": "https://cdn.dummyjson.com/product-images/smartphones/realme-x/thumbnail.webp",
+      "productId": 129,
       "quantity": 1,
       "userId": 1
     }
@@ -596,28 +221,24 @@
       "pincode": "d34543534543",
       "addressType": "home",
       "id": "3afe"
+    },
+    {
+      "id": "669f",
+      "fullName": "wwwww",
+      "mobile": "wwwww",
+      "addressLine1": "wwwww",
+      "area": "wwww",
+      "landmark": "wwwwwww",
+      "city": "wwwww",
+      "state": "wwwwww",
+      "pincode": "wwwww",
+      "addressType": "work"
     }
   ],
   "wishlist": [
     {
-      "id": "5d84",
-      "productId": 122
-    },
-    {
-      "id": "3509",
-      "productId": 4
-    },
-    {
-      "id": "8173",
-      "productId": 130
-    },
-    {
       "id": "d5fd",
       "productId": 12
-    },
-    {
-      "id": "fbfc",
-      "productId": 3
     },
     {
       "id": "457e",
@@ -628,8 +249,56 @@
       "productId": 124
     },
     {
-      "id": "7f81",
-      "productId": 125
+      "id": "5433",
+      "productId": 122
+    },
+    {
+      "id": "8f84",
+      "productId": 5
+    },
+    {
+      "id": "8897",
+      "productId": 14
+    },
+    {
+      "id": "f324",
+      "productId": 15
+    },
+    {
+      "id": "6c14",
+      "productId": 19
+    },
+    {
+      "id": "e8ee",
+      "productId": 20
+    },
+    {
+      "id": "3415",
+      "productId": 18
+    },
+    {
+      "id": "95dc",
+      "productId": 24
+    },
+    {
+      "id": "1632",
+      "productId": 3
+    },
+    {
+      "id": "1c31",
+      "productId": 13
+    },
+    {
+      "id": "b08c",
+      "productId": 2
+    },
+    {
+      "id": "6ac1",
+      "productId": 1
+    },
+    {
+      "id": "6a4a",
+      "productId": 4
     }
   ],
   "orders": [
@@ -1060,6 +729,186 @@
           "image": "https://cdn.dummyjson.com/product-images/groceries/ice-cream/thumbnail.webp",
           "quantity": 1,
           "finalPrice": 5.49
+        }
+      ]
+    },
+    {
+      "id": "12b9",
+      "userId": 1,
+      "addressId": "00b6",
+      "orderDate": "2025-12-23T04:23:45.674Z",
+      "status": "PLACED",
+      "paymentMode": "Online",
+      "totalAmount": 3848.1328076399986,
+      "orderItems": [
+        {
+          "productId": 23,
+          "name": "Eggs",
+          "image": "https://cdn.dummyjson.com/product-images/groceries/eggs/thumbnail.webp",
+          "quantity": 1,
+          "finalPrice": 2.99
+        },
+        {
+          "productId": 17,
+          "name": "Beef Steak",
+          "image": "https://cdn.dummyjson.com/product-images/groceries/beef-steak/thumbnail.webp",
+          "quantity": 1,
+          "finalPrice": 12.99
+        },
+        {
+          "productId": 2,
+          "name": "Eyeshadow Palette with Mirror",
+          "image": "https://cdn.dummyjson.com/product-images/beauty/eyeshadow-palette-with-mirror/thumbnail.webp",
+          "quantity": 1,
+          "finalPrice": 19.99
+        },
+        {
+          "productId": 3,
+          "name": "Powder Canister",
+          "image": "https://cdn.dummyjson.com/product-images/beauty/powder-canister/thumbnail.webp",
+          "quantity": 1,
+          "finalPrice": 14.99
+        },
+        {
+          "productId": 4,
+          "name": "Red Lipstick",
+          "image": "https://cdn.dummyjson.com/product-images/beauty/red-lipstick/thumbnail.webp",
+          "quantity": 1,
+          "finalPrice": 12.99
+        },
+        {
+          "productId": 122,
+          "name": "iPhone 6",
+          "image": "https://cdn.dummyjson.com/product-images/smartphones/iphone-6/thumbnail.webp",
+          "quantity": 1,
+          "finalPrice": 299.99
+        },
+        {
+          "productId": 123,
+          "name": "iPhone 13 Pro",
+          "image": "https://cdn.dummyjson.com/product-images/smartphones/iphone-13-pro/thumbnail.webp",
+          "quantity": 1,
+          "finalPrice": 1099.99
+        },
+        {
+          "productId": 124,
+          "name": "iPhone X",
+          "image": "https://cdn.dummyjson.com/product-images/smartphones/iphone-x/thumbnail.webp",
+          "quantity": 1,
+          "finalPrice": 899.99
+        },
+        {
+          "productId": 125,
+          "name": "Oppo A57",
+          "image": "https://cdn.dummyjson.com/product-images/smartphones/oppo-a57/thumbnail.webp",
+          "quantity": 1,
+          "finalPrice": 249.99
+        },
+        {
+          "productId": 127,
+          "name": "Oppo K1",
+          "image": "https://cdn.dummyjson.com/product-images/smartphones/oppo-k1/thumbnail.webp",
+          "quantity": 1,
+          "finalPrice": 299.99
+        },
+        {
+          "productId": 128,
+          "name": "Realme C35",
+          "image": "https://cdn.dummyjson.com/product-images/smartphones/realme-c35/thumbnail.webp",
+          "quantity": 1,
+          "finalPrice": 149.99
+        },
+        {
+          "productId": 129,
+          "name": "Realme X",
+          "image": "https://cdn.dummyjson.com/product-images/smartphones/realme-x/thumbnail.webp",
+          "quantity": 1,
+          "finalPrice": 299.99
+        },
+        {
+          "productId": 130,
+          "name": "Realme XT",
+          "image": "https://cdn.dummyjson.com/product-images/smartphones/realme-xt/thumbnail.webp",
+          "quantity": 1,
+          "finalPrice": 349.99
+        }
+      ]
+    },
+    {
+      "id": "1b72",
+      "userId": 1,
+      "addressId": "00b6",
+      "orderDate": "2025-12-23T07:46:50.927Z",
+      "status": "PLACED",
+      "paymentMode": "Online",
+      "totalAmount": 59.26227506,
+      "orderItems": [
+        {
+          "productId": 2,
+          "name": "Eyeshadow Palette with Mirror",
+          "image": "https://cdn.dummyjson.com/product-images/beauty/eyeshadow-palette-with-mirror/thumbnail.webp",
+          "quantity": 1,
+          "finalPrice": 19.99
+        },
+        {
+          "productId": 3,
+          "name": "Powder Canister",
+          "image": "https://cdn.dummyjson.com/product-images/beauty/powder-canister/thumbnail.webp",
+          "quantity": 1,
+          "finalPrice": 14.99
+        },
+        {
+          "productId": 4,
+          "name": "Red Lipstick",
+          "image": "https://cdn.dummyjson.com/product-images/beauty/red-lipstick/thumbnail.webp",
+          "quantity": 1,
+          "finalPrice": 12.99
+        },
+        {
+          "productId": 1,
+          "name": "Essence Mascara Lash Princess",
+          "image": "https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/thumbnail.webp",
+          "quantity": 1,
+          "finalPrice": 9.99
+        }
+      ]
+    },
+    {
+      "id": "023c",
+      "userId": 1,
+      "addressId": "3afe",
+      "orderDate": "2025-12-23T11:14:05.670Z",
+      "status": "PLACED",
+      "paymentMode": "Online",
+      "totalAmount": 166.87040210000004,
+      "orderItems": [
+        {
+          "productId": 7,
+          "name": "Chanel Coco Noir Eau De",
+          "image": "https://cdn.dummyjson.com/product-images/fragrances/chanel-coco-noir-eau-de/thumbnail.webp",
+          "quantity": 1,
+          "finalPrice": 129.99
+        },
+        {
+          "productId": 3,
+          "name": "Powder Canister",
+          "image": "https://cdn.dummyjson.com/product-images/beauty/powder-canister/thumbnail.webp",
+          "quantity": 1,
+          "finalPrice": 14.99
+        },
+        {
+          "productId": 4,
+          "name": "Red Lipstick",
+          "image": "https://cdn.dummyjson.com/product-images/beauty/red-lipstick/thumbnail.webp",
+          "quantity": 1,
+          "finalPrice": 12.99
+        },
+        {
+          "productId": 5,
+          "name": "Red Nail Polish",
+          "image": "https://cdn.dummyjson.com/product-images/beauty/red-nail-polish/thumbnail.webp",
+          "quantity": 1,
+          "finalPrice": 8.99
         }
       ]
     }

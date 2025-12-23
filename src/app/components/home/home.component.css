@@ -54,7 +54,7 @@
 }
 /* component CSS file (e.g., popular-categories.component.css) */
 .img-hover-zoom:hover {
-  transform: scale(1.5);
+  transform: scale(1.15);
 }
 .icons{
   border-bottom: 1px solid #dfe2e6;
@@ -127,10 +127,6 @@
 .wishlist-icon:hover {
   background-color: #f8f9fa;
 }
-
-
-
-
 
 
 

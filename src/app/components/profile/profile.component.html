@@ -2,7 +2,7 @@
   <div class="dashboard-wrapper">
     <aside class="sidebar">
       <div class="profile">
-        <div class="avatar">L</div>
+        <div class="avatar"><img src="" alt="" style="width:50px; height:50px"></div>
         <h3>Name</h3>
         <p>Gmail</p>
       </div>
@@ -30,7 +30,7 @@
           <div class="card" (click)="activeItem = 'Orders'">
             <i class="bi bi-box-seam"></i> <span>Orders</span>
           </div>
-          <div class="card" (click)="activeItem = 'Wishlist'">
+          <div class="card" (click)="activeItem = 'Wishlist'">  
             <i class="bi bi-heart"></i> <span>Wishlist</span>
           </div>
           <div class="card" (click)="activeItem = 'Addresses'">
@@ -145,56 +145,53 @@
         <div class=""></div>
       </div>
       <!-- INVOICE SECTION -->
-<div *ngIf="activeItem === 'Orders' && showInvoice">
+      <div *ngIf="activeItem === 'Orders' && showInvoice">
+        <button class="btn btn-sm btn-light mb-3" (click)="showInvoice = false">
+          ← Back to Orders
+        </button>
 
-  <button
-    class="btn btn-sm btn-light mb-3"
-    (click)="showInvoice = false"
-  >
-    ← Back to Orders
-  </button>
+        <h3 class="fw-bold mb-4">Invoice #INV-{{ selectedOrder?.id }}</h3>
 
-  <h3 class="fw-bold mb-4">
-    Invoice #INV-{{ selectedOrder?.id }}
-  </h3>
+        <!-- ORDER INFO -->
+        <div class="mb-3">
+          <p>
+            <b>Order Date:</b>
+            {{ selectedOrder?.orderDate | date : "dd/MM/yyyy" }}
+          </p>
+          <p><b>Status:</b> {{ selectedOrder?.status }}</p>
+          <p><b>Payment Mode:</b> {{ selectedOrder?.paymentMode }}</p>
+        </div>
 
-  <!-- ORDER INFO -->
-  <div class="mb-3">
-    <p><b>Order Date:</b> {{ selectedOrder?.orderDate | date:'dd/MM/yyyy' }}</p>
-    <p><b>Status:</b> {{ selectedOrder?.status }}</p>
-    <p><b>Payment Mode:</b> {{ selectedOrder?.paymentMode }}</p>
-  </div>
+        <!-- PRODUCTS -->
+        <table class="table">
+          <thead class="table-light">
+            <tr>
+              <th>IMAGE</th>
+              <th>NAME</th>
+              <th>QTY</th>
+              <th>PRICE</th>
+            </tr>
+          </thead>
 
-  <!-- PRODUCTS -->
-  <table class="table">
-    <thead class="table-light">
-      <tr>
-        <th>IMAGE</th>
-        <th>NAME</th>
-        <th>QTY</th>
-        <th>PRICE</th>
-      </tr>
-    </thead>
+          <tbody>
+            <tr *ngFor="let item of selectedOrder?.orderItems">
+              <td>
+                <img [src]="item.image" width="40" />
+              </td>
+              <td>{{ item.name }}</td>
+              <td>{{ item.quantity }}</td>
+              <td>${{ item.finalPrice * item.quantity | number : "1.2-2" }}</td>
+            </tr>
+          </tbody>
+        </table>
 
-    <tbody>
-      <tr *ngFor="let item of selectedOrder?.orderItems">
-        <td>
-          <img [src]="item.image" width="40" />
-        </td>
-        <td>{{ item.name }}</td>
-        <td>{{ item.quantity }}</td>
-        <td>${{ (item.finalPrice * item.quantity) | number:'1.2-2' }}</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <!-- TOTAL -->
-  <div class="text-end mt-3">
-    <h5>Total Payable: $ {{ selectedOrder?.totalAmount | number:'1.2-2' }}</h5>
-  </div>
-
-</div>
-
+        <!-- TOTAL -->
+        <div class="text-end mt-3">
+          <h5>
+            Total Payable: $ {{ selectedOrder?.totalAmount | number : "1.2-2" }}
+          </h5>
+        </div>
+      </div>
 
       <div *ngIf="activeItem === 'Wishlist'">
         <h2>My List</h2>
